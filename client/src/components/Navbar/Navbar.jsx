@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane } from 'lucide-react';
@@ -42,15 +42,21 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
 
-  const navLinks = [
-    { path: '/universities', label: 'Universities', icon: Landmark },
-    { path: '/programs', label: 'Programs', icon: BookOpen },
+  const mainNavLinks = [
+    { path: '/universities', label: 'Universities', icon: Landmark, isSubMenuTrigger: true },
     { path: '/countries', label: 'Countries', icon: Globe2 },
     { path: '/immigration', label: 'Immigration', icon: Plane },
-    { path: '/scholarships', label: 'Scholarships', icon: Award },
     { path: '/careers', label: 'Careers', icon: Briefcase },
     { path: '/calculator', label: 'Calculator', icon: Calculator },
   ];
+
+  const subNavLinks = [
+    { path: '/universities', label: 'Universities', icon: Landmark },
+    { path: '/programs', label: 'Programs', icon: BookOpen },
+    { path: '/scholarships', label: 'Scholarships', icon: Award },
+  ];
+
+  const isSubNavOpen = subNavLinks.some(link => isActive(link.path));
 
   const isLandingTop = location.pathname === '/' && !isScrolled;
 
@@ -149,8 +155,8 @@ export default function Navbar() {
       {/* Floating Fluid Glass Navigation */}
       <div className={`floating-nav-container ${isLandingTop ? 'nav-landing-override' : ''}`}>
         <nav className="fluid-glass-nav">
-          {navLinks.map((link) => {
-            const active = isActive(link.path);
+          {mainNavLinks.map((link) => {
+            const active = link.isSubMenuTrigger ? isSubNavOpen : isActive(link.path);
             const Icon = link.icon;
             
             return (
@@ -174,6 +180,43 @@ export default function Navbar() {
             );
           })}
         </nav>
+
+        <AnimatePresence>
+          {isSubNavOpen && (
+            <motion.nav 
+              className="fluid-glass-nav sub-nav"
+              initial={{ opacity: 0, y: -15, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              {subNavLinks.map((link) => {
+                const active = isActive(link.path);
+                const Icon = link.icon;
+                
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`fluid-nav-item ${active ? 'active' : ''}`}
+                  >
+                    {active && (
+                      <motion.div
+                        layoutId="sub-active-pill"
+                        className="fluid-active-bg"
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    <span className="fluid-nav-content">
+                      <Icon className="fluid-nav-icon" size={18} strokeWidth={active ? 2.5 : 2} />
+                      <span className="fluid-nav-label">{link.label}</span>
+                    </span>
+                  </Link>
+                );
+              })}
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

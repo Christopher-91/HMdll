@@ -229,6 +229,10 @@
   top: 12px; /* Floats in the center at the same height as the logo */
   transition: all 0.3s ease;
   pointer-events: none; /* Let clicks pass through container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .fluid-glass-nav {
