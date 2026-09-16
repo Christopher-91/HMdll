@@ -26,3 +26,8 @@ export const completeOnboarding = asyncHandler(async (req, res) => {
   const profile = await usersService.completeOnboarding(req.user.id);
   successResponse(res, profile);
 });
+
+export const searchUsers = asyncHandler(async (req, res) => {
+  const results = await usersService.searchUsers(req.query.q, req.user.id);
+  successResponse(res, results);
+});

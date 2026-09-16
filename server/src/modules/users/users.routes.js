@@ -11,5 +11,6 @@ router.put('/me', usersController.updateProfile);
 router.put('/me/test-scores', usersController.updateTestScores);
 router.put('/me/career-goals', usersController.updateCareerGoals);
 router.post('/me/complete-onboarding', usersController.completeOnboarding);
+router.get('/search', usersController.searchUsers);
 
 export default router;

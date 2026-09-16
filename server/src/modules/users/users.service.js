@@ -286,3 +286,42 @@ async function updateProfileCompletion(userId) {
     [completion, userId]
   );
 }
+
+/**
+ * Search users by name or username using pg_trgm similarity.
+ * Strictly returns only public-safe fields — no emails, passwords, or private data.
+ * Excludes the requesting user from results.
+ *
+ * @param {string} searchQuery - The raw search string from the client
+ * @param {string} requesterId - The ID of the user performing the search
+ */
+export const searchUsers = async (searchQuery, requesterId) => {
+  if (!searchQuery || searchQuery.trim().length < 2) return [];
+
+  const q = searchQuery.trim();
+
+  const result = await query(
+    `SELECT
+       u.id,
+       u.first_name,
+       u.last_name,
+       u.username,
+       u.avatar_url,
+       u.role
+     FROM users u
+     WHERE u.id != $1
+       AND u.is_active = TRUE
+       AND (
+         u.username ILIKE $2
+         OR (u.first_name || ' ' || u.last_name) ILIKE $2
+         OR similarity(u.first_name || ' ' || u.last_name, $3) > 0.2
+       )
+     ORDER BY
+       similarity(u.first_name || ' ' || u.last_name, $3) DESC,
+       u.first_name ASC
+     LIMIT 15`,
+    [requesterId, `%${q}%`, q]
+  );
+
+  return result.rows;
+};
