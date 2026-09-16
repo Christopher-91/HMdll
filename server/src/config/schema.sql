@@ -18,6 +18,8 @@ CREATE TYPE verification_status AS ENUM ('unverified', 'verified', 'outdated', '
 CREATE TYPE saved_item_type AS ENUM ('university', 'program', 'scholarship', 'country');
 CREATE TYPE deadline_type AS ENUM ('application', 'scholarship', 'test', 'visa', 'document_expiry', 'other');
 CREATE TYPE scholarship_coverage AS ENUM ('full', 'partial', 'tuition_only', 'living_expenses', 'travel', 'other');
+CREATE TYPE conversation_type AS ENUM ('DIRECT', 'GROUP', 'COMMUNITY');
+CREATE TYPE participant_role AS ENUM ('member', 'admin');
 
 -- ═══════════════════════════════════════════════════════════
 -- 1. USER & AUTH TABLES
@@ -26,6 +28,7 @@ CREATE TYPE scholarship_coverage AS ENUM ('full', 'partial', 'tuition_only', 'li
 CREATE TABLE users (
   id            UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   email         VARCHAR(255) UNIQUE NOT NULL,
+  username      VARCHAR(50) UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   first_name    VARCHAR(100) NOT NULL,
   last_name     VARCHAR(100) NOT NULL,
@@ -494,6 +497,7 @@ CREATE TABLE audit_logs (
 
 -- Users
 CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_username ON users(username);
 CREATE INDEX idx_users_role ON users(role);
 
 -- Refresh tokens
@@ -595,4 +599,43 @@ CREATE TRIGGER trg_app_docs_updated BEFORE UPDATE ON application_documents
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 CREATE TRIGGER trg_deadlines_updated BEFORE UPDATE ON deadlines
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- ═══════════════════════════════════════════════════════════
+-- 12. CHAT & MESSAGING
+-- ═══════════════════════════════════════════════════════════
+
+CREATE TABLE conversations (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  type conversation_type NOT NULL,
+  name VARCHAR(255),
+  direct_key VARCHAR(255) UNIQUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE conversation_participants (
+  conversation_id UUID NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  role participant_role NOT NULL DEFAULT 'member',
+  last_read_at TIMESTAMPTZ,
+  joined_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (conversation_id, user_id)
+);
+
+CREATE TABLE messages (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  conversation_id UUID NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+  sender_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_conversations_type ON conversations(type);
+CREATE INDEX idx_conversations_direct_key ON conversations(direct_key);
+CREATE INDEX idx_conversation_participants_user ON conversation_participants(user_id);
+CREATE INDEX idx_messages_conversation ON messages(conversation_id);
+CREATE INDEX idx_messages_created_at ON messages(created_at);
+
+CREATE TRIGGER trg_conversations_updated BEFORE UPDATE ON conversations
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();

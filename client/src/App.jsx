@@ -35,6 +35,7 @@ import ScholarshipDetail from './pages/Scholarships/ScholarshipDetail';
 import Careers from './pages/Careers/Careers';
 import CareerDetail from './pages/Careers/CareerDetail';
 import CostCalculator from './pages/Calculator/CostCalculator';
+import ChatLayout from './pages/Chat/ChatLayout';
 import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 import TermsOfService from './pages/Legal/TermsOfService';
 
@@ -73,6 +74,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/planner" element={<ProtectedRoute><Planner /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/chat/*" element={<ProtectedRoute><ChatLayout /></ProtectedRoute>} />
 
           {/* 404 */}
           <Route path="*" element={

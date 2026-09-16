@@ -46,6 +46,13 @@ const config = {
     keyId: process.env.APPLE_KEY_ID || '',
     privateKey: process.env.APPLE_PRIVATE_KEY || '',   // Paste .p8 content here with \n
   },
+
+  pusher: {
+    appId: process.env.PUSHER_APP_ID || '',
+    key: process.env.PUSHER_KEY || '',
+    secret: process.env.PUSHER_SECRET || '',
+    cluster: process.env.PUSHER_CLUSTER || 'us2',
+  },
 };
 
 // Validate critical config in production
