@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import UserAvatar from '../UserAvatar/UserAvatar';
-import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane } from 'lucide-react';
+import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane, MessageSquare } from 'lucide-react';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -48,6 +48,7 @@ export default function Navbar() {
     { path: '/immigration', label: 'Immigration', icon: Plane },
     { path: '/careers', label: 'Careers', icon: Briefcase },
     { path: '/calculator', label: 'Calculator', icon: Calculator },
+    { path: '/chat', label: 'Chat', icon: MessageSquare },
   ];
 
   const subNavLinks = [
