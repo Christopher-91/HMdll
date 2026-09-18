@@ -105,7 +105,7 @@ export default function ChatWindow() {
     setMessages((prev) => [...prev, incomingMsg]);
   }, [user?.id]);
 
-  usePusher(conversationId, handleIncomingMessage);
+  const isOnline = usePusher(conversationId, handleIncomingMessage);
 
   // ─── Send message ──────────────────────────────────────────────────────────
   const sendMessage = useCallback(async (content) => {
@@ -189,12 +189,16 @@ export default function ChatWindow() {
             ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
             : <span>{otherInitials}</span>
           }
-          <span className="chat-header-online-dot" />
+          {isOnline && <span className="chat-header-online-dot" />}
         </div>
 
         <div className="chat-header-info">
           <p className="chat-window-title">{otherName}</p>
-          <span className="chat-header-status">Active now</span>
+          {isOnline ? (
+            <span className="chat-header-status">Active now</span>
+          ) : (
+            <span className="chat-header-status" style={{ color: 'var(--text-tertiary)' }}>Offline</span>
+          )}
         </div>
 
         <div className="chat-header-actions">

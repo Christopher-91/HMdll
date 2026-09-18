@@ -152,7 +152,7 @@ export const sendMessage = async (req, res, next) => {
     await query('UPDATE conversations SET updated_at = NOW() WHERE id = $1', [id]);
 
     // Broadcast in real-time
-    pusher.trigger(`private-conversation-${id}`, 'new-message', message);
+    pusher.trigger(`presence-conversation-${id}`, 'new-message', message);
 
     res.status(201).json({ success: true, data: message });
   } catch (err) {
@@ -165,11 +165,11 @@ export const pusherAuth = async (req, res, next) => {
     const { socket_id, channel_name } = req.body;
     const userId = req.user.id;
 
-    if (!channel_name.startsWith('private-conversation-')) {
+    if (!channel_name.startsWith('private-conversation-') && !channel_name.startsWith('presence-conversation-')) {
       throw new ForbiddenError('Invalid channel requested');
     }
 
-    const conversationId = channel_name.replace('private-conversation-', '');
+    const conversationId = channel_name.replace('private-conversation-', '').replace('presence-conversation-', '');
 
     // Critical Security Constraint: Ensure DB validation before authorization
     const check = await query('SELECT 1 FROM conversation_participants WHERE conversation_id = $1 AND user_id = $2', [conversationId, userId]);
@@ -178,8 +178,17 @@ export const pusherAuth = async (req, res, next) => {
     }
 
     // Authorize pusher subscription
-    const auth = pusher.authorizeChannel(socket_id, channel_name);
-    res.send(auth);
+    if (channel_name.startsWith('presence-')) {
+      const presenceData = {
+        user_id: userId,
+        user_info: { id: userId, name: req.user.first_name }
+      };
+      const auth = pusher.authorizeChannel(socket_id, channel_name, presenceData);
+      res.send(auth);
+    } else {
+      const auth = pusher.authorizeChannel(socket_id, channel_name);
+      res.send(auth);
+    }
   } catch (err) {
     next(err);
   }
