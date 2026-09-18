@@ -224,15 +224,21 @@ export default function ChatWindow() {
 
       {/* ── Input Bar ── */}
       <form id="chat-message-form" className="chat-input-bar" onSubmit={handleSubmit}>
-        <input
+        <textarea
           id="chat-message-input"
-          type="text"
           className="chat-input"
           placeholder="Type a message…"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit(e);
+            }
+          }}
           autoComplete="off"
           maxLength={4000}
+          rows={1}
         />
         <button
           id="chat-send-btn"
@@ -241,7 +247,7 @@ export default function ChatWindow() {
           disabled={!inputValue.trim()}
           aria-label="Send message"
         >
-          <Send size={16} />
+          <Send size={18} />
         </button>
       </form>
     </div>
