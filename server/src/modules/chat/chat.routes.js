@@ -8,6 +8,7 @@ router.use(authenticate);
 
 // Conversations
 router.get('/conversations', chatController.getConversations);
+router.get('/conversations/:id', chatController.getConversation);
 router.post('/conversations/direct', chatController.createDirectConversation);
 
 // Messages

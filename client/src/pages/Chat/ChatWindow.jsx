@@ -1,12 +1,11 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Send, ArrowLeft } from 'lucide-react';
+import { Send, ArrowLeft, Phone, Video, MoreVertical } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { usePusher } from '../../hooks/usePusher';
 import { useChatScroll } from '../../hooks/useChatScroll';
 import MessageList from '../../components/Chat/MessageList';
 import api from '../../lib/api';
-import { useEffect } from 'react';
 
 /**
  * ChatWindow
@@ -23,15 +22,24 @@ export default function ChatWindow() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const [messages, setMessages]         = useState([]);
-  const [inputValue, setInputValue]     = useState('');
-  const [showNewBadge, setShowNewBadge] = useState(false);
+  const [messages, setMessages]           = useState([]);
+  const [inputValue, setInputValue]       = useState('');
+  const [showNewBadge, setShowNewBadge]   = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [hasMore, setHasMore]           = useState(true);
-  const [isFetching, setIsFetching]     = useState(true);
+  const [hasMore, setHasMore]             = useState(true);
+  const [isFetching, setIsFetching]       = useState(true);
+  const [convInfo, setConvInfo]           = useState(null);
 
   // Stable ref to the oldest message's created_at — used as the pagination cursor
   const cursorRef = useRef(null);
+
+  // ─── Fetch conversation info (for the header) ──────────────────────────────
+  useEffect(() => {
+    if (!conversationId) return;
+    api.get(`/chat/conversations/${conversationId}`)
+      .then((res) => setConvInfo(res.data.data))
+      .catch(() => {});
+  }, [conversationId]);
 
   // ─── Initial load ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -93,9 +101,7 @@ export default function ChatWindow() {
   // ─── Pusher real-time ──────────────────────────────────────────────────────
   const handleIncomingMessage = useCallback((incomingMsg) => {
     // DEDUPLICATION: drop events for messages WE sent.
-    // Our optimistic message already covers these; echo would cause a duplicate.
     if (incomingMsg.sender_id === user?.id) return;
-
     setMessages((prev) => [...prev, incomingMsg]);
   }, [user?.id]);
 
@@ -115,19 +121,15 @@ export default function ChatWindow() {
       status:          'sending',
     };
 
-    // Immediately append to UI
     setMessages((prev) => [...prev, optimisticMsg]);
 
     try {
       const res = await api.post(`/chat/conversations/${conversationId}/messages`, { content });
       const confirmed = res.data.data;
-
-      // Swap the temp entry with the real one from the DB
       setMessages((prev) =>
         prev.map((m) => (m.id === tempId ? { ...confirmed, status: undefined } : m))
       );
     } catch {
-      // Mark the optimistic message as failed — user sees a Retry button
       setMessages((prev) =>
         prev.map((m) => (m.id === tempId ? { ...m, status: 'failed' } : m))
       );
@@ -140,12 +142,19 @@ export default function ChatWindow() {
     setInputValue('');
   };
 
-  // Retry failed message
   const handleRetry = useCallback((failedMsg) => {
-    // Remove the failed entry and re-send its content
     setMessages((prev) => prev.filter((m) => m.id !== failedMsg.id));
     sendMessage(failedMsg.content);
   }, [sendMessage]);
+
+  // ─── Derived header info ────────────────────────────────────────────────────
+  const otherName = convInfo
+    ? `${convInfo.other_first_name || ''} ${convInfo.other_last_name || ''}`.trim() || 'Direct Message'
+    : 'Loading…';
+  const otherAvatar = convInfo?.other_avatar_url || null;
+  const otherInitials = otherName !== 'Loading…'
+    ? otherName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+    : '?';
 
   // ─── Render ────────────────────────────────────────────────────────────────
   if (isFetching) {
@@ -164,7 +173,7 @@ export default function ChatWindow() {
 
   return (
     <div className="chat-window">
-      {/* ── Header ── */}
+      {/* ── Premium Header ── */}
       <header className="chat-window-header">
         <button
           id="chat-back-btn"
@@ -174,7 +183,31 @@ export default function ChatWindow() {
         >
           <ArrowLeft size={18} />
         </button>
-        <p className="chat-window-title">Conversation</p>
+
+        <div className="chat-header-avatar">
+          {otherAvatar
+            ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
+            : <span>{otherInitials}</span>
+          }
+          <span className="chat-header-online-dot" />
+        </div>
+
+        <div className="chat-header-info">
+          <p className="chat-window-title">{otherName}</p>
+          <span className="chat-header-status">Active now</span>
+        </div>
+
+        <div className="chat-header-actions">
+          <button className="chat-header-action-btn" aria-label="Voice call" title="Voice call">
+            <Phone size={17} />
+          </button>
+          <button className="chat-header-action-btn" aria-label="Video call" title="Video call">
+            <Video size={17} />
+          </button>
+          <button className="chat-header-action-btn" aria-label="More options" title="More options">
+            <MoreVertical size={17} />
+          </button>
+        </div>
       </header>
 
       {/* ── Message Feed ── */}

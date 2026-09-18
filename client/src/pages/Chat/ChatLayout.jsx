@@ -92,22 +92,33 @@ function UserSearch({ onStartChat }) {
 }
 
 // ─── ConversationItem ──────────────────────────────────────────────────────────
-function ConversationItem({ conv, isActive }) {
+function ConversationItem({ conv }) {
   const { conversationId } = useParams();
-  const displayName = conv.name || 'Direct Message';
+  const isActive = conversationId === conv.id;
+
+  const displayName = conv.other_first_name
+    ? `${conv.other_first_name} ${conv.other_last_name || ''}`.trim()
+    : (conv.name || 'Direct Message');
+  const initials = displayName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
   const unread = Number(conv.unread_count || 0);
+  const lastMsg = conv.last_message;
 
   return (
     <Link
       to={`/chat/${conv.id}`}
       id={`conv-item-${conv.id}`}
-      className={`chat-conv-item ${isActive || conversationId === conv.id ? 'active' : ''}`}
+      className={`chat-conv-item ${isActive ? 'active' : ''}`}
     >
       <div className="chat-avatar chat-avatar-md">
-        <span>{displayName[0]}</span>
+        {conv.other_avatar_url
+          ? <img src={conv.other_avatar_url} alt="" referrerPolicy="no-referrer" />
+          : <span>{initials}</span>}
       </div>
       <div className="chat-conv-meta">
         <p className="chat-conv-name">{displayName}</p>
+        {lastMsg && (
+          <p className="chat-conv-preview">{lastMsg}</p>
+        )}
       </div>
       {unread > 0 && (
         <span className="chat-unread-badge">{unread > 99 ? '99+' : unread}</span>

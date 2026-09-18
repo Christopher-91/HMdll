@@ -6,14 +6,57 @@ export const getConversations = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const result = await query(`
-      SELECT c.*, cp.last_read_at,
-             (SELECT count(*) FROM messages m WHERE m.conversation_id = c.id AND m.created_at > COALESCE(cp.last_read_at, '1970-01-01')) as unread_count
+      SELECT 
+        c.*,
+        cp.last_read_at,
+        (
+          SELECT count(*) FROM messages m 
+          WHERE m.conversation_id = c.id 
+          AND m.created_at > COALESCE(cp.last_read_at, '1970-01-01')
+        ) as unread_count,
+        -- For DIRECT chats: get the OTHER participant's info
+        other_u.id         AS other_user_id,
+        other_u.first_name AS other_first_name,
+        other_u.last_name  AS other_last_name,
+        other_u.avatar_url AS other_avatar_url,
+        -- Last message preview
+        (SELECT content FROM messages lm WHERE lm.conversation_id = c.id ORDER BY lm.created_at DESC LIMIT 1) AS last_message,
+        (SELECT created_at FROM messages lm WHERE lm.conversation_id = c.id ORDER BY lm.created_at DESC LIMIT 1) AS last_message_at
       FROM conversations c
-      JOIN conversation_participants cp ON cp.conversation_id = c.id
-      WHERE cp.user_id = $1
-      ORDER BY c.updated_at DESC
+      JOIN conversation_participants cp ON cp.conversation_id = c.id AND cp.user_id = $1
+      LEFT JOIN conversation_participants other_cp 
+        ON other_cp.conversation_id = c.id AND other_cp.user_id <> $1
+      LEFT JOIN users other_u ON other_u.id = other_cp.user_id
+      ORDER BY COALESCE(c.updated_at, c.created_at) DESC
     `, [userId]);
     res.json({ success: true, data: result.rows });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getConversation = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    const result = await query(`
+      SELECT 
+        c.*,
+        other_u.id         AS other_user_id,
+        other_u.first_name AS other_first_name,
+        other_u.last_name  AS other_last_name,
+        other_u.avatar_url AS other_avatar_url
+      FROM conversations c
+      JOIN conversation_participants cp ON cp.conversation_id = c.id AND cp.user_id = $2
+      LEFT JOIN conversation_participants other_cp 
+        ON other_cp.conversation_id = c.id AND other_cp.user_id <> $2
+      LEFT JOIN users other_u ON other_u.id = other_cp.user_id
+      WHERE c.id = $1
+    `, [id, userId]);
+
+    if (result.rows.length === 0) throw new ForbiddenError('Conversation not found');
+    res.json({ success: true, data: result.rows[0] });
   } catch (err) {
     next(err);
   }
