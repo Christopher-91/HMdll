@@ -4,6 +4,7 @@ import { Send, ArrowLeft, Phone, Video, MoreVertical } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { usePusher } from '../../hooks/usePusher';
 import { useChatScroll } from '../../hooks/useChatScroll';
+import { useCall } from '../../context/CallContext';
 import MessageList from '../../components/Chat/MessageList';
 import api from '../../lib/api';
 
@@ -20,6 +21,7 @@ import api from '../../lib/api';
 export default function ChatWindow() {
   const { conversationId } = useParams();
   const { user } = useAuth();
+  const { startCall } = useCall();
   const navigate = useNavigate();
 
   const [messages, setMessages]           = useState([]);
@@ -202,10 +204,20 @@ export default function ChatWindow() {
         </div>
 
         <div className="chat-header-actions">
-          <button className="chat-header-action-btn" aria-label="Voice call" title="Voice call">
+          <button 
+            className="chat-header-action-btn" 
+            aria-label="Voice call" 
+            title="Voice call"
+            onClick={() => startCall(convInfo.other_user_id, otherName, false)}
+          >
             <Phone size={17} />
           </button>
-          <button className="chat-header-action-btn" aria-label="Video call" title="Video call">
+          <button 
+            className="chat-header-action-btn" 
+            aria-label="Video call" 
+            title="Video call"
+            onClick={() => startCall(convInfo.other_user_id, otherName, true)}
+          >
             <Video size={17} />
           </button>
           <button className="chat-header-action-btn" aria-label="More options" title="More options">

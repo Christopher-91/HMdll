@@ -6,7 +6,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 // Module-level singleton so we never create more than one Pusher connection.
 let pusherInstance = null;
 
-function getPusherInstance(token) {
+export function getPusherInstance(token) {
   if (!pusherInstance) {
     pusherInstance = new Pusher(import.meta.env.VITE_PUSHER_KEY, {
       cluster: import.meta.env.VITE_PUSHER_CLUSTER || 'us2',

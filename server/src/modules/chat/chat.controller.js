@@ -101,7 +101,20 @@ export const createDirectConversation = async (req, res, next) => {
     // Try to find existing by direct_key to prevent duplicates (as per schema constraints)
     const existing = await query('SELECT id FROM conversations WHERE direct_key = $1', [directKey]);
     if (existing.rows.length > 0) {
-      return res.json({ success: true, data: existing.rows[0] });
+      // Re-fetch with full participant info so the frontend header can hydrate immediately
+      const enriched = await query(`
+        SELECT c.*, 
+          other_u.id AS other_user_id,
+          other_u.first_name AS other_first_name,
+          other_u.last_name  AS other_last_name,
+          other_u.avatar_url AS other_avatar_url
+        FROM conversations c
+        JOIN conversation_participants cp ON cp.conversation_id = c.id AND cp.user_id = $2
+        LEFT JOIN conversation_participants other_cp ON other_cp.conversation_id = c.id AND other_cp.user_id <> $2
+        LEFT JOIN users other_u ON other_u.id = other_cp.user_id
+        WHERE c.id = $1
+      `, [existing.rows[0].id, userId]);
+      return res.json({ success: true, data: enriched.rows[0] });
     }
 
     // Insert new
@@ -165,8 +178,17 @@ export const pusherAuth = async (req, res, next) => {
     const { socket_id, channel_name } = req.body;
     const userId = req.user.id;
 
-    if (!channel_name.startsWith('private-conversation-') && !channel_name.startsWith('presence-conversation-')) {
+    if (!channel_name.startsWith('private-conversation-') && !channel_name.startsWith('presence-conversation-') && !channel_name.startsWith('private-user-')) {
       throw new ForbiddenError('Invalid channel requested');
+    }
+
+    if (channel_name.startsWith('private-user-')) {
+      const targetUserId = channel_name.replace('private-user-', '');
+      if (targetUserId !== userId) {
+        throw new ForbiddenError('Not authorized for this user channel');
+      }
+      const auth = pusher.authorizeChannel(socket_id, channel_name);
+      return res.send(auth);
     }
 
     const conversationId = channel_name.replace('private-conversation-', '').replace('presence-conversation-', '');

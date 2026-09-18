@@ -26,6 +26,7 @@ import dashboardRoutes from './modules/dashboard/dashboard.routes.js';
 import immigrationRoutes from './modules/immigration/immigration.routes.js';
 import reviewsRoutes from './modules/reviews/reviews.routes.js';
 import chatRoutes from './modules/chat/chat.routes.js';
+import callRoutes from './modules/call/call.routes.js';
 
 const app = express();
 
@@ -108,6 +109,7 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/immigration', immigrationRoutes);
 app.use('/api/universities/:slug/reviews', reviewsRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/call', callRoutes);
 
 // ─── 404 ────────────────────────────────────────
 app.use((req, res) => {

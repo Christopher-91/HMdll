@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
+import { CallProvider } from './context/CallContext';
 import { ProtectedRoute, PublicRoute } from './router/ProtectedRoute';
 import Navbar from './components/Navbar/Navbar';
 import { BsCompass } from 'react-icons/bs';
@@ -46,6 +47,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <AuthProvider>
+        <CallProvider>
         <Navbar />
         <Routes>
           {/* Public */}
@@ -88,6 +90,7 @@ function App() {
             </div>
           } />
         </Routes>
+        </CallProvider>
 
         <Toaster
           position="bottom-right"
