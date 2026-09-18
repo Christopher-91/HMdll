@@ -289,7 +289,7 @@ export default function Register() {
               />
             </div>
             
-            <button type="submit" className="auth-submit-btn" disabled={loading || otp.length !== 6}>
+            <button type="submit" className="btn btn-primary w-full btn-lg" disabled={loading || otp.length !== 6}>
               {loading ? 'Verifying...' : 'Verify & Continue'}
             </button>
             

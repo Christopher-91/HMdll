@@ -8,6 +8,42 @@
   background: transparent;
   border: none;
   pointer-events: none; /* Let clicks pass through empty space */
+  transition: all 0.4s ease;
+}
+
+/* Beautiful fading glass backdrop */
+.navbar-top.with-blur::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px; /* Tall enough to cover the logo, floating nav, and fade out smoothly */
+  pointer-events: none;
+  z-index: -1;
+  
+  /* Gradual fade of the background color itself */
+  background: linear-gradient(to bottom, var(--bg-primary) 10%, rgba(255,255,255,0) 100%);
+  
+  /* Apply strong blur */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  /* Use mask-image to fade the *blur effect itself* out smoothly at the bottom */
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.95; }
+}
+
+[data-theme='dark'] .navbar-top.with-blur::before {
+  background: linear-gradient(to bottom, var(--bg-primary) 20%, transparent 100%);
+  opacity: 0.90;
 }
 
 .navbar-inner {
