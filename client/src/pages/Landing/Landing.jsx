@@ -10,6 +10,8 @@ const HERO_STATS = [
   { value: '280+', label: 'Scholarships' },
 ];
 
+const HERO_PHRASES = ['HMdll', 'Your Global Education\nJourney Starts Here'];
+
 const FEATURES = [
   { icon: <BsSearch />, title: 'Smart Discovery', desc: 'AI-powered matching across 25+ countries. Find programs that fit your profile, budget, and career goals.' },
   { icon: <BsBullseye />, title: 'Match Scoring', desc: 'Safe / Target / Reach categorization for every program. Know your chances before you apply.' },
@@ -121,8 +123,8 @@ export default function Landing() {
         <div className="container hero-content">
           {/* Hero badge removed as requested */}
 
-          <h1 className="hero-title animate-fadeInUp" style={{ minHeight: '130px' }}>
-            <TextScramble phrases={['HMdll', 'Your Global Education\\nJourney Starts Here']} />
+          <h1 className="hero-title animate-fadeInUp" style={{ minHeight: '260px', transform: 'translateZ(0)' }}>
+            <TextScramble phrases={HERO_PHRASES} />
           </h1>
 
           <p className="hero-subtitle animate-fadeInUp">

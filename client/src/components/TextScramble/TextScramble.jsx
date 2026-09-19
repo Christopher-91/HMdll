@@ -79,12 +79,12 @@ export default function TextScramble({ phrases, delay = 1500, className = '' }) 
     let isCancelled = false;
     
     const next = () => {
-      if (isCancelled || counter >= phrases.length) return;
+      if (isCancelled) return;
       
       fxRef.current.setText(phrases[counter]).then(() => {
-        if (!isCancelled && counter < phrases.length - 1) {
+        if (!isCancelled) {
           setTimeout(() => {
-            counter++;
+            counter = (counter + 1) % phrases.length;
             next();
           }, delay);
         }

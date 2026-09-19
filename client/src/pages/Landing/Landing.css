@@ -83,12 +83,15 @@
 
 .hero-title {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 4.5rem;
-  font-weight: 800;
+  font-weight: 400;
+  font-size: 72px;
+  color: white;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 20px auto;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: #ffffff;
-  margin-bottom: 20px;
 }
 
 .hero-gradient {
