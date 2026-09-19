@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend } from 'react-icons/bs';
+import TextScramble from '../../components/TextScramble/TextScramble';
 import './Landing.css';
 const HERO_STATS = [
   { value: '25+', label: 'Countries' },
@@ -120,10 +121,8 @@ export default function Landing() {
         <div className="container hero-content">
           {/* Hero badge removed as requested */}
 
-          <h1 className="hero-title animate-fadeInUp">
-            Your Global Education
-            <br />
-            Journey <span className="hero-gradient">Starts Here</span>
+          <h1 className="hero-title animate-fadeInUp" style={{ minHeight: '130px' }}>
+            <TextScramble phrases={['HMdll', 'Your Global Education\\nJourney Starts Here']} />
           </h1>
 
           <p className="hero-subtitle animate-fadeInUp">

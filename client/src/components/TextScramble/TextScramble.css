@@ -1,0 +1,9 @@
+.text-scramble {
+  white-space: pre-wrap; /* Preserve newlines */
+  font-family: inherit;
+  color: inherit;
+}
+
+.text-scramble .dud {
+  color: var(--text-tertiary, #757575);
+}
