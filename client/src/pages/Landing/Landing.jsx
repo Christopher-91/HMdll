@@ -3,14 +3,12 @@ import { useState, useEffect, useRef } from 'react';
 import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend } from 'react-icons/bs';
 import TextScramble from '../../components/TextScramble/TextScramble';
 import './Landing.css';
-const HERO_STATS = [
-  { value: '25+', label: 'Countries' },
-  { value: '290+', label: 'Universities' },
-  { value: '950+', label: 'Programs' },
-  { value: '280+', label: 'Scholarships' },
-];
 
-const HERO_PHRASES = ['HMdll', 'Your Global Education\nJourney Starts Here'];
+
+const HERO_PHRASES = [
+  'HMdll',
+  'Your Global Education\nJourney Starts Here'
+];
 
 const FEATURES = [
   { icon: <BsSearch />, title: 'Smart Discovery', desc: 'AI-powered matching across 25+ countries. Find programs that fit your profile, budget, and career goals.' },
@@ -60,17 +58,9 @@ const STEPS = [
 
 export default function Landing() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [animatedStat, setAnimatedStat] = useState(0);
   const destinationsRef = useRef(null);
   const destinationsPausedRef = useRef(false);
   const destinationsResumeTimerRef = useRef(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setAnimatedStat(prev => (prev + 1) % HERO_STATS.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const carousel = destinationsRef.current;
@@ -123,7 +113,7 @@ export default function Landing() {
         <div className="container hero-content">
           {/* Hero badge removed as requested */}
 
-          <h1 className="hero-title animate-fadeInUp" style={{ minHeight: '260px', transform: 'translateZ(0)' }}>
+          <h1 className="hero-title animate-fadeInUp" style={{ minHeight: '160px', transform: 'translateZ(0)' }}>
             <TextScramble phrases={HERO_PHRASES} />
           </h1>
 
@@ -133,15 +123,6 @@ export default function Landing() {
           </p>
 
 
-          {/* Stats */}
-          <div className="hero-stats">
-            {HERO_STATS.map((stat, i) => (
-              <div key={i} className={`hero-stat ${animatedStat === i ? 'hero-stat-active' : ''}`}>
-                <span className="hero-stat-value">{stat.value}</span>
-                <span className="hero-stat-label">{stat.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

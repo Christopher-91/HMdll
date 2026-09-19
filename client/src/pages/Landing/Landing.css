@@ -10,6 +10,8 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('/images/hero-bg-5.jpg');
   background-size: cover;
   background-position: center;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 [data-theme='dark'] .hero {
