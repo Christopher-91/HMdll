@@ -113,14 +113,9 @@ export default function Landing() {
         <div className="container hero-content">
           {/* Hero badge removed as requested */}
 
-          <h1 className="hero-title animate-fadeInUp" style={{ minHeight: '160px', transform: 'translateZ(0)' }}>
+          <h1 className="hero-title animate-fadeInUp" style={{ height: '180px', contain: 'strict', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <TextScramble phrases={HERO_PHRASES} />
           </h1>
-
-          <p className="hero-subtitle animate-fadeInUp">
-            Discover the perfect university, compare costs across 25+ countries,
-            find scholarships you qualify for, and track every application — all in one place.
-          </p>
 
 
         </div>

@@ -49,6 +49,7 @@ class TextScrambleLogic {
       }
     }
     
+    output += '<span class="blinking-cursor"></span>';
     this.el.innerHTML = output;
     
     if (complete === this.queue.length) {
