@@ -27,6 +27,7 @@ import immigrationRoutes from './modules/immigration/immigration.routes.js';
 import reviewsRoutes from './modules/reviews/reviews.routes.js';
 import chatRoutes from './modules/chat/chat.routes.js';
 import callRoutes from './modules/call/call.routes.js';
+import connectionsRoutes from './modules/connections/connections.routes.js';
 
 const app = express();
 
@@ -110,6 +111,7 @@ app.use('/api/immigration', immigrationRoutes);
 app.use('/api/universities/:slug/reviews', reviewsRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/call', callRoutes);
+app.use('/api/connections', connectionsRoutes);
 
 // ─── 404 ────────────────────────────────────────
 app.use((req, res) => {

@@ -95,6 +95,18 @@ export const createDirectConversation = async (req, res, next) => {
 
     if (userId === targetUserId) throw new BadRequestError('Cannot create a chat with yourself');
 
+    // ── Connection gate ──────────────────────────────────────────────────────
+    // Users must have an accepted connection before a direct conversation can be opened.
+    const connKey = [userId, targetUserId].sort().join(':');
+    const connCheck = await query(
+      'SELECT 1 FROM connection_requests WHERE connection_key = $1 AND status = $2',
+      [connKey, 'accepted']
+    );
+    if (connCheck.rows.length === 0) {
+      throw new ForbiddenError('You must be connected with this user before messaging them');
+    }
+    // ────────────────────────────────────────────────────────────────────────
+
     const ids = [userId, targetUserId].sort();
     const directKey = `${ids[0]}:${ids[1]}`;
 
@@ -153,6 +165,25 @@ export const sendMessage = async (req, res, next) => {
 
     const check = await query('SELECT 1 FROM conversation_participants WHERE conversation_id = $1 AND user_id = $2', [id, userId]);
     if (check.rows.length === 0) throw new ForbiddenError('Not a participant');
+
+    // ── Connection revocation gate ───────────────────────────────────────────
+    // Even though a conversation exists, verify the two users are still connected.
+    // This closes the loophole where an unfriended user could still send messages.
+    const convMeta = await query(
+      'SELECT type, direct_key FROM conversations WHERE id = $1',
+      [id]
+    );
+    if (convMeta.rows[0]?.type === 'DIRECT' && convMeta.rows[0]?.direct_key) {
+      const directKey = convMeta.rows[0].direct_key;
+      const connRevoke = await query(
+        'SELECT 1 FROM connection_requests WHERE connection_key = $1 AND status = $2',
+        [directKey, 'accepted']
+      );
+      if (connRevoke.rows.length === 0) {
+        throw new ForbiddenError('You are no longer connected with this user');
+      }
+    }
+    // ────────────────────────────────────────────────────────────────────────
 
     const result = await query(`
       INSERT INTO messages (conversation_id, sender_id, content) 
