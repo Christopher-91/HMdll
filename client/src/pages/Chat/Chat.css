@@ -748,3 +748,243 @@
   border-radius: var(--radius-lg);
 }
 
+
+/* ═══════════════════════════════════════════════════════════
+   Connection Request UI
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Search Result — action buttons ──────────────────────── */
+.chat-result-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Shared action button base */
+.conn-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  letter-spacing: 0.01em;
+}
+
+.conn-action-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* Connect (blue outline) */
+.conn-action-btn--connect {
+  background: transparent;
+  color: var(--primary-400);
+  border-color: var(--primary-400);
+}
+
+.conn-action-btn--connect:hover:not(:disabled) {
+  background: var(--primary-400);
+  color: #fff;
+}
+
+/* Request Sent (neutral muted) */
+.conn-action-btn--pending {
+  background: transparent;
+  color: var(--text-tertiary);
+  border-color: var(--border-primary);
+}
+
+/* Accept (green) */
+.conn-action-btn--accept {
+  background: transparent;
+  color: var(--accent-400);
+  border-color: var(--accent-400);
+}
+
+.conn-action-btn--accept:hover:not(:disabled) {
+  background: var(--accent-400);
+  color: #fff;
+}
+
+/* Message (solid primary fill) */
+.conn-action-btn--message {
+  background: var(--primary-500);
+  color: #fff;
+  border-color: var(--primary-500);
+}
+
+.conn-action-btn--message:hover:not(:disabled) {
+  background: var(--primary-400);
+  border-color: var(--primary-400);
+}
+
+/* ─── Message Requests Section (sidebar) ──────────────────── */
+.conn-requests-section {
+  margin: 4px 0 8px;
+  border-bottom: 1px solid var(--border-secondary);
+  padding-bottom: 6px;
+}
+
+.conn-requests-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.conn-requests-header:hover {
+  color: var(--text-primary);
+}
+
+.conn-requests-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.conn-requests-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  background: var(--primary-500);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.conn-requests-list {
+  padding: 2px 0 4px;
+}
+
+/* ─── Request Item (single row in sidebar) ─────────────────── */
+.conn-request-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  transition: background var(--transition-fast);
+  border-radius: var(--radius-md);
+  margin: 2px 4px;
+}
+
+.conn-request-item:hover {
+  background: var(--bg-hover);
+}
+
+.conn-request-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conn-request-name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conn-request-handle {
+  font-size: 0.74rem;
+  color: var(--text-tertiary);
+  margin: 1px 0 0;
+}
+
+.conn-request-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* Accept / Decline icon buttons */
+.conn-req-btn {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: transparent;
+}
+
+.conn-req-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.conn-req-btn--accept {
+  color: var(--accent-400);
+  border-color: var(--accent-400);
+}
+
+.conn-req-btn--accept:hover:not(:disabled) {
+  background: var(--accent-400);
+  color: #fff;
+}
+
+.conn-req-btn--decline {
+  color: var(--text-tertiary);
+  border-color: var(--border-primary);
+}
+
+.conn-req-btn--decline:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #ef4444;
+}
+
+/* ─── Chat Locked / Blocked State ─────────────────────────── */
+.chat-locked-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 48px 32px;
+  text-align: center;
+}
+
+.chat-locked-icon {
+  opacity: 0.3;
+  color: var(--text-secondary);
+}
+
+.chat-locked-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.chat-locked-sub {
+  font-size: 0.84rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 280px;
+}

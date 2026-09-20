@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Send, ArrowLeft, Phone, Video, MoreVertical } from 'lucide-react';
+import { Send, ArrowLeft, Phone, Video, MoreVertical, UserX } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { usePusher } from '../../hooks/usePusher';
 import { useChatScroll } from '../../hooks/useChatScroll';
@@ -24,13 +24,15 @@ export default function ChatWindow() {
   const { startCall } = useCall();
   const navigate = useNavigate();
 
-  const [messages, setMessages]           = useState([]);
-  const [inputValue, setInputValue]       = useState('');
-  const [showNewBadge, setShowNewBadge]   = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [hasMore, setHasMore]             = useState(true);
-  const [isFetching, setIsFetching]       = useState(true);
-  const [convInfo, setConvInfo]           = useState(null);
+  const [messages, setMessages]             = useState([]);
+  const [inputValue, setInputValue]         = useState('');
+  const [showNewBadge, setShowNewBadge]     = useState(false);
+  const [isLoadingMore, setIsLoadingMore]   = useState(false);
+  const [hasMore, setHasMore]               = useState(true);
+  const [isFetching, setIsFetching]         = useState(true);
+  const [convInfo, setConvInfo]             = useState(null);
+  // 'loading' | 'accepted' | 'blocked' | 'forbidden'
+  const [connectionStatus, setConnectionStatus] = useState('loading');
 
   // Stable ref to the oldest message's created_at — used as the pagination cursor
   const cursorRef = useRef(null);
@@ -40,8 +42,25 @@ export default function ChatWindow() {
     if (!conversationId) return;
     api.get(`/chat/conversations/${conversationId}`)
       .then((res) => setConvInfo(res.data.data))
-      .catch(() => {});
+      .catch((err) => {
+        // If the server refuses access to this conversation, show friendly state
+        if (err?.response?.status === 403 || err?.response?.status === 404) {
+          setConnectionStatus('forbidden');
+          setIsFetching(false);
+        }
+      });
   }, [conversationId]);
+
+  // ─── Check connection status once convInfo (other_user_id) is available ────
+  useEffect(() => {
+    if (!convInfo?.other_user_id) return;
+    api.get(`/connections/status/${convInfo.other_user_id}`)
+      .then((res) => {
+        const status = res.data.data?.status;
+        setConnectionStatus(status === 'accepted' ? 'accepted' : 'blocked');
+      })
+      .catch(() => setConnectionStatus('accepted')); // fail-open for non-DIRECT convs
+  }, [convInfo?.other_user_id]);
 
   // ─── Initial load ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -159,7 +178,7 @@ export default function ChatWindow() {
     : '?';
 
   // ─── Render ────────────────────────────────────────────────────────────────
-  if (isFetching) {
+  if (isFetching && connectionStatus !== 'forbidden') {
     return (
       <div className="chat-window-loading">
         <div className="chat-skeleton-messages">
@@ -168,6 +187,45 @@ export default function ChatWindow() {
               <div className="skeleton chat-skeleton-bubble" style={{ width: `${40 + (i * 17) % 40}%` }} />
             </div>
           ))}
+        </div>
+      </div>
+    );
+  }
+
+  // ─── Forbidden / Blocked fallback state ────────────────────────────────────
+  if (connectionStatus === 'forbidden' || connectionStatus === 'blocked') {
+    const isForbidden = connectionStatus === 'forbidden';
+    return (
+      <div className="chat-window">
+        {/* Minimal header */}
+        <header className="chat-window-header">
+          <button id="chat-back-btn" className="chat-back-btn" onClick={() => navigate('/chat')} aria-label="Back">
+            <ArrowLeft size={18} />
+          </button>
+          {convInfo && (
+            <>
+              <div className="chat-header-avatar">
+                {otherAvatar
+                  ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
+                  : <span>{otherInitials}</span>}
+              </div>
+              <div className="chat-header-info">
+                <p className="chat-window-title">{otherName}</p>
+              </div>
+            </>
+          )}
+        </header>
+        {/* Locked state body */}
+        <div className="chat-locked-state">
+          <div className="chat-locked-icon"><UserX size={40} strokeWidth={1.5} /></div>
+          <h3 className="chat-locked-title">
+            {isForbidden ? 'Conversation not found' : 'Not connected'}
+          </h3>
+          <p className="chat-locked-sub">
+            {isForbidden
+              ? "This conversation doesn't exist or you don't have access to it."
+              : 'You must be connected with this user before messaging them.'}
+          </p>
         </div>
       </div>
     );
@@ -238,34 +296,36 @@ export default function ChatWindow() {
         isLoadingMore={isLoadingMore}
       />
 
-      {/* ── Input Bar ── */}
-      <form id="chat-message-form" className="chat-input-bar" onSubmit={handleSubmit}>
-        <textarea
-          id="chat-message-input"
-          className="chat-input"
-          placeholder="Type a message…"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit(e);
-            }
-          }}
-          autoComplete="off"
-          maxLength={4000}
-          rows={1}
-        />
-        <button
-          id="chat-send-btn"
-          type="submit"
-          className="chat-send-btn"
-          disabled={!inputValue.trim()}
-          aria-label="Send message"
-        >
-          <Send size={18} />
-        </button>
-      </form>
+      {/* ── Input Bar — hidden when not connected ── */}
+      {connectionStatus === 'accepted' && (
+        <form id="chat-message-form" className="chat-input-bar" onSubmit={handleSubmit}>
+          <textarea
+            id="chat-message-input"
+            className="chat-input"
+            placeholder="Type a message…"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
+            autoComplete="off"
+            maxLength={4000}
+            rows={1}
+          />
+          <button
+            id="chat-send-btn"
+            type="submit"
+            className="chat-send-btn"
+            disabled={!inputValue.trim()}
+            aria-label="Send message"
+          >
+            <Send size={18} />
+          </button>
+        </form>
+      )}
     </div>
   );
 }
