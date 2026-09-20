@@ -66,7 +66,7 @@
 
 .logo-text {
   font-size: 2.15rem; /* Increased logo size further based on request */
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text-primary);
   letter-spacing: -0.03em;
 }
