@@ -126,7 +126,7 @@ export default function Landing() {
         <div className="container">
           <div className="destinations-header">
             <span className="section-badge">Study destinations</span>
-            <h2 className="section-title">Explore Your Next<br /><span className="hero-gradient">Global Opportunity</span></h2>
+            <h2 className="section-title">Explore Your Next<br />Global Opportunity</h2>
             <p className="section-subtitle">
               See the cities students love, and the industries where graduates can make their mark.
             </p>
@@ -182,7 +182,7 @@ export default function Landing() {
         <div className="container">
           <div className="section-header">
             <span className="section-badge">Features</span>
-            <h2 className="section-title">Everything You Need to<br /><span className="hero-gradient">Make the Right Choice</span></h2>
+            <h2 className="section-title">Everything You Need to<br />Make the Right Choice</h2>
             <p className="section-subtitle">
               We've built every tool a student needs — from initial research to final application submission.
             </p>
@@ -205,7 +205,7 @@ export default function Landing() {
         <div className="container">
           <div className="section-header">
             <span className="section-badge">How It Works</span>
-            <h2 className="section-title">Three Steps to Your<br /><span className="hero-gradient">Dream University</span></h2>
+            <h2 className="section-title">Three Steps to Your<br />Dream University</h2>
           </div>
 
           <div className="steps-grid">
