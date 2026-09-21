@@ -135,6 +135,11 @@ export default function ChatWindow() {
     // DEDUPLICATION: drop events for messages WE sent.
     if (incomingMsg.sender_id === user?.id) return;
     setMessages((prev) => [...prev, incomingMsg]);
+
+    try {
+      const audio = new Audio('/receive.wav');
+      audio.play().catch(() => {});
+    } catch (err) {}
   }, [user?.id]);
 
   const isOnline = usePusher(conversationId, handleIncomingMessage);
@@ -142,6 +147,11 @@ export default function ChatWindow() {
   // ─── Send message ──────────────────────────────────────────────────────────
   const sendMessage = useCallback(async (content) => {
     if (!content.trim()) return;
+
+    try {
+      const audio = new Audio('/send.wav');
+      audio.play().catch(() => {});
+    } catch (err) {}
 
     const tempId = `temp-${Date.now()}-${Math.random()}`;
     const optimisticMsg = {
