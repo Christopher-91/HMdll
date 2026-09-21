@@ -13,6 +13,7 @@ export const getConversations = async (req, res, next) => {
           SELECT count(*) FROM messages m 
           WHERE m.conversation_id = c.id 
           AND m.created_at > COALESCE(cp.last_read_at, '1970-01-01')
+          AND m.sender_id != $1
         ) as unread_count,
         -- For DIRECT chats: get the OTHER participant's info
         other_u.id         AS other_user_id,
@@ -71,6 +72,12 @@ export const getMessages = async (req, res, next) => {
     // Check membership
     const check = await query('SELECT 1 FROM conversation_participants WHERE conversation_id = $1 AND user_id = $2', [id, userId]);
     if (check.rows.length === 0) throw new ForbiddenError('Not a participant of this conversation');
+
+    // If fetching the first page (no cursor), mark as read
+    if (!cursor) {
+      await query('UPDATE conversation_participants SET last_read_at = NOW() WHERE conversation_id = $1 AND user_id = $2', [id, userId]);
+    }
+
 
     // Cursor-based pagination: fetch messages older than the cursor
     let sql = 'SELECT * FROM messages WHERE conversation_id = $1';
