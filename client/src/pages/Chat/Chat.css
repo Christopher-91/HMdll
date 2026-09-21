@@ -3,43 +3,55 @@
    Subtle 1px borders · Neutral colours · Generous whitespace
    ═══════════════════════════════════════════════════════════ */
 
-/* ─── Root Layout — Viewport Lockdown ─────────────────────── */
-/* The chat interface behaves like a native app: fixed height, zero page scroll. */
+/* ─── Root Layout — Full-Bleed Viewport Lockdown ─────────── */
+/* The global Navbar is position:fixed at 64px height. The chat layout
+   fills every remaining pixel below it. No page-level scrolling ever. */
 .chat-layout {
   display: flex;
-  height: calc(100dvh - 110px);
-  height: calc(100vh - 110px); /* fallback for browsers without dvh */
-  margin-top: 110px;
+  /* Exact Navbar height offset — no extra gap */
+  height: calc(100dvh - 64px);
+  height: calc(100vh - 64px); /* 100vh fallback */
+  margin-top: 64px;
   overflow: hidden;
   overscroll-behavior: none;
-  border-top: 1px solid var(--border-secondary);
-  /* Prevent any horizontal bleed */
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  /* No border-top — the header defines its own bottom border */
 }
 
 /* ─── Layer 1: Sidebar ─────────────────────────────────────── */
-/* White/secondary background, full-height right border. */
+/* Strict white background with full-height right border for visual depth. */
 .chat-sidebar {
   width: 320px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--border-secondary);
-  background: var(--bg-secondary);
+  border-right: 1px solid #e5e7eb; /* neutral-200 — hard line between panes */
+  background: #ffffff;
   overflow: hidden;
-  min-height: 0; /* Required for flex children to scroll correctly */
+  min-height: 0;
 }
 
-/* Pinned sidebar header — stays above scrolling list */
+[data-theme='dark'] .chat-sidebar {
+  background: var(--bg-secondary);
+  border-right-color: var(--border-secondary);
+}
+
+/* Pinned sidebar header — white, stays above scrolling list */
 .chat-sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 18px 16px 14px;
-  border-bottom: 1px solid var(--border-secondary);
-  background: var(--bg-secondary);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
   flex-shrink: 0;
   z-index: 10;
+}
+
+[data-theme='dark'] .chat-sidebar-header {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-secondary);
 }
 
 .chat-sidebar-title {
@@ -293,13 +305,17 @@
 }
 
 /* ─── Layer 2: Main Chat Pane ──────────────────────────────── */
-/* Slightly different background from sidebar for clear visual depth. */
+/* Contrasting slate-50 feed — visually separates from the white sidebar. */
 .chat-main {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: #f8fafc; /* slate-50 — premium neutral chat feed */
+}
+
+[data-theme='dark'] .chat-main {
   background: var(--bg-primary);
 }
 
@@ -348,11 +364,10 @@
 /* ─── Mobile Responsive ────────────────────────────────────── */
 @media (max-width: 767px) {
   .chat-layout {
-    height: calc(100dvh - 90px);
-    height: calc(100vh - 90px); /* dvh fallback */
-    margin-top: 90px;
-    /* Use dvh to account for mobile browser chrome and virtual keyboard */
-    height: calc(100dvh - 90px);
+    /* On mobile the navbar is same 64px fixed. dvh accounts for browser chrome + virtual keyboard. */
+    height: calc(100dvh - 64px);
+    height: calc(100vh - 64px); /* 100vh fallback */
+    margin-top: 64px;
   }
 
   .chat-sidebar {
@@ -368,7 +383,7 @@
     width: 100%;
   }
 
-  /* On mobile, ensure no horizontal overflow from any child */
+  /* No horizontal overflow from any child on mobile */
   .chat-window,
   .chat-message-list,
   .chat-input-bar {
@@ -384,18 +399,28 @@
   height: 100%;
   min-height: 0;
   overflow: hidden;
+  background: #f8fafc; /* Matches .chat-main — slate-50 */
 }
 
-/* Pinned header — uses bg-secondary for clear visual separation from feed */
+[data-theme='dark'] .chat-window {
+  background: var(--bg-primary);
+}
+
+/* Pinned header — white so it pops against the slate-50 feed */
 .chat-window-header {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 20px;
-  border-bottom: 1px solid var(--border-secondary);
-  background: var(--bg-secondary);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb; /* neutral-200 */
   flex-shrink: 0;
   z-index: 10;
+}
+
+[data-theme='dark'] .chat-window-header {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-secondary);
 }
 
 /* Back button (mobile only) */

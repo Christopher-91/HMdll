@@ -60,11 +60,13 @@ export default function Navbar() {
   const isSubNavOpen = subNavLinks.some(link => isActive(link.path));
 
   const isLandingTop = location.pathname === '/' && !isScrolled;
+  // On /chat routes, suppress the navbar gradient/blur overlay — it bleeds into the fixed chat layout
+  const isChat = location.pathname.startsWith('/chat');
 
   return (
     <>
       {/* Top Header */}
-      <nav className={`navbar-top ${!isLandingTop ? 'with-blur' : ''}`}>
+      <nav className={`navbar-top ${!isLandingTop && !isChat ? 'with-blur' : ''}`}>
         <div className="navbar-inner container">
           <Link to="/" className="navbar-logo">
             <span className={`logo-text ${isLandingTop ? 'landing-override' : ''}`}>HMdll<span className="blinking-dot"></span></span>
