@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend } from 'react-icons/bs';
-import FluidTextHover from '../../components/Landing/FluidTextHover';
+import TextMorph from '../../components/Landing/TextMorph';
 import './Landing.css';
 
 
@@ -107,9 +107,8 @@ export default function Landing() {
         <div className="hero-bg-orb hero-orb-2" />
         <div className="hero-bg-orb hero-orb-3" />
 
-        <FluidTextHover text="Your dream university starts here." />
         <div className="container hero-content">
-          {/* Hero content placeholder */}
+          <TextMorph />
         </div>
       </section>
 
