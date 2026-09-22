@@ -1,0 +1,66 @@
+.fluid-text-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Below other hero content */
+    isolation: isolate;
+    mix-blend-mode: screen;
+}
+
+.fluid-canvas-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.fluid-canvas-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fluid-text-mask {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* Black background turns transparent when screened by container */
+    color: #fff; /* White text reveals the canvas below due to multiply */
+    mix-blend-mode: multiply;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Let mouse events pass through to canvas */
+}
+
+
+
+.fluid-title {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-align: center;
+    max-width: 900px;
+    margin: 0;
+    padding: 0 20px;
+    white-space: pre-wrap; /* allow \n in text */
+}
+
+@media (max-width: 768px) {
+    .fluid-title {
+        font-size: 2.25rem;
+    }
+}

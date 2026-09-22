@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend } from 'react-icons/bs';
-import TextScramble from '../../components/TextScramble/TextScramble';
+import FluidTextHover from '../../components/Landing/FluidTextHover';
 import './Landing.css';
 
 
-const HERO_PHRASES = [
-  'HMdll',
-  'Your Global Education\nJourney Starts Here'
-];
+
 
 const FEATURES = [
   { icon: <BsSearch />, title: 'Smart Discovery', desc: 'AI-powered matching across 25+ countries. Find programs that fit your profile, budget, and career goals.' },
@@ -110,14 +107,9 @@ export default function Landing() {
         <div className="hero-bg-orb hero-orb-2" />
         <div className="hero-bg-orb hero-orb-3" />
 
+        <FluidTextHover text="Your dream university starts here." />
         <div className="container hero-content">
-          {/* Hero badge removed as requested */}
-
-          <h1 className="hero-title animate-fadeInUp" style={{ height: '180px', contain: 'strict', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <TextScramble phrases={HERO_PHRASES} />
-          </h1>
-
-
+          {/* Hero content placeholder */}
         </div>
       </section>
 
