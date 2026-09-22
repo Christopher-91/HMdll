@@ -624,7 +624,7 @@
   background: var(--primary-600); /* Brand accent background */
   color: white; /* white text */
   border-bottom-right-radius: var(--radius-sm);
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .chat-bubble--sending { opacity: 0.55; }
@@ -661,6 +661,10 @@
 
 .chat-bubble--own .chat-bubble-time {
   color: rgba(255, 255, 255, 0.9);
+}
+
+.chat-bubble--own .chat-bubble-meta {
+  align-self: flex-end;
 }
 
 .chat-bubble-status {
