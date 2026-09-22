@@ -6,7 +6,6 @@ import { usePusher } from '../../hooks/usePusher';
 import { useChatScroll } from '../../hooks/useChatScroll';
 import { useCall } from '../../context/CallContext';
 import MessageList from '../../components/Chat/MessageList';
-import FluidBackground from '../../components/Chat/FluidBackground';
 import api from '../../lib/api';
 
 /**
@@ -30,7 +29,6 @@ export default function ChatWindow() {
   const [inputValue, setInputValue]         = useState('');
   const [showNewBadge, setShowNewBadge]     = useState(false);
   
-  const fluidRef = useRef(null);
   const [isLoadingMore, setIsLoadingMore]   = useState(false);
   const [hasMore, setHasMore]               = useState(true);
   const [isFetching, setIsFetching]         = useState(true);
@@ -143,10 +141,6 @@ export default function ChatWindow() {
       const audio = new Audio('/receive.wav');
       audio.play().catch(() => {});
     } catch (err) {}
-
-    if (fluidRef.current) {
-      fluidRef.current.splat(0.2, 0.2, 500, 500, { r: 0.1, g: 0.2, b: 0.8 });
-    }
   }, [user?.id]);
 
   const isOnline = usePusher(conversationId, handleIncomingMessage);
@@ -159,11 +153,6 @@ export default function ChatWindow() {
       const audio = new Audio('/send.wav');
       audio.play().catch(() => {});
     } catch (err) {}
-
-    if (fluidRef.current) {
-      // Splat originating from bottom right (input box area)
-      fluidRef.current.splat(0.8, 0.9, 0, -5000, { r: 0.4, g: 0.1, b: 0.9 });
-    }
 
     const tempId = `temp-${Date.now()}-${Math.random()}`;
     const optimisticMsg = {
@@ -405,9 +394,6 @@ export default function ChatWindow() {
           </button>
         </div>
       </header>
-
-      {/* ── Fluid Background ── */}
-      <FluidBackground ref={fluidRef} />
 
       {/* ── Message Feed ── */}
       <MessageList
