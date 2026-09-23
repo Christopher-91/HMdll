@@ -205,14 +205,19 @@ export default function CostCalculator() {
             <div className="form-group" style={{ gridColumn: '1 / -1' }}>
               <label className="form-label">Estimation Mode</label>
               <select className="form-input" value={form.estimationMode} onChange={update('estimationMode')} style={{ borderColor: form.estimationMode === 'worst-case' ? 'var(--warning-400)' : undefined }}>
-                <option value="worst-case">Worst-Case Scenario (High Cost of Living)</option>
                 <option value="average">National Average Costs (Standard)</option>
+                <option value="worst-case">Worst-Case Scenario (High Cost of Living)</option>
               </select>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full btn-lg" disabled={loading}>
+            <button type="submit" className="btn btn-primary w-full btn-lg" disabled={loading} style={{ gridColumn: '1 / -1' }}>
               {loading ? 'Calculating...' : 'Calculate Costs'}
             </button>
+            {result && result.disclaimer && (
+              <p className="text-xs text-muted text-center" style={{ gridColumn: '1 / -1', marginTop: '8px' }}>
+                {result.disclaimer}
+              </p>
+            )}
           </div>
         </form>
 
@@ -268,7 +273,6 @@ export default function CostCalculator() {
                 </div>
               </div>
 
-              <p className="text-xs text-muted text-center">{result.disclaimer}</p>
             </div>
           ) : (
             <div className="card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 300 }}>
