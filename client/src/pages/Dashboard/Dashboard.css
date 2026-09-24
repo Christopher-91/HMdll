@@ -118,7 +118,7 @@
 
 .status-draft { background: rgba(100, 116, 139, 0.3); color: var(--text-secondary); }
 .status-in_progress { background: rgba(59, 130, 246, 0.3); color: #93c5fd; }
-.status-submitted { background: rgba(var(--primary-rgb), 0.3); color: var(--primary-500); }
+.status-submitted { background: rgba(var(--brand-rgb), 0.15); color: var(--primary-500); }
 .status-accepted { background: rgba(16, 185, 129, 0.3); color: var(--accent-300); }
 .status-rejected { background: rgba(244, 63, 94, 0.2); color: var(--error-400); }
 .status-waitlisted { background: rgba(245, 158, 11, 0.3); color: var(--warning-400); }
@@ -129,7 +129,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.08), rgba(16, 185, 129, 0.05));
+  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.06), rgba(16, 185, 129, 0.05));
 }
 
 /* Empty State */

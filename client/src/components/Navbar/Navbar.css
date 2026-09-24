@@ -1,63 +1,24 @@
-/* Top Navbar */
+/* ═══════════════════════════════════════════════════
+   Navbar — Anchored Full-Width Top Header
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Primary Navbar ─────────────────────────────────────── */
 .navbar-top {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 90;
-  background: transparent;
-  border: none;
-  pointer-events: none; /* Let clicks pass through empty space */
-  transition: all 0.4s ease;
-}
-
-.navbar-top.chat-nav {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.navbar-top.chat-nav .navbar-inner {
-  height: 80px;
-}
-
-[data-theme='dark'] .navbar-top.chat-nav {
+  height: 64px;
+  z-index: 100;
   background: var(--bg-secondary);
-  border-bottom-color: var(--border-secondary);
+  border-bottom: 1px solid var(--border-card);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Beautiful fading glass backdrop */
-.navbar-top.with-blur::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 140px; /* Tall enough to cover the logo, floating nav, and fade out smoothly */
-  pointer-events: none;
-  z-index: -1;
-  
-  /* Gradual fade of the background color itself */
-  background: linear-gradient(to bottom, var(--bg-primary) 10%, rgba(255,255,255,0) 100%);
-  
-  /* Apply strong blur */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  
-  /* Use mask-image to fade the *blur effect itself* out smoothly at the bottom */
-  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  
-  animation: fadeIn 0.4s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 0.95; }
-}
-
-[data-theme='dark'] .navbar-top.with-blur::before {
-  background: linear-gradient(to bottom, var(--bg-primary) 20%, transparent 100%);
-  opacity: 0.90;
+/* Landing page — transparent over hero */
+.navbar-top.navbar-landing {
+  background: transparent;
+  border-bottom-color: transparent;
 }
 
 .navbar-inner {
@@ -65,88 +26,122 @@
   align-items: center;
   justify-content: space-between;
   height: 64px;
-  pointer-events: auto; /* Re-enable clicks for logo and actions */
+  gap: 24px;
 }
 
-/* Logo */
+/* ─── Logo ────────────────────────────────────────────────── */
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
   text-decoration: none;
   flex-shrink: 0;
-  margin-left: -16px; /* Pushed slightly to the left */
 }
 
 .logo-text {
-  font-size: 2.15rem; /* Increased logo size further based on request */
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.03em;
 }
 
-.logo-text.landing-override {
+.navbar-landing .logo-text {
   color: #ffffff;
 }
 
-.logo-highlight {
-  background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ─── Main Navigation Links ──────────────────────────────── */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
-/* Actions */
+.navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.navbar-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.navbar-link.active {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--bg-hover);
+}
+
+/* Landing page — white nav links over hero */
+.navbar-landing .navbar-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-landing .navbar-link:hover,
+.navbar-landing .navbar-link.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Actions ─────────────────────────────────────────────── */
 .navbar-actions {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .auth-buttons {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-right: -12px; /* Pushes the buttons to the right edge */
 }
 
-/* Theme */
+/* ─── Theme Toggle ────────────────────────────────────────── */
 .theme-toggle {
   display: flex;
   align-items: center;
   gap: 2px;
-  padding: 4px;
-  margin-right: 96px; /* Pushes the toggle further left, centering it between the floating nav and profile */
-  background: rgba(255, 255, 255, 0.05); /* Match nav clear background */
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Match nav subtle border */
+  padding: 3px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme='dark'] .theme-toggle {
-  background: rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.navbar-landing .theme-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .theme-option {
-  position: relative; /* Essential for the framer-motion layout component to snap correctly */
+  position: relative;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
   color: var(--text-tertiary);
-  transition: color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: color 0.15s;
+}
+
+.navbar-landing .theme-option {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .theme-option svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
@@ -156,65 +151,39 @@
 
 .theme-option.active {
   color: white;
-  background: transparent; /* Background is now handled by motion.div */
 }
 
 .theme-active-bg {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  z-index: 1; /* Below the icon */
-  /* Dark Mode (Default) */
-  background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
-  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.4);
+  z-index: 1;
+  background: var(--primary-500);
 }
 
 [data-theme='light'] .theme-active-bg {
-  /* Light Mode */
-  background: linear-gradient(135deg, var(--warning-400), var(--warning-500));
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+  background: #0f172a;
 }
 
 .theme-icon-wrapper {
   position: relative;
-  z-index: 2; /* Ensures the SVG sits above the sliding pill */
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .theme-option:hover:not(.active) {
-  background: var(--bg-hover);
   color: var(--text-primary);
 }
 
-/* Profile */
+.navbar-landing .theme-option:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ─── Profile Menu ────────────────────────────────────────── */
 .profile-menu-wrapper {
   position: relative;
-}
-
-.profile-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-  border: 1px solid var(--border-primary);
-  border-radius: 50%;
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
-  transition: all var(--transition-fast);
-}
-
-.profile-trigger:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
 }
 
 .profile-dropdown {
@@ -223,9 +192,9 @@
   right: 0;
   min-width: 240px;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
   z-index: 200;
 }
@@ -260,7 +229,7 @@
   font-size: 0.85rem;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: all 0.15s;
   border: none;
   background: none;
   width: 100%;
@@ -275,166 +244,95 @@
 }
 
 .dropdown-logout:hover {
-  color: var(--error-400);
+  color: var(--error-500);
 }
 
-/* Floating Fluid Glass Navigation */
-.floating-nav-container {
+/* ─── Sub-Navigation Bar ──────────────────────────────────── */
+.sub-nav-bar {
   position: fixed;
-  z-index: 100;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 12px; /* Floats in the center at the same height as the logo */
-  transition: all 0.3s ease;
-  pointer-events: none; /* Let clicks pass through container */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  z-index: 90;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-card);
 }
 
-.fluid-glass-nav {
-  pointer-events: auto; /* Re-enable clicks for the nav */
+.sub-nav-inner {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: transparent; /* Completely clear background */
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Very subtle border */
-  padding: 6px; /* Increased from 2px to 6px */
-  border-radius: 100px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
+  height: 44px;
 }
 
-[data-theme='dark'] .fluid-glass-nav {
-  background: transparent; /* Completely clear in dark mode */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.fluid-nav-item {
-  position: relative;
+.sub-nav-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 6px 18px; /* Reduced by 2px to compensate for larger font */
-  border-radius: 100px;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
   text-decoration: none;
-  color: var(--text-primary); /* Use primary text (dark/light adapting) instead of gray */
-  transition: color 0.3s ease;
-  z-index: 1;
-  min-width: 72px;
+  border-radius: var(--radius-md);
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
 }
 
-[data-theme='light'] .fluid-nav-item {
-  color: #000000; /* Force completely black in light mode */
+.sub-nav-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
 }
 
-.nav-landing-override .fluid-nav-item {
-  color: #ffffff; /* Pure white text to stand out against dark hero */
-}
-
-.nav-landing-override .fluid-nav-item .fluid-nav-label {
-  opacity: 1; /* Remove the default fade from the labels */
-}
-
-.nav-landing-override .fluid-nav-item:hover {
-  color: #ffffff;
-}
-
-.fluid-nav-item.active {
-  color: white;
-}
-
-[data-theme='light'] .fluid-nav-item.active {
-  color: #000000; /* Also black for active item in light mode */
-  font-weight: 800; /* Make active item bolder instead to stand out */
-}
-
-.nav-landing-override .fluid-nav-item.active {
-  color: #ffffff; /* Force white text for active item in landing hero */
-}
-
-[data-theme='dark'] .fluid-nav-item.active {
-  color: white;
-}
-
-.fluid-active-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 100px;
-  z-index: -1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 3px rgba(255, 255, 255, 0.9);
-}
-
-[data-theme='dark'] .fluid-active-bg {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.2);
-}
-
-.fluid-nav-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px; /* Reduced by 1px */
-}
-
-.fluid-nav-icon {
-  margin-bottom: 0; 
-}
-
-.fluid-nav-label {
-  font-size: 0.75rem; /* Increased label size for better readability */
+.sub-nav-link.active {
+  color: var(--text-primary);
   font-weight: 600;
-  text-transform: capitalize;
-  letter-spacing: 0.02em;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  background: var(--bg-hover);
 }
 
-.fluid-nav-item.active .fluid-nav-label {
-  opacity: 1;
-}
-
+/* ─── Mobile Responsive ───────────────────────────────────── */
 @media (max-width: 768px) {
-  .theme-toggle {
-    margin-right: 0;
+  .navbar-inner {
+    gap: 8px;
   }
 
-  .floating-nav-container {
-    top: 72px; /* Top fixed navigation below header on mobile */
-    bottom: auto;
-    width: 95%;
-    max-width: 450px;
+  .navbar-link {
+    padding: 6px 8px;
+    font-size: 0.78rem;
+    gap: 4px;
   }
-  
-  .fluid-glass-nav {
-    justify-content: space-between;
-    width: 100%;
+
+  .navbar-link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .sub-nav-link {
     padding: 6px 10px;
-    gap: 0;
+    font-size: 0.78rem;
   }
-  
-  .fluid-nav-item {
-    padding: 8px 10px;
-    min-width: auto;
-    flex: 1;
+
+  .logo-text {
+    font-size: 1.3rem;
   }
-  
-  .fluid-nav-label {
-    font-size: 0.6rem;
+
+  .theme-option {
+    width: 28px;
+    height: 28px;
   }
-  
-  /* On very small screens, maybe hide labels entirely if it's too cramped */
-  @media (max-width: 380px) {
-    .fluid-nav-label {
-      display: none;
-    }
+
+  .theme-option svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-link span {
+    display: none; /* Icon-only nav on very small screens */
+  }
+
+  .navbar-link {
+    padding: 8px;
   }
 }

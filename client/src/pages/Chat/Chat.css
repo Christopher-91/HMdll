@@ -8,10 +8,10 @@
    fills every remaining pixel below it. No page-level scrolling ever. */
 .chat-layout {
   display: flex;
-  /* Navbar height offset — pushed downwards to 80px */
-  height: calc(100dvh - 80px);
-  height: calc(100vh - 80px); /* 100vh fallback */
-  margin-top: 80px;
+  /* Navbar height offset — locked to 64px anchored header */
+  height: calc(100dvh - 64px);
+  height: calc(100vh - 64px); /* 100vh fallback */
+  margin-top: 64px;
   overflow: hidden;
   overscroll-behavior: none;
   width: 100%;
@@ -363,10 +363,10 @@
 /* ─── Mobile Responsive ────────────────────────────────────── */
 @media (max-width: 767px) {
   .chat-layout {
-    /* On mobile the navbar is same fixed. dvh accounts for browser chrome + virtual keyboard. */
-    height: calc(100dvh - 80px);
-    height: calc(100vh - 80px); /* 100vh fallback */
-    margin-top: 80px;
+    /* On mobile the navbar is same 64px fixed. dvh accounts for browser chrome + virtual keyboard. */
+    height: calc(100dvh - 64px);
+    height: calc(100vh - 64px); /* 100vh fallback */
+    margin-top: 64px;
   }
 
   .chat-sidebar {
@@ -763,7 +763,7 @@
 
 .chat-input:focus {
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--brand-rgb), 0.1);
 }
 
 .chat-input::placeholder {
@@ -1096,7 +1096,7 @@
 .chat-locked-cta:hover:not(:disabled) {
   background: var(--primary-500);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 4px 16px rgba(var(--brand-rgb), 0.3);
 }
 
 .chat-locked-cta:active:not(:disabled) {

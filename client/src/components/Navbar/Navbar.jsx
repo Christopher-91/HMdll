@@ -25,12 +25,9 @@ export default function Navbar() {
   }, [theme]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Toggle logo color after scrolling past the dark hero gradient (~400px)
-      setIsScrolled(window.scrollY > 400);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial scroll position
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -58,19 +55,37 @@ export default function Navbar() {
   ];
 
   const isSubNavOpen = subNavLinks.some(link => isActive(link.path));
-
   const isLandingTop = location.pathname === '/' && !isScrolled;
-  // On /chat routes, suppress the navbar gradient/blur overlay — it bleeds into the fixed chat layout
   const isChat = location.pathname.startsWith('/chat');
 
   return (
     <>
-      {/* Top Header */}
-      <nav className={`navbar-top ${!isLandingTop && !isChat ? 'with-blur' : ''} ${isChat ? 'chat-nav' : ''}`}>
+      {/* Primary Navbar — Full-width anchored top bar */}
+      <nav className={`navbar-top ${isLandingTop ? 'navbar-landing' : ''}`}>
         <div className="navbar-inner container">
           <Link to="/" className="navbar-logo">
-            <span className={`logo-text ${isLandingTop ? 'landing-override' : ''}`}>HMdll<span className="blinking-dot"></span></span>
+            <span className="logo-text">HMdll<span className="blinking-dot"></span></span>
           </Link>
+
+          {/* Main Navigation — Horizontal inline text links */}
+          {!isChat && (
+            <div className="navbar-links">
+              {mainNavLinks.map((link) => {
+                const active = link.isSubMenuTrigger ? isSubNavOpen : isActive(link.path);
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`navbar-link ${active ? 'active' : ''}`}
+                  >
+                    <Icon size={16} strokeWidth={active ? 2.5 : 1.8} />
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
 
           <div className="navbar-actions">
             <div className="theme-toggle" role="group" aria-label="Color theme">
@@ -114,10 +129,10 @@ export default function Navbar() {
                 </span>
               </button>
             </div>
-            
+
             {isAuthenticated ? (
               <div className="profile-menu-wrapper">
-              <button
+                <button
                   className="profile-trigger"
                   onClick={() => setProfileOpen(!profileOpen)}
                   onBlur={() => setTimeout(() => setProfileOpen(false), 200)}
@@ -155,72 +170,35 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Floating Fluid Glass Navigation */}
-      <div className={`floating-nav-container ${isLandingTop ? 'nav-landing-override' : ''}`}>
-        <nav className="fluid-glass-nav">
-          {mainNavLinks.map((link) => {
-            const active = link.isSubMenuTrigger ? isSubNavOpen : isActive(link.path);
-            const Icon = link.icon;
-            
-            return (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`fluid-nav-item ${active ? 'active' : ''}`}
-              >
-                {active && (
-                  <motion.div
-                    layoutId="active-pill"
-                    className="fluid-active-bg"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <span className="fluid-nav-content">
-                  <Icon className="fluid-nav-icon" size={18} strokeWidth={active ? 2.5 : 2} />
-                  <span className="fluid-nav-label">{link.label}</span>
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        <AnimatePresence>
-          {isSubNavOpen && (
-            <motion.nav 
-              className="fluid-glass-nav sub-nav"
-              initial={{ opacity: 0, y: -15, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -15, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
+      {/* Sub-navigation — flat horizontal tabs below primary navbar */}
+      <AnimatePresence>
+        {isSubNavOpen && !isChat && (
+          <motion.div
+            className="sub-nav-bar"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+          >
+            <div className="sub-nav-inner container">
               {subNavLinks.map((link) => {
                 const active = isActive(link.path);
                 const Icon = link.icon;
-                
                 return (
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`fluid-nav-item ${active ? 'active' : ''}`}
+                    className={`sub-nav-link ${active ? 'active' : ''}`}
                   >
-                    {active && (
-                      <motion.div
-                        layoutId="sub-active-pill"
-                        className="fluid-active-bg"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                    <span className="fluid-nav-content">
-                      <Icon className="fluid-nav-icon" size={18} strokeWidth={active ? 2.5 : 2} />
-                      <span className="fluid-nav-label">{link.label}</span>
-                    </span>
+                    <Icon size={15} strokeWidth={active ? 2.5 : 1.8} />
+                    <span>{link.label}</span>
                   </Link>
                 );
               })}
-            </motion.nav>
-          )}
-        </AnimatePresence>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
