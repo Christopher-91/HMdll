@@ -250,7 +250,7 @@
 
 .chat-avatar {
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+  background: var(--surface-2, #1e1e2e); /* Fallback */
   display: grid;
   place-items: center;
   font-weight: 700;
@@ -453,7 +453,7 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+  background: var(--surface-2, #1e1e2e); /* Fallback */
   display: grid;
   place-items: center;
   font-weight: 700;

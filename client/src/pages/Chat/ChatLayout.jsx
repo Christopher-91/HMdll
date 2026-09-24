@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import api from '../../lib/api';
 import ChatWindow from './ChatWindow';
+import { getAvatarColor } from '../../components/UserAvatar/UserAvatar';
 import './Chat.css';
 
 // ─── UserSearch ────────────────────────────────────────────────────────────────
@@ -129,7 +130,7 @@ function UserSearch({ onStartChat }) {
         <ul className="chat-search-results" role="listbox">
           {results.map((u) => (
             <li key={u.id} role="option" className="chat-search-result-item">
-              <div className="chat-avatar chat-avatar-sm">
+              <div className="chat-avatar chat-avatar-sm" style={{ background: getAvatarColor(u.id || u.first_name) }}>
                 {u.avatar_url ? <img src={u.avatar_url} alt="" /> : <span>{u.first_name?.[0]}{u.last_name?.[0]}</span>}
               </div>
               <div className="chat-result-info">
@@ -158,7 +159,7 @@ function RequestItem({ request, onAccept, onDecline }) {
 
   return (
     <div className="conn-request-item">
-      <div className="chat-avatar chat-avatar-sm">
+      <div className="chat-avatar chat-avatar-sm" style={{ background: getAvatarColor(request.requester_id || request.requester_first_name) }}>
         {request.requester_avatar_url
           ? <img src={request.requester_avatar_url} alt="" referrerPolicy="no-referrer" />
           : <span>{initials}</span>}
@@ -271,7 +272,7 @@ function ConversationItem({ conv }) {
       id={`conv-item-${conv.id}`}
       className={`chat-conv-item ${isActive ? 'active' : ''}`}
     >
-      <div className="chat-avatar chat-avatar-md">
+      <div className="chat-avatar chat-avatar-md" style={{ background: getAvatarColor(conv.other_user_id || conv.other_first_name || conv.id) }}>
         {conv.other_avatar_url
           ? <img src={conv.other_avatar_url} alt="" referrerPolicy="no-referrer" />
           : <span>{initials}</span>}

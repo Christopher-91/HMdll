@@ -6,6 +6,7 @@ import { usePusher } from '../../hooks/usePusher';
 import { useChatScroll } from '../../hooks/useChatScroll';
 import { useCall } from '../../context/CallContext';
 import MessageList from '../../components/Chat/MessageList';
+import { getAvatarColor } from '../../components/UserAvatar/UserAvatar';
 import api from '../../lib/api';
 
 /**
@@ -277,7 +278,7 @@ export default function ChatWindow() {
           </button>
           {convInfo && (
             <>
-              <div className="chat-header-avatar">
+              <div className="chat-header-avatar" style={{ background: getAvatarColor(convInfo.other_user_id || convInfo.other_first_name) }}>
                 {otherAvatar
                   ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
                   : <span>{otherInitials}</span>}
@@ -355,7 +356,7 @@ export default function ChatWindow() {
           <ArrowLeft size={18} />
         </button>
 
-        <div className="chat-header-avatar">
+        <div className="chat-header-avatar" style={{ background: getAvatarColor(convInfo.other_user_id || convInfo.other_first_name) }}>
           {otherAvatar
             ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
             : <span>{otherInitials}</span>
