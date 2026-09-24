@@ -33,7 +33,7 @@
 
 .hero-orb-1 {
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.3), transparent);
   top: -200px; left: -100px;
   animation: float 8s ease-in-out infinite;
 }
@@ -353,7 +353,7 @@
   display: inline-flex;
   gap: 6px;
   margin-top: 18px;
-  color: var(--primary-400);
+  color: var(--primary-500);
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -417,12 +417,12 @@
 .section-badge {
   display: inline-block;
   padding: 4px 14px;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(var(--primary-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   border-radius: var(--radius-full);
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--primary-400);
+  color: var(--primary-500);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 16px;
@@ -530,7 +530,7 @@
   justify-content: center;
   font-size: 0.8rem;
   font-weight: 800;
-  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
 }
 
 .step-title {
@@ -572,7 +572,7 @@
   transform: translateX(-50%);
   width: 500px;
   height: 300px;
-  background: radial-gradient(ellipse, rgba(99, 102, 241, 0.2), transparent);
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb), 0.2), transparent);
   pointer-events: none;
 }
 
@@ -641,7 +641,7 @@
 }
 
 .footer-col a:hover {
-  color: var(--primary-400);
+  color: var(--primary-500);
 }
 
 .footer-bottom {

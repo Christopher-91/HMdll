@@ -17,7 +17,7 @@
 }
 
 .news-card:hover {
-  border-color: var(--primary-400);
+  border-color: var(--primary-500);
   background: var(--bg-hover);
   transform: translateY(-2px);
 }
@@ -38,7 +38,7 @@
 }
 
 .news-domain {
-  color: var(--primary-400);
+  color: var(--primary-500);
   font-weight: 500;
 }
 

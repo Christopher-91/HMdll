@@ -98,7 +98,7 @@
 
 .chat-search-input-wrapper:focus-within {
   background: var(--bg-hover); /* light gray background on focus */
-  border-color: var(--primary-400);
+  border-color: var(--primary-500);
 }
 
 .chat-search-icon {
@@ -687,7 +687,7 @@
 .chat-retry-btn {
   border: none;
   background: none;
-  color: var(--primary-400);
+  color: var(--primary-500);
   cursor: pointer;
   font-size: 0.7rem;
   font-family: var(--font-sans);
@@ -763,7 +763,7 @@
 
 .chat-input:focus {
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
 .chat-input::placeholder {
@@ -856,8 +856,8 @@
 /* Connect (blue outline) */
 .conn-action-btn--connect {
   background: transparent;
-  color: var(--primary-400);
-  border-color: var(--primary-400);
+  color: var(--primary-500);
+  border-color: var(--primary-500);
 }
 
 .conn-action-btn--connect:hover:not(:disabled) {
@@ -893,7 +893,7 @@
 
 .conn-action-btn--message:hover:not(:disabled) {
   background: var(--primary-400);
-  border-color: var(--primary-400);
+  border-color: var(--primary-500);
 }
 
 /* ─── Message Requests Section (sidebar) ──────────────────── */
@@ -1096,7 +1096,7 @@
 .chat-locked-cta:hover:not(:disabled) {
   background: var(--primary-500);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.3);
 }
 
 .chat-locked-cta:active:not(:disabled) {

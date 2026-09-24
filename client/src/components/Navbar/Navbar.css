@@ -166,7 +166,7 @@
   z-index: 1; /* Below the icon */
   /* Dark Mode (Default) */
   background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.4);
 }
 
 [data-theme='light'] .theme-active-bg {

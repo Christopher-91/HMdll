@@ -93,9 +93,9 @@
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(var(--primary-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0); }
 }
 
 /* Active Call Overlay */
@@ -174,7 +174,7 @@
   font-size: 3rem;
   font-weight: 700;
   color: white;
-  box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 40px rgba(var(--primary-rgb), 0.2);
 }
 
 .active-call-controls {
