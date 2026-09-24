@@ -129,7 +129,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.06), rgba(16, 185, 129, 0.05));
+  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.06), rgba(var(--brand-rgb), 0.02));
 }
 
 /* Empty State */
