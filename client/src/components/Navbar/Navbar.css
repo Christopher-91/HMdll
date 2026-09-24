@@ -116,6 +116,7 @@
   align-items: center;
   gap: 2px;
   padding: 4px;
+  margin-right: 96px; /* Pushes the toggle further left, centering it between the floating nav and profile */
   background: rgba(255, 255, 255, 0.05); /* Match nav clear background */
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -402,6 +403,10 @@
 }
 
 @media (max-width: 768px) {
+  .theme-toggle {
+    margin-right: 0;
+  }
+
   .floating-nav-container {
     top: 72px; /* Top fixed navigation below header on mobile */
     bottom: auto;
