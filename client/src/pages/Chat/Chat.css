@@ -8,19 +8,14 @@
    fills every remaining pixel below it. No page-level scrolling ever. */
 .chat-layout {
   display: flex;
-  /* Exact Navbar height offset — no extra gap */
-  height: calc(100dvh - 64px);
-  height: calc(100vh - 64px); /* 100vh fallback */
-  margin-top: 64px;
+  /* Navbar height offset — pushed downwards to 80px */
+  height: calc(100dvh - 80px);
+  height: calc(100vh - 80px); /* 100vh fallback */
+  margin-top: 80px;
   overflow: hidden;
   overscroll-behavior: none;
   width: 100%;
   max-width: 100%;
-  border-top: 1px solid #e5e7eb; /* Explicitly separates chat from navbar */
-}
-
-[data-theme='dark'] .chat-layout {
-  border-top-color: var(--border-secondary);
 }
 
 /* ─── Layer 1: Sidebar ─────────────────────────────────────── */
@@ -368,10 +363,10 @@
 /* ─── Mobile Responsive ────────────────────────────────────── */
 @media (max-width: 767px) {
   .chat-layout {
-    /* On mobile the navbar is same 64px fixed. dvh accounts for browser chrome + virtual keyboard. */
-    height: calc(100dvh - 64px);
-    height: calc(100vh - 64px); /* 100vh fallback */
-    margin-top: 64px;
+    /* On mobile the navbar is same fixed. dvh accounts for browser chrome + virtual keyboard. */
+    height: calc(100dvh - 80px);
+    height: calc(100vh - 80px); /* 100vh fallback */
+    margin-top: 80px;
   }
 
   .chat-sidebar {

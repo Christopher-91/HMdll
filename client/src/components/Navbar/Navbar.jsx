@@ -66,7 +66,7 @@ export default function Navbar() {
   return (
     <>
       {/* Top Header */}
-      <nav className={`navbar-top ${!isLandingTop && !isChat ? 'with-blur' : ''}`}>
+      <nav className={`navbar-top ${!isLandingTop && !isChat ? 'with-blur' : ''} ${isChat ? 'chat-nav' : ''}`}>
         <div className="navbar-inner container">
           <Link to="/" className="navbar-logo">
             <span className={`logo-text ${isLandingTop ? 'landing-override' : ''}`}>HMdll<span className="blinking-dot"></span></span>

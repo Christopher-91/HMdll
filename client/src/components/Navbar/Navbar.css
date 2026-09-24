@@ -11,6 +11,20 @@
   transition: all 0.4s ease;
 }
 
+.navbar-top.chat-nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-top.chat-nav .navbar-inner {
+  height: 80px;
+}
+
+[data-theme='dark'] .navbar-top.chat-nav {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-secondary);
+}
+
 /* Beautiful fading glass backdrop */
 .navbar-top.with-blur::before {
   content: '';
