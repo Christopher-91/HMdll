@@ -16,7 +16,11 @@
   overscroll-behavior: none;
   width: 100%;
   max-width: 100%;
-  /* No border-top — the header defines its own bottom border */
+  border-top: 1px solid #e5e7eb; /* Explicitly separates chat from navbar */
+}
+
+[data-theme='dark'] .chat-layout {
+  border-top-color: var(--border-secondary);
 }
 
 /* ─── Layer 1: Sidebar ─────────────────────────────────────── */

@@ -356,7 +356,7 @@ export default function ChatWindow() {
           <ArrowLeft size={18} />
         </button>
 
-        <div className="chat-header-avatar" style={{ background: getAvatarColor(convInfo.other_user_id || convInfo.other_first_name) }}>
+        <div className="chat-header-avatar" style={{ background: getAvatarColor(convInfo?.other_user_id || convInfo?.other_first_name) }}>
           {otherAvatar
             ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
             : <span>{otherInitials}</span>
