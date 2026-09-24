@@ -150,7 +150,7 @@
 }
 
 .theme-option.active {
-  color: white;
+  color: var(--primary-inverse);
 }
 
 .theme-active-bg {

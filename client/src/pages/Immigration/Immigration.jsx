@@ -106,7 +106,7 @@ export default function Immigration() {
 
                 <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                   {profile.verificationStatus === 'verified' ? (
-                    <span className="badge badge-primary" style={{ fontSize: '0.75rem' }}>Verified Data</span>
+                    <span className="badge badge-brand" style={{ fontSize: '0.75rem' }}>Verified Data</span>
                   ) : (
                     <span className="badge badge-accent" style={{ fontSize: '0.75rem' }}>Best Effort</span>
                   )}

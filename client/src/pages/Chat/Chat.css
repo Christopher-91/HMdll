@@ -620,7 +620,7 @@
 }
 
 .chat-bubble--own {
-  background: var(--primary-600); /* Brand accent background */
+  background: var(--brand-600); /* Brand accent background */
   color: white; /* white text */
   border-bottom-right-radius: var(--radius-sm);
   align-items: flex-start;
