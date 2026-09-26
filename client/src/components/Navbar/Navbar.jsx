@@ -119,7 +119,7 @@ export default function Navbar() {
                   >
                     <h4 className="notification-heading">Zero Spam Guarantee</h4>
                     <p className="notification-body">
-                      Unlike traditional study-abroad agencies, HMdll guarantees a call/spam-free research experience. We never share your contact information with consultants or third-party consultants for that matter. Explore global universities with complete privacy and zero unsolicited calls.
+                      Unlike traditional study-abroad agencies, HMdll guarantees a call/spam-free research experience. We never share your contact information with consultants or third-party websites for that matter. Explore global universities with complete privacy and zero unsolicited calls.
                     </p>
                   </motion.div>
                 )}
@@ -127,8 +127,8 @@ export default function Navbar() {
             </div>
 
             <div className="theme-toggle" role="group" aria-label="Color theme">
-              <div 
-                className="theme-active-bg" 
+              <div
+                className="theme-active-bg"
                 style={{ left: theme === 'light' ? 3 : 37 }}
               />
               <button
