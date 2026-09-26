@@ -150,11 +150,6 @@ export default function ChatWindow() {
   const sendMessage = useCallback(async (content) => {
     if (!content.trim()) return;
 
-    try {
-      const audio = new Audio('/send.wav?v=3');
-      audio.play().catch(() => {});
-    } catch (err) {}
-
     const tempId = `temp-${Date.now()}-${Math.random()}`;
     const optimisticMsg = {
       id:              tempId,
