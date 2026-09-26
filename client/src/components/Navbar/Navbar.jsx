@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import UserAvatar from '../UserAvatar/UserAvatar';
-import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane, MessageSquare } from 'lucide-react';
+import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane, MessageSquare, Bell } from 'lucide-react';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -12,6 +12,18 @@ export default function Navbar() {
   const location = useLocation();
   const [profileOpen, setProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const notificationRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setNotificationOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('hmdll-theme');
@@ -88,6 +100,34 @@ export default function Navbar() {
           )}
 
           <div className="navbar-actions">
+            <div className="notification-wrapper" ref={notificationRef}>
+              <button
+                className="notification-bell"
+                onClick={() => setNotificationOpen(!notificationOpen)}
+                aria-label="Notifications"
+              >
+                <Bell size={20} strokeWidth={1.8} />
+                <span className="notification-dot"></span>
+              </button>
+
+              <AnimatePresence>
+                {notificationOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="notification-dropdown"
+                  >
+                    <h4 className="notification-heading">Zero Spam Guarantee</h4>
+                    <p className="notification-body">
+                      Unlike traditional study-abroad agencies, HMdll guarantees a call/spam-free research experience. We never share your contact information with consultants or third-party consultants for that matter. Explore global universities with complete privacy and zero unsolicited calls.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <div className="theme-toggle" role="group" aria-label="Color theme">
               <button
                 type="button"
