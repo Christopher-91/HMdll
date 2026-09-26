@@ -139,7 +139,7 @@ export default function ChatWindow() {
     setMessages((prev) => [...prev, incomingMsg]);
 
     try {
-      const audio = new Audio('/receive.wav');
+      const audio = new Audio('/receive.wav?v=3');
       audio.play().catch(() => {});
     } catch (err) {}
   }, [user?.id]);
@@ -151,7 +151,7 @@ export default function ChatWindow() {
     if (!content.trim()) return;
 
     try {
-      const audio = new Audio('/send.wav');
+      const audio = new Audio('/send.wav?v=3');
       audio.play().catch(() => {});
     } catch (err) {}
 
