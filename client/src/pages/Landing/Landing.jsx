@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend } from 'react-icons/bs';
-import TextMorph from '../../components/Landing/TextMorph';
+import { motion } from 'framer-motion';
 import './Landing.css';
 
 
@@ -103,12 +103,28 @@ export default function Landing() {
     <div className="landing">
       {/* ── Hero ──────────────────────────────────── */}
       <section className="hero">
-        <div className="hero-bg-orb hero-orb-1" />
-        <div className="hero-bg-orb hero-orb-2" />
-        <div className="hero-bg-orb hero-orb-3" />
-
         <div className="container hero-content">
-          <TextMorph />
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
+          >
+            <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.025em', textAlign: 'center' }}>
+              Your Global Education Starts Here.
+            </h1>
+            <p className="hero-subtitle" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.25rem)', marginTop: '1.5rem', maxWidth: '640px', textAlign: 'center', lineHeight: 1.7 }}>
+              Navigate universities, visa requirements, and career pathways with confidence. No spam, no hidden fees—just data.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginTop: '2.5rem' }}>
+              <Link className="hero-btn-primary" to="/universities" style={{ padding: '0.875rem 2rem', borderRadius: '9999px', fontWeight: 600, fontSize: '0.95rem' }}>
+                Explore Universities
+              </Link>
+              <Link className="hero-btn-secondary" to="/calculator" style={{ padding: '0.875rem 2rem', borderRadius: '9999px', fontWeight: 600, fontSize: '0.95rem', backdropFilter: 'blur(12px)' }}>
+                Calculate Costs
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
