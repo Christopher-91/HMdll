@@ -127,19 +127,16 @@ export default function Navbar() {
             </div>
 
             <div className="theme-toggle" role="group" aria-label="Color theme">
+              <div 
+                className="theme-active-bg" 
+                style={{ left: theme === 'light' ? 3 : 37 }}
+              />
               <button
                 type="button"
                 className={`theme-option ${theme === 'light' ? 'active' : ''}`}
                 onClick={() => setTheme('light')}
                 aria-label="Use light theme"
               >
-                {theme === 'light' && (
-                  <motion.div
-                    layoutId="theme-pill"
-                    className="theme-active-bg"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
                 <span className="theme-icon-wrapper">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="12" r="4" />
@@ -153,13 +150,6 @@ export default function Navbar() {
                 onClick={() => setTheme('dark')}
                 aria-label="Use dark theme"
               >
-                {theme === 'dark' && (
-                  <motion.div
-                    layoutId="theme-pill"
-                    className="theme-active-bg"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
                 <span className="theme-icon-wrapper">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.4 14.8A8.5 8.5 0 0 1 9.2 3.6 8.5 8.5 0 1 0 20.4 14.8Z" />

@@ -107,6 +107,7 @@
 
 /* ─── Theme Toggle ────────────────────────────────────────── */
 .theme-toggle {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -155,10 +156,13 @@
 
 .theme-active-bg {
   position: absolute;
-  inset: 0;
+  top: 3px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   z-index: 1;
   background: var(--primary-500);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme='light'] .theme-active-bg {
