@@ -80,24 +80,22 @@ export default function Navbar() {
           </Link>
 
           {/* Main Navigation — Horizontal inline text links */}
-          {!isChat && (
-            <div className="navbar-links">
-              {mainNavLinks.map((link) => {
-                const active = link.isSubMenuTrigger ? isSubNavOpen : isActive(link.path);
-                const Icon = link.icon;
-                return (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={`navbar-link ${active ? 'active' : ''}`}
-                  >
-                    <Icon size={16} strokeWidth={active ? 2.5 : 1.8} />
-                    <span>{link.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+          <div className="navbar-links">
+            {mainNavLinks.map((link) => {
+              const active = link.isSubMenuTrigger ? isSubNavOpen : isActive(link.path);
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`navbar-link ${active ? 'active' : ''}`}
+                >
+                  <Icon size={16} strokeWidth={active ? 2.5 : 1.8} />
+                  <span>{link.label}</span>
+                </Link>
+              );
+            })}
+          </div>
 
           <div className="navbar-actions">
             <div className="notification-wrapper" ref={notificationRef}>
