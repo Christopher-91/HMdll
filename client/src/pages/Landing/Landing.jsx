@@ -114,7 +114,7 @@ export default function Landing() {
               Your Global Education Starts Here.
             </h1>
             <p className="hero-subtitle" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.25rem)', marginTop: '1.5rem', maxWidth: '640px', textAlign: 'center', lineHeight: 1.7 }}>
-              Navigate universities, visa requirements, and career pathways with confidence. No spam, no hidden fees—just data.
+              Navigate 25+ countries, 280+ universities, visa requirements, and career pathways with confidence. No spam, no hidden fees—just data.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginTop: '2.5rem' }}>
               <Link className="hero-btn-primary" to="/universities" style={{ padding: '0.875rem 2rem', borderRadius: '9999px', fontWeight: 600, fontSize: '0.95rem' }}>
