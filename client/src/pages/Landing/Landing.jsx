@@ -287,9 +287,10 @@ export default function Landing() {
           </div>
 
           <div className="footer-solidarity">
-            <p className="footer-solidarity-text">
-              🇺🇦 HMdll supports Ukraine’s right to defend itself.
-            </p>
+            <div className="footer-solidarity-left">
+              <img src="/flags/ua.svg" alt="Flag of Ukraine" className="footer-solidarity-flag" />
+              <p className="footer-solidarity-text">HMdll supports Ukraine’s right to defend itself.</p>
+            </div>
             <a
               href="https://u24.gov.ua/"
               target="_blank"
