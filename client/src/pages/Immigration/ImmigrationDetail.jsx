@@ -93,11 +93,10 @@ export default function ImmigrationDetail() {
 
   return (
     <div className="page container">
-      <Link to="/immigration" className="back-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', textDecoration: 'none', marginBottom: '2rem' }}>
-        <ArrowLeft size={16} /> Back to Immigration Hub
-      </Link>
-
-      <div className="detail-hero" style={{ padding: '3rem', background: 'var(--bg-card)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-primary)', marginBottom: '2rem' }}>
+      <div className="immigration-hero-card" style={{ padding: '3rem', background: 'var(--bg-card)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-primary)', marginBottom: '2rem', marginTop: '-40px' }}>
+        <Link to="/immigration" className="back-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', textDecoration: 'none', marginBottom: '2rem' }}>
+          <ArrowLeft size={16} /> Back to Immigration Hub
+        </Link>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
           <img 
             src={`/flags/${profile.countryCode.toLowerCase()}.webp`} 
