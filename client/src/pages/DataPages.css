@@ -283,7 +283,9 @@
 
 /* Detail Pages */
 .detail-hero {
-  padding: 48px 0;
+  margin-top: -56px; /* Pulls the background up to meet the 64px navbar, covering the 56px gap caused by .page's 120px padding */
+  padding-top: 104px; /* 48px original + 56px offset to keep content exactly where it was */
+  padding-bottom: 48px;
   border-bottom: 1px solid var(--border-secondary);
   margin-bottom: 32px;
 }
