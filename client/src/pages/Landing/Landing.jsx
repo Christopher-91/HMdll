@@ -285,7 +285,21 @@ export default function Landing() {
               <Link to="/dashboard">Dashboard</Link>
             </div>
           </div>
-          <div className="footer-bottom">
+
+          <div className="footer-solidarity">
+            <p className="footer-solidarity-text">
+              🇺🇦 HMdll supports Ukraine’s right to defend itself.
+            </p>
+            <a
+              href="https://u24.gov.ua/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-solidarity-btn"
+            >
+              Donate to United24
+            </a>
+          </div>
+                    <div className="footer-bottom">
             <p>© {new Date().getFullYear()} HMdll. All rights reserved.</p>
           </div>
         </div>
