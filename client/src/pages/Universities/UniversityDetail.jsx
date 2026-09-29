@@ -644,10 +644,10 @@ export default function UniversityDetail() {
             <Bookmark size={18} />
           </button>
 
-          <Link to={location.state?.fromParams ? `/universities?${location.state.fromParams}` : '/universities'} className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none', marginTop: '-1.5rem' }}>
+          <Link to={location.state?.fromParams ? `/universities?${location.state.fromParams}` : '/universities'} className="text-sm text-muted" style={{ position: 'absolute', top: '-70px', left: 0, display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
             ← Back to Universities
           </Link>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap', marginTop: 12 }}>
             <div className="uni-logo" style={{ width: 72, height: 72, fontSize: '2rem', flexShrink: 0, padding: 0 }}>
               <Logo website={uni.website} name={uni.name} slug={uni.slug} logoUrl={uni.logoUrl} size={72} />
             </div>
