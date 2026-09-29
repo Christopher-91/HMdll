@@ -394,24 +394,24 @@ export default function Profile() {
               <input className="form-input" type="number" placeholder="e.g. 92" min="0" max="100" value={academic.class10Percentage} onChange={e => setAcademic(p => ({ ...p, class10Percentage: e.target.value }))} />
             </div>
             <div className="form-group">
+              <label className="form-label">Current / Most Recent Degree</label>
+              <input className="form-input" placeholder="e.g. Bachelor of Technology" value={academic.currentDegree} onChange={e => setAcademic(p => ({ ...p, currentDegree: e.target.value }))} />
+            </div>
+            <div className="form-group">
               <label className="form-label">Class 12 HSC %</label>
               <input className="form-input" type="number" placeholder="e.g. 88" min="0" max="100" value={academic.class12Percentage} onChange={e => setAcademic(p => ({ ...p, class12Percentage: e.target.value }))} />
             </div>
             <div className="form-group">
-              <label className="form-label">School / University Name</label>
-              <input className="form-input" placeholder="e.g. Delhi University" value={academic.schoolUniversity} onChange={e => setAcademic(p => ({ ...p, schoolUniversity: e.target.value }))} />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Current / Most Recent Degree</label>
-              <input className="form-input" placeholder="e.g. Bachelor of Technology" value={academic.currentDegree} onChange={e => setAcademic(p => ({ ...p, currentDegree: e.target.value }))} />
+              <label className="form-label">Graduation Year</label>
+              <input className="form-input" type="number" placeholder="e.g. 2025" min="2000" max="2030" value={academic.graduationYear} onChange={e => setAcademic(p => ({ ...p, graduationYear: e.target.value }))} />
             </div>
             <div className="form-group">
               <label className="form-label">Major / Field of Study</label>
               <input className="form-input" placeholder="e.g. Computer Science" value={academic.currentMajor} onChange={e => setAcademic(p => ({ ...p, currentMajor: e.target.value }))} />
             </div>
             <div className="form-group">
-              <label className="form-label">Graduation Year</label>
-              <input className="form-input" type="number" placeholder="e.g. 2025" min="2000" max="2030" value={academic.graduationYear} onChange={e => setAcademic(p => ({ ...p, graduationYear: e.target.value }))} />
+              <label className="form-label">School / University Name</label>
+              <input className="form-input" placeholder="e.g. Delhi University" value={academic.schoolUniversity} onChange={e => setAcademic(p => ({ ...p, schoolUniversity: e.target.value }))} />
             </div>
             <div className="form-group">
               <label className="form-label">GPA / CGPA <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
