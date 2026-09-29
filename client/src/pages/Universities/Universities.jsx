@@ -3,6 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import api from '../../lib/api';
 import Logo from '../../components/Logo/Logo';
 import { BsBank2, BsSearch } from 'react-icons/bs';
+import { Bookmark } from 'lucide-react';
+import useShortlist from '../../hooks/useShortlist';
 import '../DataPages.css';
 
 export default function Universities() {
@@ -15,6 +17,7 @@ export default function Universities() {
   const [type, setType] = useState(searchParams.get('type') || '');
   const [institutionType, setInstitutionType] = useState(searchParams.get('institutionType') || '');
   const [distinction, setDistinction] = useState(searchParams.get('distinction') || '');
+  const { toggle, isShortlisted } = useShortlist();
 
   const eurCountries = ['germany', 'austria', 'finland', 'norway', 'sweden', 'switzerland', 'netherlands', 'ireland', 'denmark', 'france', 'portugal', 'estonia', 'belgium'];
   const showInstitutionType = eurCountries.includes(country);
@@ -160,7 +163,20 @@ export default function Universities() {
       ) : universities.length > 0 ? (
         <div className="cards-grid stagger-children">
           {universities.map((u) => (
-            <Link key={u.id} to={`/universities/${u.slug}`} state={{ fromParams: searchParams.toString() }} className="uni-card card">
+            <Link key={u.id} to={`/universities/${u.slug}`} state={{ fromParams: searchParams.toString() }} className="uni-card card" style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className={`shortlist-card-btn ${isShortlisted(u.id) ? 'shortlisted' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggle(u.id);
+                }}
+                aria-label={isShortlisted(u.id) ? 'Remove from shortlist' : 'Add to shortlist'}
+              >
+                <Bookmark size={18} />
+              </button>
+
               <div className="uni-card-header">
                 <div className="uni-logo">
                   <Logo website={u.website} name={u.name} slug={u.slug} logoUrl={u.logoUrl} size={48} />

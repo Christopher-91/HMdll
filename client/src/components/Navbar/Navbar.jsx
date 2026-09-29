@@ -3,7 +3,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import UserAvatar from '../UserAvatar/UserAvatar';
-import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane, MessageSquare, Bell } from 'lucide-react';
+import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane, MessageSquare, Bell, Bookmark } from 'lucide-react';
+import useShortlist from '../../hooks/useShortlist';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [hasUnread, setHasUnread] = useState(() => localStorage.getItem('hmdll-notification-read') !== 'true');
   const notificationRef = useRef(null);
+  const { count: shortlistCount } = useShortlist();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -99,6 +101,13 @@ export default function Navbar() {
           </div>
 
           <div className="navbar-actions">
+            <Link to="/shortlist" className="shortlist-icon-link" aria-label="Shortlist">
+              <Bookmark size={20} strokeWidth={1.8} />
+              {shortlistCount > 0 && (
+                <span className="shortlist-badge">{shortlistCount}</span>
+              )}
+            </Link>
+
             <div className="notification-wrapper" ref={notificationRef}>
               <button
                 className="notification-bell"
