@@ -390,6 +390,14 @@ export default function Profile() {
               </select>
             </div>
             <div className="form-group">
+              <label className="form-label">Class 10 % (if applicable)</label>
+              <input className="form-input" type="number" placeholder="e.g. 92" min="0" max="100" value={academic.class10Percentage} onChange={e => setAcademic(p => ({ ...p, class10Percentage: e.target.value }))} />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Class 12 HSC %</label>
+              <input className="form-input" type="number" placeholder="e.g. 88" min="0" max="100" value={academic.class12Percentage} onChange={e => setAcademic(p => ({ ...p, class12Percentage: e.target.value }))} />
+            </div>
+            <div className="form-group">
               <label className="form-label">School / University Name</label>
               <input className="form-input" placeholder="e.g. Delhi University" value={academic.schoolUniversity} onChange={e => setAcademic(p => ({ ...p, schoolUniversity: e.target.value }))} />
             </div>
@@ -416,14 +424,6 @@ export default function Profile() {
                   <option value="100">/ 100%</option>
                 </select>
               </div>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Class 10 % (if applicable)</label>
-              <input className="form-input" type="number" placeholder="e.g. 92" min="0" max="100" value={academic.class10Percentage} onChange={e => setAcademic(p => ({ ...p, class10Percentage: e.target.value }))} />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Class 12 HSC %</label>
-              <input className="form-input" type="number" placeholder="e.g. 88" min="0" max="100" value={academic.class12Percentage} onChange={e => setAcademic(p => ({ ...p, class12Percentage: e.target.value }))} />
             </div>
           </div>
           <button className="btn btn-primary" onClick={handleSaveAcademic} disabled={saving}>
