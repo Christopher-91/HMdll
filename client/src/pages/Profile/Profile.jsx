@@ -9,7 +9,7 @@ import './Profile.css';
 const COUNTRIES = [
   'Australia', 'Austria', 'Belgium', 'Canada', 'China', 'Denmark', 'Finland', 'France',
   'Germany', 'Ireland', 'Italy', 'Japan', 'Luxembourg', 'Malaysia', 'Netherlands',
-  'New Zealand', 'Norway', 'Poland', 'Portugal', 'Russia', 'Singapore', 'South Korea',
+  'New Zealand', 'Norway', 'Poland', 'Portugal', 'Singapore', 'South Korea',
   'Spain', 'Sweden', 'Switzerland', 'United Arab Emirates', 'United Kingdom', 'United States',
   'Other'
 ];
