@@ -639,7 +639,7 @@ export default function UniversityDetail() {
               toggle(uni.id);
             }}
             aria-label={isShortlisted(uni.id) ? 'Remove from shortlist' : 'Add to shortlist'}
-            style={{ position: 'absolute', top: '-12px', right: 0 }}
+            style={{ position: 'absolute', top: '-12px', right: '12px' }}
           >
             <Bookmark size={18} />
           </button>
