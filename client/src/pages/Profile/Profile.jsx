@@ -96,6 +96,9 @@ export default function Profile() {
   });
   const [careerGoal, setCareerGoal] = useState('');
   const [personalErrors, setPersonalErrors] = useState({});
+  const [academicErrors, setAcademicErrors] = useState({});
+  const [prefErrors, setPrefErrors] = useState({});
+  const [scoreErrors, setScoreErrors] = useState({});
 
   useEffect(() => {
     api.get('/users/me')
@@ -148,6 +151,15 @@ export default function Profile() {
   }, []);
 
   const handleSaveAcademic = async () => {
+    const errors = {};
+    if (!academic.currentEducationLevel) errors.currentEducationLevel = true;
+    if (!academic.gpa) errors.gpa = true;
+    if (Object.keys(errors).length > 0) {
+      setAcademicErrors(errors);
+      toast.error('Please fill all required fields.');
+      return;
+    }
+    setAcademicErrors({});
     setSaving(true);
     try {
       const res = await api.put('/users/me', {
@@ -177,6 +189,17 @@ export default function Profile() {
   };
 
   const handleSavePreferences = async () => {
+    const errors = {};
+    if (!preferences.desiredDegree) errors.desiredDegree = true;
+    if (!preferences.desiredField) errors.desiredField = true;
+    if (!preferences.budgetMin) errors.budgetMin = true;
+    if (!preferences.budgetMax) errors.budgetMax = true;
+    if (Object.keys(errors).length > 0) {
+      setPrefErrors(errors);
+      toast.error('Please fill all required fields.');
+      return;
+    }
+    setPrefErrors({});
     setSaving(true);
     try {
       const res = await api.put('/users/me', {
@@ -202,7 +225,11 @@ export default function Profile() {
   };
 
   const handleAddScore = async () => {
-    if (!newScore.testName || !newScore.overallScore) { toast.error('Please enter test name and score'); return; }
+    const sErrors = {};
+    if (!newScore.testName) sErrors.testName = true;
+    if (!newScore.overallScore) sErrors.overallScore = true;
+    if (Object.keys(sErrors).length > 0) { setScoreErrors(sErrors); toast.error('Please enter test name and score'); return; }
+    setScoreErrors({});
     setSaving(true);
     try {
       const allScores = [
@@ -401,7 +428,7 @@ export default function Profile() {
           <div className="profile-form-grid">
             <div className="form-group">
               <label className="form-label">Current Education Level</label>
-              <select className="form-input" value={academic.currentEducationLevel} onChange={e => setAcademic(p => ({ ...p, currentEducationLevel: e.target.value }))}>
+              <select className="form-input" value={academic.currentEducationLevel} style={{ borderColor: academicErrors.currentEducationLevel ? 'red' : undefined }} onChange={e => { setAcademic(p => ({ ...p, currentEducationLevel: e.target.value })); setAcademicErrors(p => ({ ...p, currentEducationLevel: false })); }}>
                 <option value="">Select level...</option>
                 {EDUCATION_LEVELS.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
               </select>
@@ -433,7 +460,7 @@ export default function Profile() {
             <div className="form-group">
               <label className="form-label">GPA / CGPA <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
               <div style={{ display: 'flex', gap: 10 }}>
-                <input className="form-input" type="number" step="0.01" placeholder="e.g. 3.7" value={academic.gpa} onChange={e => setAcademic(p => ({ ...p, gpa: e.target.value }))} style={{ flex: 2 }} />
+                <input className="form-input" type="number" step="0.01" placeholder="e.g. 3.7" value={academic.gpa} style={{ flex: 2, borderColor: academicErrors.gpa ? 'red' : undefined }} onChange={e => { setAcademic(p => ({ ...p, gpa: e.target.value })); setAcademicErrors(p => ({ ...p, gpa: false })); }} />
                 <select className="form-input" value={academic.gpaScale} onChange={e => setAcademic(p => ({ ...p, gpaScale: e.target.value }))} style={{ flex: 1 }}>
                   <option value="4.0">/ 4.0</option>
                   <option value="5.0">/ 5.0</option>
@@ -456,14 +483,14 @@ export default function Profile() {
           <div className="profile-form-grid">
             <div className="form-group">
               <label className="form-label">Desired Degree <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <select className="form-input" value={preferences.desiredDegree} onChange={e => setPreferences(p => ({ ...p, desiredDegree: e.target.value }))}>
+              <select className="form-input" value={preferences.desiredDegree} style={{ borderColor: prefErrors.desiredDegree ? 'red' : undefined }} onChange={e => { setPreferences(p => ({ ...p, desiredDegree: e.target.value })); setPrefErrors(p => ({ ...p, desiredDegree: false })); }}>
                 <option value="">Select degree...</option>
                 {DESIRED_DEGREES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
               </select>
             </div>
             <div className="form-group">
               <label className="form-label">Desired Field of Study <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <select className="form-input" value={preferences.desiredField} onChange={e => setPreferences(p => ({ ...p, desiredField: e.target.value }))}>
+              <select className="form-input" value={preferences.desiredField} style={{ borderColor: prefErrors.desiredField ? 'red' : undefined }} onChange={e => { setPreferences(p => ({ ...p, desiredField: e.target.value })); setPrefErrors(p => ({ ...p, desiredField: false })); }}>
                 <option value="">Select field...</option>
                 {STUDY_FIELDS.map(f => <option key={f} value={f}>{f}</option>)}
               </select>
@@ -482,12 +509,12 @@ export default function Profile() {
                   <option value="AUD">AUD</option>
                   <option value="INR">INR</option>
                 </select>
-                <input className="form-input" type="number" placeholder="e.g. 10000" value={preferences.budgetMin} onChange={e => setPreferences(p => ({ ...p, budgetMin: e.target.value }))} style={{ flex: 2 }} />
+                <input className="form-input" type="number" placeholder="e.g. 10000" value={preferences.budgetMin} style={{ flex: 2, borderColor: prefErrors.budgetMin ? 'red' : undefined }} onChange={e => { setPreferences(p => ({ ...p, budgetMin: e.target.value })); setPrefErrors(p => ({ ...p, budgetMin: false })); }} />
               </div>
             </div>
             <div className="form-group">
               <label className="form-label">Annual Budget (Max) <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <input className="form-input" type="number" placeholder="e.g. 50000" value={preferences.budgetMax} onChange={e => setPreferences(p => ({ ...p, budgetMax: e.target.value }))} />
+              <input className="form-input" type="number" placeholder="e.g. 50000" value={preferences.budgetMax} style={{ borderColor: prefErrors.budgetMax ? 'red' : undefined }} onChange={e => { setPreferences(p => ({ ...p, budgetMax: e.target.value })); setPrefErrors(p => ({ ...p, budgetMax: false })); }} />
             </div>
             <div className="form-group">
               <label className="form-label">Preferred Intake</label>
@@ -540,14 +567,14 @@ export default function Profile() {
             <div className="profile-form-grid">
               <div className="form-group">
                 <label className="form-label">Test Name <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-                <select className="form-input" value={newScore.testName} onChange={e => setNewScore(p => ({ ...p, testName: e.target.value }))}>
+                <select className="form-input" value={newScore.testName} style={{ borderColor: scoreErrors.testName ? 'red' : undefined }} onChange={e => { setNewScore(p => ({ ...p, testName: e.target.value })); setScoreErrors(p => ({ ...p, testName: false })); }}>
                   <option value="">Select test...</option>
                   {TESTS.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div className="form-group">
                 <label className="form-label">Overall Score <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-                <input className="form-input" type="number" step="0.5" placeholder="e.g. 7.5 (IELTS), 110 (TOEFL)" value={newScore.overallScore} onChange={e => setNewScore(p => ({ ...p, overallScore: e.target.value }))} />
+                <input className="form-input" type="number" step="0.5" placeholder="e.g. 7.5 (IELTS), 110 (TOEFL)" value={newScore.overallScore} style={{ borderColor: scoreErrors.overallScore ? 'red' : undefined }} onChange={e => { setNewScore(p => ({ ...p, overallScore: e.target.value })); setScoreErrors(p => ({ ...p, overallScore: false })); }} />
               </div>
               <div className="form-group">
                 <label className="form-label">Test Date (optional)</label>
