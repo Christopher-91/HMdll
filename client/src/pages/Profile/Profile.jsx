@@ -7,9 +7,11 @@ import { BsLightbulb, BsAsterisk } from 'react-icons/bs';
 import './Profile.css';
 
 const COUNTRIES = [
-  'Australia', 'Canada', 'China', 'France', 'Germany', 'India', 'Japan', 'Netherlands',
-  'New Zealand', 'Singapore', 'South Korea', 'United Arab Emirates', 'United Kingdom',
-  'United States', 'Other',
+  'Australia', 'Austria', 'Belgium', 'Canada', 'China', 'Denmark', 'Finland', 'France',
+  'Germany', 'Ireland', 'Italy', 'Japan', 'Luxembourg', 'Malaysia', 'Netherlands',
+  'New Zealand', 'Norway', 'Poland', 'Portugal', 'Russia', 'Singapore', 'South Korea',
+  'Spain', 'Sweden', 'Switzerland', 'United Arab Emirates', 'United Kingdom', 'United States',
+  'Other'
 ];
 const EDUCATION_LEVELS = [
   { value: 'high_school', label: 'High School / Secondary' },
