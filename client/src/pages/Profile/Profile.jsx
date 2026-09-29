@@ -530,7 +530,7 @@ export default function Profile() {
           </div>
           <div className="form-group" style={{ marginTop: 8 }}>
             <label className="form-label">Preferred Countries (select all that apply)</label>
-            <div className="country-chips" style={{ borderRadius: 8, padding: prefErrors.preferredCountries ? '8px' : undefined, border: prefErrors.preferredCountries ? '1.5px solid red' : undefined }}>
+            <div className="country-chips">
               {COUNTRIES.map(c => (
                 <button key={c} type="button" className={`country-chip ${preferences.preferredCountries.includes(c) ? 'selected' : ''}`} onClick={() => toggleCountry(c)}>
                   {c}
