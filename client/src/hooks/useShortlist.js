@@ -23,23 +23,36 @@ export default function useShortlist() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(shortlist));
   }, [shortlist]);
 
-  // Sync across tabs (optional but nice)
+  // Sync across tabs and within the same tab
   useEffect(() => {
     const onStorage = (e) => {
       if (e.key === STORAGE_KEY) {
         setShortlist(e.newValue ? JSON.parse(e.newValue) : []);
       }
     };
+    const onLocalChange = () => {
+      setShortlist(getStoredShortlist());
+    };
+    
     window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
+    window.addEventListener('shortlist-updated', onLocalChange);
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('shortlist-updated', onLocalChange);
+    };
   }, []);
 
   const toggle = useCallback((universityId) => {
-    setShortlist((prev) =>
-      prev.includes(universityId)
+    setShortlist((prev) => {
+      const newList = prev.includes(universityId)
         ? prev.filter((id) => id !== universityId)
-        : [...prev, universityId]
-    );
+        : [...prev, universityId];
+      // Note: the other useEffect saves this to localStorage, but since it's asynchronous,
+      // we need to save it directly here before dispatching the event so other listeners get the latest data.
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newList));
+      window.dispatchEvent(new Event('shortlist-updated'));
+      return newList;
+    });
   }, []);
 
   const isShortlisted = useCallback(
