@@ -194,6 +194,7 @@ export default function Profile() {
     if (!preferences.desiredField) errors.desiredField = true;
     if (!preferences.budgetMin) errors.budgetMin = true;
     if (!preferences.budgetMax) errors.budgetMax = true;
+    if (preferences.preferredCountries.length === 0) errors.preferredCountries = true;
     if (Object.keys(errors).length > 0) {
       setPrefErrors(errors);
       toast.error('Please fill all required fields.');
@@ -265,6 +266,7 @@ export default function Profile() {
         ? prev.preferredCountries.filter(c => c !== country)
         : [...prev.preferredCountries, country],
     }));
+    setPrefErrors(p => ({ ...p, preferredCountries: false }));
   };
 
   const completionPct = profileData?.profileCompletion || 0;
@@ -528,13 +530,14 @@ export default function Profile() {
           </div>
           <div className="form-group" style={{ marginTop: 8 }}>
             <label className="form-label">Preferred Countries (select all that apply)</label>
-            <div className="country-chips">
+            <div className="country-chips" style={{ borderRadius: 8, padding: prefErrors.preferredCountries ? '8px' : undefined, border: prefErrors.preferredCountries ? '1.5px solid red' : undefined }}>
               {COUNTRIES.map(c => (
                 <button key={c} type="button" className={`country-chip ${preferences.preferredCountries.includes(c) ? 'selected' : ''}`} onClick={() => toggleCountry(c)}>
                   {c}
                 </button>
               ))}
             </div>
+            {prefErrors.preferredCountries && <p style={{ color: 'red', fontSize: '0.8rem', marginTop: 6 }}>Please select at least one country.</p>}
           </div>
           <button className="btn btn-primary" onClick={handleSavePreferences} disabled={saving} style={{ marginTop: 24 }}>
             {saving ? 'Saving…' : 'Save Preferences →'}
