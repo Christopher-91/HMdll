@@ -5,6 +5,8 @@ import api from '../../lib/api';
 import Logo from '../../components/Logo/Logo';
 import UserAvatar from '../../components/UserAvatar/UserAvatar';
 import { formatDegree } from '../../lib/formatters';
+import { Bookmark } from 'lucide-react';
+import useShortlist from '../../hooks/useShortlist';
 import {
   BsBullseye, BsCashCoin, BsMortarboard, BsPeopleFill,
   BsChatSquareDots, BsHouseDoor, BsForkKnife, BsBusFront, BsBox,
@@ -517,6 +519,7 @@ export default function UniversityDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated } = useAuth();
+  const { toggle, isShortlisted } = useShortlist();
   const [uni, setUni] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -627,8 +630,21 @@ export default function UniversityDetail() {
     <div className="page">
       {/* ══════════ HERO ══════════ */}
       <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)', marginBottom: 0 }}>
-        <div className="container">
-          <Link to={location.state?.fromParams ? `/universities?${location.state.fromParams}` : '/universities'} className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none' }}>
+        <div className="container" style={{ position: 'relative' }}>
+          <button
+            type="button"
+            className={`shortlist-card-btn ${isShortlisted(uni.id) ? 'shortlisted' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              toggle(uni.id);
+            }}
+            aria-label={isShortlisted(uni.id) ? 'Remove from shortlist' : 'Add to shortlist'}
+            style={{ position: 'absolute', top: '-12px', right: 0 }}
+          >
+            <Bookmark size={18} />
+          </button>
+
+          <Link to={location.state?.fromParams ? `/universities?${location.state.fromParams}` : '/universities'} className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none', marginTop: '-1.5rem' }}>
             ← Back to Universities
           </Link>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24, flexWrap: 'wrap' }}>
@@ -647,15 +663,11 @@ export default function UniversityDetail() {
                 {uni.rankings?.the && <span className="badge">THE World#{uni.rankings.the}</span>}
               </div>
             </div>
-            {uni.website && (
-              <a href={uni.website} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ flexShrink: 0 }}>
-                Visit Website ↗
-              </a>
-            )}
           </div>
 
-          {/* Quick Stats */}
-          <div style={{ display: 'flex', gap: 32, marginTop: 28, flexWrap: 'wrap' }}>
+          {/* Quick Stats and Action */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 28, flexWrap: 'wrap', gap: 24 }}>
+            <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
             {[
               { label: 'Avg. Tuition', value: uni.financial?.avgTuitionUsd ? `$${Number(uni.financial.avgTuitionUsd).toLocaleString('en-US')}/yr` : 'N/A' },
               { label: 'Total Students', value: uni.totalStudents ? Number(uni.totalStudents).toLocaleString('en-US') : 'N/A' },
@@ -667,6 +679,13 @@ export default function UniversityDetail() {
                 <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-300)', marginTop: 2 }}>{stat.value}</div>
               </div>
             ))}
+            </div>
+            
+            {uni.website && (
+              <a href={uni.website} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ flexShrink: 0 }}>
+                Visit Website ↗
+              </a>
+            )}
           </div>
         </div>
       </div>
