@@ -245,7 +245,7 @@ export default function Profile() {
   const handleSavePersonal = async () => {
     const errors = {};
     if (!personal.nationality) errors.nationality = true;
-    if (!personal.countryOfResidence) errors.countryOfResidence = true;
+    if (!personal.countryOfResidence || !COUNTRIES.includes(personal.countryOfResidence)) errors.countryOfResidence = true;
     if (!personal.dateOfBirth) errors.dateOfBirth = true;
     if (!personal.preferredLanguage) errors.preferredLanguage = true;
     if (!personal.phone) errors.phone = true;
