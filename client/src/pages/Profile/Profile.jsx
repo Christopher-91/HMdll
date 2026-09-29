@@ -95,6 +95,7 @@ export default function Profile() {
     nationality: '', countryOfResidence: '', dateOfBirth: '', preferredLanguage: '', phone: '',
   });
   const [careerGoal, setCareerGoal] = useState('');
+  const [personalErrors, setPersonalErrors] = useState({});
 
   useEffect(() => {
     api.get('/users/me')
@@ -242,6 +243,20 @@ export default function Profile() {
   const completionPct = profileData?.profileCompletion || 0;
 
   const handleSavePersonal = async () => {
+    const errors = {};
+    if (!personal.nationality) errors.nationality = true;
+    if (!personal.countryOfResidence) errors.countryOfResidence = true;
+    if (!personal.dateOfBirth) errors.dateOfBirth = true;
+    if (!personal.preferredLanguage) errors.preferredLanguage = true;
+    if (!personal.phone) errors.phone = true;
+    if (!careerGoal) errors.careerGoal = true;
+
+    if (Object.keys(errors).length > 0) {
+      setPersonalErrors(errors);
+      toast.error('Please fill all required fields.');
+      return;
+    }
+    setPersonalErrors({});
     setSaving(true);
     try {
       const res = await api.put('/users/me', {
@@ -338,36 +353,36 @@ export default function Profile() {
           <div className="profile-form-grid">
             <div className="form-group">
               <label className="form-label">Nationality <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <select className="form-input" value={personal.nationality} onChange={e => setPersonal(p => ({ ...p, nationality: e.target.value }))}>
+              <select className="form-input" value={personal.nationality} style={{ borderColor: personalErrors.nationality ? "red" : undefined }} onChange={e => { setPersonal(p => ({ ...p, nationality: e.target.value })); setPersonalErrors(p => ({ ...p, nationality: false })); }}>
                 <option value="">Select nationality...</option>
                 {NATIONALITIES.map(n => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
             <div className="form-group">
               <label className="form-label">Country of Residence <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <select className="form-input" value={personal.countryOfResidence} onChange={e => setPersonal(p => ({ ...p, countryOfResidence: e.target.value }))}>
+              <select className="form-input" value={personal.countryOfResidence} style={{ borderColor: personalErrors.countryOfResidence ? "red" : undefined }} onChange={e => { setPersonal(p => ({ ...p, countryOfResidence: e.target.value })); setPersonalErrors(p => ({ ...p, countryOfResidence: false })); }}>
                 <option value="">Select country...</option>
                 {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div className="form-group">
               <label className="form-label">Date of Birth <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <input className="form-input" type="date" value={personal.dateOfBirth} onChange={e => setPersonal(p => ({ ...p, dateOfBirth: e.target.value }))} />
+              <input className="form-input" type="date" value={personal.dateOfBirth} style={{ borderColor: personalErrors.dateOfBirth ? "red" : undefined }} onChange={e => { setPersonal(p => ({ ...p, dateOfBirth: e.target.value })); setPersonalErrors(p => ({ ...p, dateOfBirth: false })); }} />
             </div>
             <div className="form-group">
               <label className="form-label">Preferred Language <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <select className="form-input" value={personal.preferredLanguage} onChange={e => setPersonal(p => ({ ...p, preferredLanguage: e.target.value }))}>
+              <select className="form-input" value={personal.preferredLanguage} style={{ borderColor: personalErrors.preferredLanguage ? "red" : undefined }} onChange={e => { setPersonal(p => ({ ...p, preferredLanguage: e.target.value })); setPersonalErrors(p => ({ ...p, preferredLanguage: false })); }}>
                 <option value="">Select language...</option>
                 {LANGUAGES.map(l => <option key={l} value={l}>{l}</option>)}
               </select>
             </div>
             <div className="form-group">
               <label className="form-label">Phone Number <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <input className="form-input" type="tel" placeholder="e.g. +91 98765 43210" value={personal.phone} onChange={e => setPersonal(p => ({ ...p, phone: e.target.value }))} />
+              <input className="form-input" type="tel" placeholder="e.g. +91 98765 43210" value={personal.phone} style={{ borderColor: personalErrors.phone ? "red" : undefined }} onChange={e => { setPersonal(p => ({ ...p, phone: e.target.value })); setPersonalErrors(p => ({ ...p, phone: false })); }} />
             </div>
             <div className="form-group">
               <label className="form-label">Career Goal <BsAsterisk size={9} style={{ verticalAlign: 'middle', color: 'var(--primary-400)' }} /></label>
-              <select className="form-input" value={careerGoal} onChange={e => setCareerGoal(e.target.value)}>
+              <select className="form-input" value={careerGoal} style={{ borderColor: personalErrors.careerGoal ? "red" : undefined }} onChange={e => { setCareerGoal(e.target.value); setPersonalErrors(p => ({ ...p, careerGoal: false })); }}>
                 <option value="">Select your goal career...</option>
                 {CAREER_GOALS.map(g => <option key={g} value={g}>{g}</option>)}
               </select>
