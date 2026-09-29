@@ -13,6 +13,7 @@ export default function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [hasUnread, setHasUnread] = useState(() => localStorage.getItem('hmdll-notification-read') !== 'true');
   const notificationRef = useRef(null);
 
   useEffect(() => {
@@ -101,11 +102,17 @@ export default function Navbar() {
             <div className="notification-wrapper" ref={notificationRef}>
               <button
                 className="notification-bell"
-                onClick={() => setNotificationOpen(!notificationOpen)}
+                onClick={() => {
+                  setNotificationOpen(!notificationOpen);
+                  if (hasUnread) {
+                    setHasUnread(false);
+                    localStorage.setItem('hmdll-notification-read', 'true');
+                  }
+                }}
                 aria-label="Notifications"
               >
                 <Bell size={20} strokeWidth={1.8} />
-                <span className="notification-dot"></span>
+                {hasUnread && <span className="notification-dot"></span>}
               </button>
 
               <AnimatePresence>
