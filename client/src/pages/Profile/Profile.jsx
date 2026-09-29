@@ -422,16 +422,8 @@ export default function Profile() {
               <input className="form-input" type="number" placeholder="e.g. 92" min="0" max="100" value={academic.class10Percentage} onChange={e => setAcademic(p => ({ ...p, class10Percentage: e.target.value }))} />
             </div>
             <div className="form-group">
-              <label className="form-label">Class 12 / HSC %</label>
+              <label className="form-label">Class 12 HSC %</label>
               <input className="form-input" type="number" placeholder="e.g. 88" min="0" max="100" value={academic.class12Percentage} onChange={e => setAcademic(p => ({ ...p, class12Percentage: e.target.value }))} />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{"Bachelor's %"} (if completed)</label>
-              <input className="form-input" type="number" placeholder="e.g. 75" min="0" max="100" value={academic.bachelorsPercentage} onChange={e => setAcademic(p => ({ ...p, bachelorsPercentage: e.target.value }))} />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{"Bachelor's CGPA"} (if completed)</label>
-              <input className="form-input" type="number" step="0.01" placeholder="e.g. 8.2" value={academic.bachelorsCgpa} onChange={e => setAcademic(p => ({ ...p, bachelorsCgpa: e.target.value }))} />
             </div>
           </div>
           <button className="btn btn-primary" onClick={handleSaveAcademic} disabled={saving}>
