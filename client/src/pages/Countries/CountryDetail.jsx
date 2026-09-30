@@ -37,7 +37,7 @@ export default function CountryDetail() {
   return (
     <div className="page">
       {/* Hero */}
-      <div className="detail-hero" style={{ position: 'relative', borderBottom: '1px solid var(--border-primary)', overflow: 'hidden' }}>
+      <div className="detail-hero" style={{ position: 'relative', borderBottom: '1px solid var(--border-primary)', overflow: 'hidden', backgroundColor: 'transparent' }}>
         {/* High-res background image */}
         <div style={{
           position: 'absolute',
@@ -52,7 +52,7 @@ export default function CountryDetail() {
           position: 'absolute',
           top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'var(--bg-secondary)',
-          opacity: 0.85,
+          opacity: 0.5,
           zIndex: 0
         }} />
 
