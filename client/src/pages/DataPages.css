@@ -320,8 +320,9 @@
 .detail-hero {
   margin-top: -56px; /* Pulls the background up to meet the 64px navbar, covering the 56px gap caused by .page's 120px padding */
   padding-top: 24px; /* Reduced to remove extra empty space above back button */
-  padding-bottom: 24px; /* Reduced to pull tabs closer */
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--border-secondary);
+  margin-bottom: 0;
 }
 
 .detail-title {

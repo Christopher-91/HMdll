@@ -76,7 +76,7 @@ export default function CountryDetail() {
       </div>
 
       {/* Tabs */}
-      <div style={{ borderBottom: '1px solid var(--border-secondary)', background: 'var(--bg-secondary)', position: 'sticky', top: 60, zIndex: 10 }}>
+      <div style={{ borderBottom: '1px solid var(--border-secondary)', background: 'var(--bg-secondary)', position: 'sticky', top: 64, zIndex: 10 }}>
         <div className="container" style={{ display: 'flex', gap: 0 }}>
           {tabs.map(t => (
             <button
@@ -97,7 +97,7 @@ export default function CountryDetail() {
       </div>
 
       {/* Content */}
-      <div className="container" style={{ paddingTop: 32, paddingBottom: 64 }}>
+      <div className="container" style={{ paddingTop: 32, paddingBottom: 64, scrollMarginTop: '120px' }}>
 
         {activeTab === 'overview' && (
           <div className="detail-content">
