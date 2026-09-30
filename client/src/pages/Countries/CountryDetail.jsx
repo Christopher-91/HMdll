@@ -36,24 +36,28 @@ export default function CountryDetail() {
 
   return (
     <div className="page">
-      {/* Cover Image */}
-      <div style={{
-        width: '100%',
-        height: '240px',
-        backgroundColor: 'var(--border-secondary)',
-        backgroundImage: `url('https://loremflickr.com/1600/600/${encodeURIComponent(country.name.toLowerCase())},landscape/all')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        position: 'relative'
-      }}>
-        {/* Gradient overlay to seamlessly blend the image into the hero section below */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px', background: 'linear-gradient(to bottom, transparent, var(--bg-secondary))' }} />
-      </div>
-
       {/* Hero */}
-      <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)', paddingTop: 10, marginTop: '-20px', position: 'relative', zIndex: 1 }}>
-        <div className="container">
-          <Link to="/countries" className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none', position: 'relative', zIndex: 2 }}>
+      <div className="detail-hero" style={{ position: 'relative', borderBottom: '1px solid var(--border-primary)', overflow: 'hidden' }}>
+        {/* High-res background image */}
+        <div style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundImage: `url('https://loremflickr.com/1920/1080/${encodeURIComponent(country.name.toLowerCase())},landscape/all')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }} />
+        {/* Theme-aware overlay for text readability */}
+        <div style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'var(--bg-secondary)',
+          opacity: 0.85,
+          zIndex: 0
+        }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <Link to="/countries" className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none' }}>
             ← Back to Countries
           </Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
