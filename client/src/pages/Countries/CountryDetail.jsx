@@ -37,7 +37,7 @@ export default function CountryDetail() {
   return (
     <div className="page">
       {/* Hero */}
-      <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)' }}>
+      <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)', paddingTop: 72, paddingBottom: 24, marginBottom: 0 }}>
         <div className="container">
           <Link to="/countries" className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none' }}>
             ← Back to Countries
