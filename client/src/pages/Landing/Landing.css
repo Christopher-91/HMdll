@@ -706,9 +706,10 @@
   gap: 16px;
   margin-top: 32px;
   margin-bottom: 4px;
-  padding-top: 20px;
-  padding-bottom: 12px;
-  border-top: 1px solid var(--border-secondary);
+  padding: 20px 24px;
+  border: 1px solid rgba(0, 87, 183, 0.15);
+  border-radius: var(--radius-lg, 12px);
+  background: linear-gradient(135deg, rgba(0, 87, 183, 0.04) 0%, rgba(255, 221, 0, 0.04) 100%);
   text-align: center;
 }
 
@@ -738,19 +739,15 @@
 .footer-solidarity-btn {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #1d4ed8 !important;
-  background-color: #eff6ff;
-  border-radius: 8px;
-  text-decoration: none !important;
-  transition: background-color 0.15s ease;
+  color: #0057b7 !important;
+  text-decoration: underline !important;
+  transition: color 0.15s ease;
 }
 
 .footer-solidarity-btn:hover {
-  background-color: #dbeafe !important;
-  color: #1d4ed8 !important;
+  color: #003a7a !important;
 }
 
 /* ─── Responsive ────────────────────────────────── */
