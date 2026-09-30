@@ -42,7 +42,7 @@ export default function CountryDetail() {
         <div style={{
           position: 'absolute',
           top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: `url('https://loremflickr.com/1920/1080/${encodeURIComponent(country.name.toLowerCase())},landscape/all')`,
+          backgroundImage: `url('https://picsum.photos/seed/${encodeURIComponent(country.name)}/1920/1080')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: 0
