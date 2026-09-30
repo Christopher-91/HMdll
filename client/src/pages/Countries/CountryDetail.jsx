@@ -37,68 +37,40 @@ export default function CountryDetail() {
   return (
     <div className="page">
       {/* Hero */}
-      <div className="detail-hero" style={{ position: 'relative', borderBottom: '1px solid var(--border-primary)', overflow: 'hidden', backgroundColor: 'transparent', paddingBottom: 64 }}>
-        {/* High-res background image */}
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: `url('https://picsum.photos/seed/${encodeURIComponent(country.name)}/1920/1080')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          zIndex: 0
-        }} />
-        {/* Subtle overlay so the image isn't too bright */}
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: '#000',
-          opacity: 0.2,
-          zIndex: 0
-        }} />
-
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <Link to="/countries" className="text-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 24, textDecoration: 'none', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)', fontWeight: 600 }}>
+      <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)' }}>
+        <div className="container">
+          <Link to="/countries" className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none' }}>
             ← Back to Countries
           </Link>
-          
-          {/* Glassmorphism Card for Content */}
-          <div style={{ 
-            background: 'var(--bg-primary)', 
-            padding: '36px 48px', 
-            borderRadius: '24px', 
-            boxShadow: '0 16px 48px rgba(0,0,0,0.15)',
-            border: '1px solid var(--border-secondary)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 28, flexWrap: 'wrap' }}>
-              <img src={`/flags/${country.code.toLowerCase()}.webp`} alt={country.name} style={{ width: '5.5rem', display: 'block', borderRadius: 8, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-              <div>
-                <h1 className="detail-title">{country.name}</h1>
-                <p className="detail-subtitle" style={{ marginTop: 4 }}>{country.continent}</p>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12 }}>
-                  {country.general?.officialLanguages?.map((l, i) => (
-                    <span key={i} className="badge">{l}</span>
-                  ))}
-                  {country.visa?.postStudyWorkDuration && (
-                    <span className="badge badge-accent">{country.visa.postStudyWorkDuration} post-study work</span>
-                  )}
-                </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+            <img src={`/flags/${country.code.toLowerCase()}.webp`} alt={country.name} style={{ width: '4rem', display: 'block', marginBottom: '1rem' }} />
+            <div>
+              <h1 className="detail-title">{country.name}</h1>
+              <p className="detail-subtitle">{country.continent}</p>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
+                {country.general?.officialLanguages?.map((l, i) => (
+                  <span key={i} className="badge">{l}</span>
+                ))}
+                {country.visa?.postStudyWorkDuration && (
+                  <span className="badge badge-accent">{country.visa.postStudyWorkDuration} post-study work</span>
+                )}
               </div>
             </div>
+          </div>
 
-            {/* Quick Stats */}
-            <div style={{ display: 'flex', gap: 40, marginTop: 36, flexWrap: 'wrap', paddingTop: 36, borderTop: '1px solid var(--border-secondary)' }}>
-              {[
-                { label: 'Universities', value: country.universities?.length || 0 },
-                { label: 'Avg. Tuition', value: `$${((country.costs?.avgTuitionMinUsd || 0) / 1000).toFixed(0)}k–$${((country.costs?.avgTuitionMaxUsd || 0) / 1000).toFixed(0)}k/yr` },
-                { label: 'Avg. Living Cost', value: country.costs?.avgLivingCostUsd ? `$${country.costs.avgLivingCostUsd.toLocaleString('en-US')}/mo` : 'N/A' },
-                { label: 'Work Hours', value: country.visa?.workHoursPerWeek ? `${country.visa.workHoursPerWeek}hrs/wk` : 'N/A' },
-              ].map(stat => (
-                <div key={stat.label}>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>{stat.label}</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary-300)', marginTop: 4 }}>{stat.value}</div>
-                </div>
-              ))}
-            </div>
+          {/* Quick Stats */}
+          <div style={{ display: 'flex', gap: 32, marginTop: 28, flexWrap: 'wrap' }}>
+            {[
+              { label: 'Universities', value: country.universities?.length || 0 },
+              { label: 'Avg. Tuition', value: `$${((country.costs?.avgTuitionMinUsd || 0) / 1000).toFixed(0)}k–$${((country.costs?.avgTuitionMaxUsd || 0) / 1000).toFixed(0)}k/yr` },
+              { label: 'Avg. Living Cost', value: country.costs?.avgLivingCostUsd ? `$${country.costs.avgLivingCostUsd.toLocaleString('en-US')}/mo` : 'N/A' },
+              { label: 'Work Hours', value: country.visa?.workHoursPerWeek ? `${country.visa.workHoursPerWeek}hrs/wk` : 'N/A' },
+            ].map(stat => (
+              <div key={stat.label}>
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>{stat.label}</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-300)', marginTop: 2 }}>{stat.value}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
