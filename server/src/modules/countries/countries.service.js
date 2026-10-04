@@ -49,7 +49,7 @@ export const getCountry = async (idOrSlug) => {
   const universities = await query(
     `SELECT id, name, slug, city, university_type, qs_ranking, avg_tuition_usd, logo_url, website,
             (SELECT COUNT(*) FROM programs WHERE university_id = u.id AND is_active = TRUE) as program_count
-     FROM universities u WHERE country_id = $1 AND is_active = TRUE ORDER BY qs_ranking NULLS LAST, name`,
+     FROM universities u WHERE country_id = $1 AND is_active = TRUE AND name IS NOT NULL AND TRIM(name) != '' ORDER BY qs_ranking NULLS LAST, name`,
     [c.id]
   );
 

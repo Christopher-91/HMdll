@@ -19,7 +19,7 @@ export default function Logo({ website, name, slug, size = 48, logoUrl }) {
         borderRadius: 'var(--radius-md, 6px)'
       }}
     >
-      {name ? name[0] : 'U'}
+      {name && typeof name === 'string' && name.trim().length > 0 ? name.trim()[0].toUpperCase() : 'U'}
     </span>
   );
 

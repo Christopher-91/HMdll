@@ -191,7 +191,7 @@ export default function CountryDetail() {
             </h2>
             {country.universities?.length > 0 ? (
               <div className="cards-grid">
-                {country.universities.map(u => (
+                {country.universities.filter(u => u && u.name && u.name.trim() !== '').map(u => (
                   <Link key={u.id} to={`/universities/${u.slug}`} className="uni-card card">
                     <div className="uni-card-header">
                       <div className="uni-logo">
@@ -211,11 +211,11 @@ export default function CountryDetail() {
                       )}
                       <div className="uni-meta-item">
                         <span className="uni-meta-label">Avg. Tuition</span>
-                        <span className="uni-meta-value">${(u.avgTuitionUsd || 0).toLocaleString('en-US')}/yr</span>
+                        <span className="uni-meta-value">{u.avgTuitionUsd ? '$' + Number(u.avgTuitionUsd).toLocaleString('en-US') + '/yr' : 'N/A'}</span>
                       </div>
                       <div className="uni-meta-item">
                         <span className="uni-meta-label">Programs</span>
-                        <span className="uni-meta-value">{u.programCount || '-'}</span>
+                        <span className="uni-meta-value">{u.programCount ? u.programCount : 'N/A'}</span>
                       </div>
                     </div>
                     <div className="uni-tags">

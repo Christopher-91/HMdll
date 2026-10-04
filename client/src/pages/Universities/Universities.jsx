@@ -162,7 +162,7 @@ export default function Universities() {
         </div>
       ) : universities.length > 0 ? (
         <div className="cards-grid stagger-children">
-          {universities.map((u) => (
+          {universities.filter(u => u && u.name && u.name.trim() !== '').map((u) => (
             <Link key={u.id} to={`/universities/${u.slug}`} state={{ fromParams: searchParams.toString() }} className="uni-card card" style={{ position: 'relative' }}>
               <button
                 type="button"
@@ -198,11 +198,11 @@ export default function Universities() {
                 )}
                 <div className="uni-meta-item">
                   <span className="uni-meta-label">Avg. Tuition</span>
-                  <span className="uni-meta-value">${Number(u.avgTuitionUsd || 0).toLocaleString('en-US')}/yr</span>
+                  <span className="uni-meta-value">{u.avgTuitionUsd ? '$' + Number(u.avgTuitionUsd).toLocaleString('en-US') + '/yr' : 'N/A'}</span>
                 </div>
                 <div className="uni-meta-item">
                   <span className="uni-meta-label">Programs</span>
-                  <span className="uni-meta-value">{u.programCount || '-'}</span>
+                  <span className="uni-meta-value">{u.programCount ? u.programCount : 'N/A'}</span>
                 </div>
               </div>
 
