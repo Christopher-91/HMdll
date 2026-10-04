@@ -4,7 +4,21 @@ export default function Logo({ website, name, slug, size = 48, logoUrl }) {
   const [errorLevel, setErrorLevel] = useState(0);
   
   const Placeholder = () => (
-    <span className="uni-logo-placeholder" style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: size * 0.4 }}>
+    <span 
+      className="uni-logo-placeholder" 
+      style={{ 
+        width: '100%', 
+        height: '100%', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        fontSize: size * 0.4,
+        background: 'var(--primary-50, #eef2ff)',
+        color: 'var(--primary-700, #4338ca)',
+        fontWeight: 'bold',
+        borderRadius: 'var(--radius-md, 6px)'
+      }}
+    >
       {name ? name[0] : 'U'}
     </span>
   );

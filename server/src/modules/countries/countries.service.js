@@ -47,7 +47,7 @@ export const getCountry = async (idOrSlug) => {
 
   // Get universities
   const universities = await query(
-    `SELECT id, name, slug, city, university_type, qs_ranking, avg_tuition_usd, logo_url,
+    `SELECT id, name, slug, city, university_type, qs_ranking, avg_tuition_usd, logo_url, website,
             (SELECT COUNT(*) FROM programs WHERE university_id = u.id AND is_active = TRUE) as program_count
      FROM universities u WHERE country_id = $1 AND is_active = TRUE ORDER BY qs_ranking NULLS LAST, name`,
     [c.id]
@@ -88,7 +88,7 @@ export const getCountry = async (idOrSlug) => {
     universities: universities.rows.map(u => ({
       id: u.id, name: u.name, slug: u.slug, city: u.city,
       universityType: u.university_type, qsRanking: u.qs_ranking,
-      avgTuitionUsd: u.avg_tuition_usd, logoUrl: u.logo_url,
+      avgTuitionUsd: u.avg_tuition_usd, logoUrl: u.logo_url, website: u.website,
       programCount: parseInt(u.program_count),
     })),
     scholarships: scholarships.rows,

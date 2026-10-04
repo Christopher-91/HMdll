@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../lib/api';
+import Logo from '../../components/Logo/Logo';
 import {
   BsBank2, BsCurrencyDollar, BsStarFill, BsCash, BsClock,
   BsPassport, BsBriefcase, BsRocketTakeoff, BsChatDots, BsLightningCharge,
@@ -194,7 +195,7 @@ export default function CountryDetail() {
                   <Link key={u.id} to={`/universities/${u.slug}`} className="uni-card card">
                     <div className="uni-card-header">
                       <div className="uni-logo">
-                        {u.logoUrl ? <img src={u.logoUrl} alt={u.name} /> : <span className="uni-logo-placeholder">{u.name[0]}</span>}
+                        <Logo website={u.website} name={u.name} slug={u.slug} logoUrl={u.logoUrl} size={48} />
                       </div>
                       <div className="flex-1">
                         <h3 className="uni-name">{u.name}</h3>
