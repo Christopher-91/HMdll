@@ -177,3 +177,32 @@ export const getStatus = async (req, res, next) => {
     next(err);
   }
 };
+
+// ─── Get all accepted connections (friends list) ──────────────────────────────
+export const getFriends = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    const result = await query(
+      `SELECT
+         u.id,
+         u.first_name,
+         u.last_name,
+         u.avatar_url,
+         u.username
+       FROM connection_requests cr
+       JOIN users u ON u.id = CASE
+         WHEN cr.requester_id = $1 THEN cr.recipient_id
+         ELSE cr.requester_id
+       END
+       WHERE (cr.requester_id = $1 OR cr.recipient_id = $1)
+         AND cr.status = 'accepted'
+       ORDER BY u.first_name, u.last_name`,
+      [userId]
+    );
+
+    res.json({ success: true, data: result.rows });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -8,9 +8,10 @@ router.use(authenticate);
 
 // Conversations
 router.get('/conversations', chatController.getConversations);
-// IMPORTANT: /direct must be declared before /:id to prevent Express treating
-// the literal string "direct" as a conversationId param.
+// IMPORTANT: /direct and /group must be declared before /:id to prevent Express
+// treating the literal strings "direct" or "group" as a conversationId param.
 router.post('/conversations/direct', chatController.createDirectConversation);
+router.post('/conversations/group', chatController.createGroupConversation);
 router.get('/conversations/:id', chatController.getConversation);
 
 // Messages

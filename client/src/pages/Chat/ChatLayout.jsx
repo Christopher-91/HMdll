@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Routes, Route, useParams, useNavigate, Link } from 'react-router-dom';
 import {
   Search, MessageSquare, X, Plus,
-  UserPlus, Clock, Check, ChevronDown, ChevronUp,
+  UserPlus, Clock, Check, ChevronDown, ChevronUp, Users,
 } from 'lucide-react';
 import api from '../../lib/api';
 import ChatWindow from './ChatWindow';
@@ -149,6 +149,146 @@ function UserSearch({ onStartChat }) {
   );
 }
 
+// ─── CreateGroupModal ──────────────────────────────────────────────────────────
+function CreateGroupModal({ isOpen, onClose, onGroupCreated }) {
+  const [groupName, setGroupName]       = useState('');
+  const [friends, setFriends]           = useState([]);
+  const [selectedIds, setSelectedIds]   = useState(new Set());
+  const [loading, setLoading]           = useState(true);
+  const [creating, setCreating]         = useState(false);
+  const [error, setError]               = useState('');
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setGroupName('');
+    setSelectedIds(new Set());
+    setError('');
+    setLoading(true);
+
+    api.get('/connections/friends')
+      .then(res => setFriends(res.data.data || []))
+      .catch(() => setFriends([]))
+      .finally(() => setLoading(false));
+  }, [isOpen]);
+
+  const toggleFriend = (id) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const handleCreate = async () => {
+    if (!groupName.trim()) { setError('Please enter a group name'); return; }
+    if (selectedIds.size === 0) { setError('Select at least one friend'); return; }
+
+    setCreating(true);
+    setError('');
+    try {
+      const res = await api.post('/chat/conversations/group', {
+        name: groupName.trim(),
+        participantIds: [...selectedIds],
+      });
+      onGroupCreated(res.data.data);
+      onClose();
+    } catch (err) {
+      setError(err?.response?.data?.error?.message || 'Failed to create group');
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="group-modal-overlay" onClick={onClose}>
+      <div className="group-modal" onClick={e => e.stopPropagation()}>
+        <div className="group-modal-header">
+          <h3 className="group-modal-title">Create Group Chat</h3>
+          <button className="group-modal-close" onClick={onClose} aria-label="Close">
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="group-modal-body">
+          <label className="group-modal-label">Group Name</label>
+          <input
+            type="text"
+            className="group-modal-input"
+            placeholder="e.g. Study Group, Fall 2027 Cohort…"
+            value={groupName}
+            onChange={e => setGroupName(e.target.value)}
+            maxLength={100}
+            autoFocus
+          />
+
+          <label className="group-modal-label" style={{ marginTop: 20 }}>
+            Add Friends
+            {selectedIds.size > 0 && (
+              <span className="group-modal-count">{selectedIds.size} selected</span>
+            )}
+          </label>
+
+          <div className="group-modal-friends-list">
+            {loading && (
+              <div className="group-modal-loading">Loading your connections…</div>
+            )}
+            {!loading && friends.length === 0 && (
+              <div className="group-modal-empty">
+                <Users size={24} />
+                <p>No connections yet. Connect with students first!</p>
+              </div>
+            )}
+            {!loading && friends.map(friend => {
+              const isSelected = selectedIds.has(friend.id);
+              const displayName = `${friend.first_name} ${friend.last_name || ''}`.trim();
+              const initials = displayName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+
+              return (
+                <label
+                  key={friend.id}
+                  className={`group-modal-friend ${isSelected ? 'selected' : ''}`}
+                >
+                  <div className="chat-avatar chat-avatar-sm" style={{ background: getAvatarColor(friend.id || friend.first_name) }}>
+                    {friend.avatar_url
+                      ? <img src={friend.avatar_url} alt="" referrerPolicy="no-referrer" />
+                      : <span>{initials}</span>}
+                  </div>
+                  <div className="group-modal-friend-info">
+                    <p className="group-modal-friend-name">{displayName}</p>
+                    {friend.username && <p className="group-modal-friend-handle">@{friend.username}</p>}
+                  </div>
+                  <input
+                    type="checkbox"
+                    className="group-modal-checkbox"
+                    checked={isSelected}
+                    onChange={() => toggleFriend(friend.id)}
+                  />
+                </label>
+              );
+            })}
+          </div>
+
+          {error && <p className="group-modal-error">{error}</p>}
+        </div>
+
+        <div className="group-modal-footer">
+          <button className="group-modal-cancel" onClick={onClose}>Cancel</button>
+          <button
+            className="group-modal-create"
+            onClick={handleCreate}
+            disabled={creating || !groupName.trim() || selectedIds.size === 0}
+          >
+            {creating ? 'Creating…' : 'Create Group'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── RequestItem ───────────────────────────────────────────────────────────────
 function RequestItem({ request, onAccept, onDecline }) {
   const [busy, setBusy]  = useState(false);
@@ -259,10 +399,13 @@ function RequestsSection({ onRequestAccepted }) {
 function ConversationItem({ conv }) {
   const { conversationId } = useParams();
   const isActive           = conversationId === conv.id;
+  const isGroup            = conv.is_group === true;
 
-  const displayName = conv.other_first_name
-    ? `${conv.other_first_name} ${conv.other_last_name || ''}`.trim()
-    : (conv.name || 'Direct Message');
+  const displayName = isGroup
+    ? (conv.name || 'Group Chat')
+    : conv.other_first_name
+      ? `${conv.other_first_name} ${conv.other_last_name || ''}`.trim()
+      : (conv.name || 'Direct Message');
   const initials = displayName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
   const unread   = Number(conv.unread_count || 0);
 
@@ -272,11 +415,17 @@ function ConversationItem({ conv }) {
       id={`conv-item-${conv.id}`}
       className={`chat-conv-item ${isActive ? 'active' : ''}`}
     >
-      <div className="chat-avatar chat-avatar-md" style={{ background: getAvatarColor(conv.other_user_id || conv.other_first_name || conv.id) }}>
-        {conv.other_avatar_url
-          ? <img src={conv.other_avatar_url} alt="" referrerPolicy="no-referrer" />
-          : <span>{initials}</span>}
-      </div>
+      {isGroup ? (
+        <div className="chat-avatar chat-avatar-md chat-avatar-group">
+          <Users size={18} />
+        </div>
+      ) : (
+        <div className="chat-avatar chat-avatar-md" style={{ background: getAvatarColor(conv.other_user_id || conv.other_first_name || conv.id) }}>
+          {conv.other_avatar_url
+            ? <img src={conv.other_avatar_url} alt="" referrerPolicy="no-referrer" />
+            : <span>{initials}</span>}
+        </div>
+      )}
       <div className="chat-conv-meta">
         <p className="chat-conv-name">{displayName}</p>
         {conv.last_message && <p className="chat-conv-preview">{conv.last_message}</p>}
@@ -289,14 +438,14 @@ function ConversationItem({ conv }) {
 }
 
 // ─── ConversationList (Sidebar) ────────────────────────────────────────────────
-function ConversationList({ conversations, loading, onStartChat, onRequestAccepted }) {
+function ConversationList({ conversations, loading, onStartChat, onRequestAccepted, onCreateGroup }) {
   const { conversationId } = useParams();
 
   return (
     <aside className={`chat-sidebar ${conversationId ? 'chat-sidebar--hidden-mobile' : ''}`}>
       <div className="chat-sidebar-header">
         <h2 className="chat-sidebar-title">Messages</h2>
-        <button id="chat-new-btn" className="chat-new-btn" title="New direct message" onClick={() => {}}>
+        <button id="chat-new-btn" className="chat-new-btn" title="Create group chat" onClick={onCreateGroup}>
           <Plus size={16} />
         </button>
       </div>
@@ -351,6 +500,7 @@ export default function ChatLayout() {
   const navigate          = useNavigate();
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading]             = useState(true);
+  const [showGroupModal, setShowGroupModal] = useState(false);
 
   const fetchConversations = useCallback(async () => {
     try {
@@ -389,6 +539,12 @@ export default function ChatLayout() {
     } catch { /* Conversation will appear on next refresh */ }
   }, [navigate]);
 
+  // Called by CreateGroupModal after successful group creation
+  const handleGroupCreated = useCallback((conv) => {
+    setConversations(prev => [conv, ...prev]);
+    navigate(`/chat/${conv.id}`);
+  }, [navigate]);
+
   return (
     <div className="chat-layout">
       <ConversationList
@@ -396,6 +552,7 @@ export default function ChatLayout() {
         loading={loading}
         onStartChat={handleStartChat}
         onRequestAccepted={handleRequestAccepted}
+        onCreateGroup={() => setShowGroupModal(true)}
       />
 
       <div className="chat-main">
@@ -404,6 +561,12 @@ export default function ChatLayout() {
           <Route path=":conversationId" element={<ChatWindow />} />
         </Routes>
       </div>
+
+      <CreateGroupModal
+        isOpen={showGroupModal}
+        onClose={() => setShowGroupModal(false)}
+        onGroupCreated={handleGroupCreated}
+      />
     </div>
   );
 }

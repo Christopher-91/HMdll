@@ -12,6 +12,9 @@ router.get('/status/:userId', connectionsController.getStatus);
 // Get all incoming pending requests
 router.get('/pending', connectionsController.getPending);
 
+// Get all accepted connections (friends list)
+router.get('/friends', connectionsController.getFriends);
+
 // Send a connection request
 router.post('/request', connectionsController.sendRequest);
 
