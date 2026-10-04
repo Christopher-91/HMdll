@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Send, ArrowLeft, Phone, Video, MoreVertical, UserPlus, Clock, Check } from 'lucide-react';
+import { Send, ArrowLeft, Phone, Video, MoreVertical, UserPlus, Clock, Check, Users } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { usePusher } from '../../hooks/usePusher';
 import { useChatScroll } from '../../hooks/useChatScroll';
@@ -47,7 +47,12 @@ export default function ChatWindow() {
     if (!conversationId) return;
     setConnectionStatus('loading');
     api.get(`/chat/conversations/${conversationId}`)
-      .then((res) => setConvInfo(res.data.data))
+      .then((res) => {
+        setConvInfo(res.data.data);
+        if (res.data.data.is_group) {
+          setConnectionStatus('accepted');
+        }
+      })
       .catch((err) => {
         if (err?.response?.status === 403 || err?.response?.status === 404) {
           setConnectionStatus('forbidden');
@@ -215,12 +220,24 @@ export default function ChatWindow() {
   }, [convInfo?.other_user_id]);
 
   // ─── Derived header info ────────────────────────────────────────────────────
-  const otherName = convInfo
-    ? `${convInfo.other_first_name || ''} ${convInfo.other_last_name || ''}`.trim() || 'Direct Message'
-    : 'Loading…';
-  const otherAvatar = convInfo?.other_avatar_url || null;
-  const otherInitials = otherName !== 'Loading…'
-    ? otherName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+  const isGroup = convInfo?.is_group;
+  const displayName = isGroup
+    ? (convInfo.name || 'Group Chat')
+    : convInfo
+      ? `${convInfo.other_first_name || ''} ${convInfo.other_last_name || ''}`.trim() || 'Direct Message'
+      : 'Loading…';
+
+  let subtitle = '';
+  if (isGroup && convInfo.participants) {
+    const names = convInfo.participants.filter(p => p.id !== user?.id).map(p => p.first_name);
+    if (names.length === 0) subtitle = 'Just you';
+    else if (names.length <= 2) subtitle = names.join(' and ');
+    else subtitle = `${names[0]}, ${names[1]}, and ${names.length - 2} other${names.length - 2 > 1 ? 's' : ''}`;
+  }
+
+  const otherAvatar = !isGroup ? convInfo?.other_avatar_url : null;
+  const otherInitials = displayName !== 'Loading…' && !isGroup
+    ? displayName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
     : '?';
 
   // ─── Render ────────────────────────────────────────────────────────────────
@@ -279,7 +296,7 @@ export default function ChatWindow() {
                   : <span>{otherInitials}</span>}
               </div>
               <div className="chat-header-info">
-                <p className="chat-window-title">{otherName}</p>
+                <p className="chat-window-title">{displayName}</p>
                 <span className="chat-header-status" style={{ color: 'var(--text-tertiary)' }}>Not connected</span>
               </div>
             </>
@@ -351,17 +368,25 @@ export default function ChatWindow() {
           <ArrowLeft size={18} />
         </button>
 
-        <div className="chat-header-avatar" style={{ background: getAvatarColor(convInfo?.other_user_id || convInfo?.other_first_name) }}>
-          {otherAvatar
-            ? <img src={otherAvatar} alt={otherName} referrerPolicy="no-referrer" />
-            : <span>{otherInitials}</span>
-          }
-          {isOnline && <span className="chat-header-online-dot" />}
-        </div>
+        {isGroup ? (
+          <div className="chat-avatar chat-avatar-group" style={{ width: 38, height: 38, borderRadius: '50%', background: 'var(--primary-100)', color: 'var(--primary-600)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Users size={18} />
+          </div>
+        ) : (
+          <div className="chat-header-avatar" style={{ background: getAvatarColor(convInfo?.other_user_id || convInfo?.other_first_name) }}>
+            {otherAvatar
+              ? <img src={otherAvatar} alt={displayName} referrerPolicy="no-referrer" />
+              : <span>{otherInitials}</span>
+            }
+            {isOnline && <span className="chat-header-online-dot" />}
+          </div>
+        )}
 
         <div className="chat-header-info">
-          <p className="chat-window-title">{otherName}</p>
-          {isOnline ? (
+          <p className="chat-window-title">{displayName}</p>
+          {isGroup ? (
+            <span className="chat-header-status" style={{ color: 'var(--text-tertiary)' }}>{subtitle}</span>
+          ) : isOnline ? (
             <span className="chat-header-status">Active now</span>
           ) : (
             <span className="chat-header-status" style={{ color: 'var(--text-tertiary)' }}>Offline</span>
