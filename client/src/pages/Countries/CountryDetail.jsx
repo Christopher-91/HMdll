@@ -77,7 +77,7 @@ export default function CountryDetail() {
       </div>
 
       {/* Tabs */}
-      <div style={{ borderBottom: '1px solid var(--border-secondary)', background: 'var(--bg-secondary)', position: 'sticky', top: 64, zIndex: 10 }}>
+      <div style={{ borderBottom: '1px solid var(--border-secondary)', background: 'var(--bg-secondary)', position: 'sticky', top: 64, zIndex: 10, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)' }}>
         <div className="container" style={{ display: 'flex', gap: 0 }}>
           {tabs.map(t => (
             <button

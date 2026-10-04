@@ -13,8 +13,8 @@ export default function Logo({ website, name, slug, size = 48, logoUrl }) {
         alignItems: 'center', 
         justifyContent: 'center', 
         fontSize: size * 0.4,
-        background: 'var(--primary-50, #eef2ff)',
-        color: 'var(--primary-700, #4338ca)',
+        background: '#eef2ff',
+        color: '#4338ca',
         fontWeight: 'bold',
         borderRadius: 'var(--radius-md, 6px)'
       }}
