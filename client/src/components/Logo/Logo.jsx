@@ -54,14 +54,26 @@ export default function Logo({ website, name, slug, size = 48, logoUrl }) {
     );
   }
 
-  // Level 2: Icon Horse Fallback (Faster than Clearbit)
+  // Level 2: Google S2 Favicon (most reliable, works with nearly any domain)
   if (errorLevel <= 2 && hostname) {
+    return (
+      <img 
+        src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=128`} 
+        alt={name} 
+        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        onError={() => setErrorLevel(3)}
+      />
+    );
+  }
+
+  // Level 3: Icon Horse Fallback
+  if (errorLevel <= 3 && hostname) {
     return (
       <img 
         src={`https://icon.horse/icon/${hostname}`} 
         alt={name} 
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-        onError={() => setErrorLevel(3)}
+        onError={() => setErrorLevel(4)}
       />
     );
   }
