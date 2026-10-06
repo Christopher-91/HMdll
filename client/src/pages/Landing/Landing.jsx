@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend, BsCurrencyDollar } from 'react-icons/bs';
+import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend, BsCoin } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 import './Landing.css';
 
@@ -243,7 +243,7 @@ export default function Landing() {
             </p>
             <div className="cta-actions">
               <Link to="/donate" className="btn btn-primary btn-lg">
-                <BsCurrencyDollar style={{ marginRight: '8px' }} /> Donate Now
+                <BsCoin /> Donate Now
               </Link>
             </div>
           </div>
