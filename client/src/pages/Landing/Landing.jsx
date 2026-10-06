@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend } from 'react-icons/bs';
+import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend, BsHeartFill } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 import './Landing.css';
 
@@ -236,17 +236,14 @@ export default function Landing() {
         <div className="container">
           <div className="cta-card">
             <div className="cta-glow" />
-            <h2 className="cta-title">Ready to Find Your Perfect University?</h2>
+            <h2 className="cta-title">Help Us Keep AdmitQ Free</h2>
             <p className="cta-subtitle">
-              Join thousands of students who've already found their ideal program.
-              Create your free profile and get personalized recommendations in minutes.
+              Join thousands of students who use our platform every day. 
+              Your donation allows us to continue providing unbiased, data-driven university recommendations without paywalls.
             </p>
             <div className="cta-actions">
-              <Link to="/register" className="btn btn-primary btn-lg">
-                Create Account →
-              </Link>
-              <Link to="/universities" className="btn btn-secondary btn-lg">
-                Browse Universities
+              <Link to="/donate" className="btn btn-primary btn-lg">
+                <BsHeartFill style={{ marginRight: '8px' }} /> Donate Now
               </Link>
             </div>
           </div>
