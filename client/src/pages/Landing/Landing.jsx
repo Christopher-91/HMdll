@@ -243,7 +243,7 @@ export default function Landing() {
             </p>
             <div className="cta-actions">
               {/* Paste your Razorpay / Buy Me A Coffee link inside the href below! */}
-              <a href="https://buymeacoffee.com/hmdll" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+              <a href="https://buymeacoffee.com/chris27" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                 <BsCoin /> Donate Now
               </a>
             </div>
