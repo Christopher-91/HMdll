@@ -568,7 +568,7 @@ export default function UniversityDetail() {
 
   if (!uni) return null;
 
-  const totalAnnualCost = (uni.financial?.avgTuitionUsd || 0) + (uni.financial?.avgLivingCostUsd || 0);
+  const totalAnnualCost = Number(uni.financial?.avgTuitionUsd || 0) + Number(uni.financial?.avgLivingCostUsd || 0);
   const userBudget = profile?.preferences?.budgetMax || null;
   const budgetDiffPct = userBudget ? Math.round(((totalAnnualCost - userBudget) / userBudget) * 100) : null;
 
@@ -815,14 +815,14 @@ export default function UniversityDetail() {
               <h2 className="decision-section-title"><BsCashCoin style={{ verticalAlign: 'middle', marginRight: 6 }} /> Can You Afford It?</h2>
               <div className="afford-card">
                 <div className="afford-comparison">
-                  <div className="afford-item">
-                    <div className="afford-item-label">Estimated Annual Cost</div>
-                    <div className="afford-item-value">${Number(totalAnnualCost).toLocaleString('en-US')}</div>
-                  </div>
-                  <div className="afford-vs">vs</div>
-                  <div className="afford-item">
+                  <div className="afford-item" style={{ textAlign: 'left' }}>
                     <div className="afford-item-label">Your Budget</div>
                     <div className="afford-item-value">{userBudget ? `$${Number(userBudget).toLocaleString('en-US')}` : '—'}</div>
+                  </div>
+                  <div className="afford-vs">vs</div>
+                  <div className="afford-item" style={{ textAlign: 'right' }}>
+                    <div className="afford-item-label">Estimated Annual Cost</div>
+                    <div className="afford-item-value">${Number(totalAnnualCost).toLocaleString('en-US')}</div>
                   </div>
                 </div>
                 {budgetDiffPct !== null ? (
