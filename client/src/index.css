@@ -337,6 +337,7 @@ input, select, textarea {
 .btn-primary:hover {
   background: var(--brand-700);
   border-color: var(--brand-700);
+  color: #ffffff;
 }
 
 .btn-secondary {
@@ -348,6 +349,7 @@ input, select, textarea {
 .btn-secondary:hover {
   border-color: var(--text-tertiary);
   background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .btn-accent {
@@ -359,6 +361,7 @@ input, select, textarea {
 .btn-accent:hover {
   background: var(--accent-700);
   border-color: var(--accent-700);
+  color: white;
 }
 
 .btn-ghost {

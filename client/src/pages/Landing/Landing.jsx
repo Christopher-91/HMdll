@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend, BsHeartFill } from 'react-icons/bs';
+import { BsSearch, BsBullseye, BsMortarboard, BsClipboard2, BsMap, BsCurrencyExchange, BsPerson, BsSend, BsCurrencyDollar } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 import './Landing.css';
 
@@ -236,14 +236,14 @@ export default function Landing() {
         <div className="container">
           <div className="cta-card">
             <div className="cta-glow" />
-            <h2 className="cta-title">Help Us Keep AdmitQ Free</h2>
+            <h2 className="cta-title">Help Us Keep HMdll Free</h2>
             <p className="cta-subtitle">
-              Join thousands of students who use our platform every day. 
+              Join thousands of students who use our platform every day.
               Your donation allows us to continue providing unbiased, data-driven university recommendations without paywalls.
             </p>
             <div className="cta-actions">
               <Link to="/donate" className="btn btn-primary btn-lg">
-                <BsHeartFill style={{ marginRight: '8px' }} /> Donate Now
+                <BsCurrencyDollar style={{ marginRight: '8px' }} /> Donate Now
               </Link>
             </div>
           </div>
@@ -297,7 +297,7 @@ export default function Landing() {
               Donate to United24
             </a>
           </div>
-                    <div className="footer-bottom">
+          <div className="footer-bottom">
             <p>© {new Date().getFullYear()} HMdll. All rights reserved.</p>
           </div>
         </div>
