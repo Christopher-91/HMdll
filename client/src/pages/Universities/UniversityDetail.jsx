@@ -378,7 +378,7 @@ function computeMatch(profile, uni) {
 
   // Budget
   if (budgetMax && uni.financial?.avgTuitionUsd) {
-    const totalCost = Number(uni.financial.avgTuitionUsd) + Number(uni.financial.avgLivingCostUsd || 0) * 12;
+    const totalCost = Number(uni.financial.avgTuitionUsd) + Number(uni.financial.avgLivingCostUsd || 0);
     if (budgetMax >= totalCost) {
       const ratio = budgetMax / totalCost;
       const score = Math.min(100, Math.round(ratio * 100));
@@ -568,7 +568,7 @@ export default function UniversityDetail() {
 
   if (!uni) return null;
 
-  const totalAnnualCost = (uni.financial?.avgTuitionUsd || 0) + (uni.financial?.avgLivingCostUsd || 0) * 12;
+  const totalAnnualCost = (uni.financial?.avgTuitionUsd || 0) + (uni.financial?.avgLivingCostUsd || 0);
   const userBudget = profile?.preferences?.budgetMax || null;
   const budgetDiffPct = userBudget ? Math.round(((totalAnnualCost - userBudget) / userBudget) * 100) : null;
 
@@ -597,7 +597,7 @@ export default function UniversityDetail() {
   ];
 
   // Living costs
-  const monthlyLiving = uni.financial?.avgLivingCostUsd || 0;
+  const monthlyLiving = (uni.financial?.avgLivingCostUsd || 0) / 12;
   const livingCosts = [
     { label: 'Housing', icon: <BsHouseDoor size={14} />, value: Math.round(monthlyLiving * 0.5) },
     { label: 'Food', icon: <BsForkKnife size={14} />, value: Math.round(monthlyLiving * 0.25) },
@@ -1001,8 +1001,8 @@ export default function UniversityDetail() {
               </div>
               {uni.financial?.avgLivingCostUsd && (
                 <div style={{ marginTop: 16, padding: '14px 16px', borderRadius: 'var(--radius-md)', background: 'var(--bg-secondary)', border: '1px solid var(--border-secondary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Total Monthly</span>
-                  <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-300)' }}>${Number(uni.financial.avgLivingCostUsd).toLocaleString('en-US')}/mo</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Total Annual</span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-300)' }}>${Number(uni.financial.avgLivingCostUsd).toLocaleString('en-US')}/yr</span>
                 </div>
               )}
             </div>
