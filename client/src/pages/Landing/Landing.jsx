@@ -242,9 +242,10 @@ export default function Landing() {
               Your donation allows us to continue providing unbiased, data-driven university recommendations without paywalls.
             </p>
             <div className="cta-actions">
-              <Link to="/donate" className="btn btn-primary btn-lg">
+              {/* Paste your Razorpay / Buy Me A Coffee link inside the href below! */}
+              <a href="YOUR_LINK_HERE" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                 <BsCoin /> Donate Now
-              </Link>
+              </a>
             </div>
           </div>
         </div>
