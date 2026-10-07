@@ -310,12 +310,61 @@
   overflow: hidden;
 }
 
-.career-meta {
+.career-stats-row {
   display: flex;
-  gap: 12px;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
 }
 
+.career-stat-badge {
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-emerald {
+  background-color: #ecfdf5;
+  color: #047857;
+  border-color: #d1fae5;
+}
+
+.stat-indigo {
+  background-color: #eef2ff;
+  color: #4338ca;
+  border-color: #e0e7ff;
+}
+
+.stat-slate {
+  background-color: #f8fafc;
+  color: #334155;
+  border-color: #e2e8f0;
+}
+
+.career-skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.career-skill-tag {
+  padding: 4px 8px;
+  background-color: #f8fafc;
+  color: #64748b;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
 /* Detail Pages */
 .detail-hero {
   margin-top: -56px; /* Pulls the background up to meet the 64px navbar, covering the 56px gap caused by .page's 120px padding */
