@@ -60,10 +60,10 @@ export default function CareerDetail() {
             <div>
               <h1 className="detail-title">{career.name}</h1>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 12 }}>
-                <span className="badge badge-accent" style={{ fontSize: '1rem', padding: '6px 12px' }}>
+                <span className="career-stat-badge stat-emerald" style={{ fontSize: '1rem', padding: '6px 12px' }}>
                   <BsCashCoin style={{ marginRight: 6 }} /> ${(career.avgSalaryUsd / 1000).toFixed(0)}k Avg Salary
                 </span>
-                <span className={`badge ${career.growthOutlook === 'high' ? 'badge-safe' : 'badge-warning'}`} style={{ fontSize: '1rem', padding: '6px 12px' }}>
+                <span className="career-stat-badge stat-indigo" style={{ fontSize: '1rem', padding: '6px 12px' }}>
                   <BsGraphUpArrow style={{ marginRight: 6 }} /> {career.growthOutlook} Growth
                 </span>
               </div>
