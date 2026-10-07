@@ -66,23 +66,23 @@ export default function Careers() {
               <div className="career-info">
                 <h3 className="career-name">{c.name}</h3>
                 <p className="career-desc">{c.description}</p>
-                <div className="flex flex-wrap items-center gap-2 mt-4">
-                  <span className="px-3 py-1.5 rounded-full text-xs font-semibold border whitespace-nowrap bg-emerald-50 text-emerald-700 border-emerald-100">
+                <div className="career-stats-row">
+                  <span className="career-stat-badge stat-emerald">
                     ${(c.avgSalaryUsd / 1000).toFixed(0)}k avg salary
                   </span>
-                  <span className="px-3 py-1.5 rounded-full text-xs font-semibold border whitespace-nowrap bg-indigo-50 text-indigo-700 border-indigo-100 flex items-center gap-1">
+                  <span className="career-stat-badge stat-indigo">
                     <BsGraphUpArrow size={11} /> {c.growthOutlook} growth
                   </span>
-                  <span className="px-3 py-1.5 rounded-full text-xs font-semibold border whitespace-nowrap bg-slate-50 text-slate-700 border-slate-200">
+                  <span className="career-stat-badge stat-slate">
                     {c.pathwayCount} pathways
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-slate-100">
+                <div className="career-skills-row">
                   {(c.requiredSkills || []).slice(0, 4).map((s, i) => (
-                    <span key={i} className="px-2 py-1 bg-slate-50 text-slate-500 rounded text-[11px] font-medium">{s}</span>
+                    <span key={i} className="career-skill-tag">{s}</span>
                   ))}
                   {(c.requiredSkills || []).length > 4 && (
-                    <span className="px-2 py-1 bg-slate-50 text-slate-500 rounded text-[11px] font-medium">+{c.requiredSkills.length - 4}</span>
+                    <span className="career-skill-tag">+{c.requiredSkills.length - 4}</span>
                   )}
                 </div>
               </div>
