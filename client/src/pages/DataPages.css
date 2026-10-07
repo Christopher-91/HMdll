@@ -982,10 +982,10 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .career-main-content {
-    grid-column: span 2 / span 2;
+    grid-column: span 2;
   }
   .career-sidebar {
-    grid-column: span 1 / span 1;
+    grid-column: span 1;
   }
 }
 

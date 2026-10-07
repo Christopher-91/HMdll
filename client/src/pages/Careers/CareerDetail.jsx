@@ -122,7 +122,7 @@ export default function CareerDetail() {
                 <div className="career-data-header">Typical Industries</div>
                 <div className="flex gap-2 flex-wrap mt-2">
                   {(career.typicalIndustries || []).map((ind, idx) => (
-                    <span key={idx} className="badge bg-secondary">{ind}</span>
+                    <span key={idx} className="badge badge-primary">{ind}</span>
                   ))}
                 </div>
               </div>
