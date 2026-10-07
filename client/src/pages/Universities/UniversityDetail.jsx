@@ -11,8 +11,7 @@ import {
   BsBullseye, BsCashCoin, BsMortarboard, BsPeopleFill,
   BsChatSquareDots, BsHouseDoor, BsForkKnife, BsBusFront, BsBox,
   BsStarFill, BsStarHalf, BsCash, BsExclamationTriangleFill, BsCheckCircleFill,
-  BsClipboard2, BsClock, BsGlobe2, BsPaperclip, BsLightningCharge, BsShieldCheck,
-
+  BsClipboard2, BsClock, BsGlobe2, BsPaperclip, BsLightningCharge, BsShieldCheck, BsImages
 } from 'react-icons/bs';
 import {
   FcCommandLine, FcComboChart, FcAndroidOs, FcPrivacy,
@@ -681,11 +680,16 @@ export default function UniversityDetail() {
             ))}
             </div>
             
-            {uni.website && (
-              <a href={uni.website} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ flexShrink: 0 }}>
-                Visit Website ↗
-              </a>
-            )}
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button className="btn btn-secondary btn-sm" style={{ flexShrink: 0 }}>
+                <BsImages style={{ marginRight: 6 }} /> View Photos
+              </button>
+              {uni.website && (
+                <a href={uni.website} target="_blank" rel="noreferrer" className="btn btn-primary btn-sm" style={{ flexShrink: 0 }}>
+                  Visit Website ↗
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
