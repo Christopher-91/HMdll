@@ -695,7 +695,7 @@ export default function UniversityDetail() {
       </div>
 
       {/* ══════════ PAGE CONTENT ══════════ */}
-      <div className="container" style={{ padding: '16px 20px 80px' }}>
+      <div className="container" style={{ padding: '16px 20px 0px' }}>
         <div className="overview-section animate-fadeInUp" style={{ marginBottom: '40px' }}>
           <style>{`
               .overview-grid-custom {
