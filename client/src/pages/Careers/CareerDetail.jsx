@@ -73,15 +73,15 @@ export default function CareerDetail() {
       </div>
 
       <div className="container" style={{ paddingTop: 32, paddingBottom: 64 }}>
-        <div className="detail-content">
-          <div>
+        <div className="career-layout-grid">
+          <div className="career-main-content">
             <div className="detail-section">
-              <h2 className="detail-section-title">About the Role</h2>
+              <h2 className="career-section-header">About the Role</h2>
               <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)' }}>{career.description}</p>
             </div>
 
             <div className="detail-section">
-              <h2 className="detail-section-title"><BsListCheck style={{ verticalAlign: 'middle', marginRight: 8 }} /> Required Skills</h2>
+              <h2 className="career-section-header"><BsListCheck /> Required Skills</h2>
               <div className="flex gap-2 flex-wrap">
                 {(career.requiredSkills || []).map((skill, idx) => (
                   <span key={idx} className="tag tag-primary" style={{ padding: '8px 16px', fontSize: '0.95rem' }}>{skill}</span>
@@ -90,16 +90,20 @@ export default function CareerDetail() {
             </div>
 
             <div className="detail-section">
-              <h2 className="detail-section-title"><BsMortarboard style={{ verticalAlign: 'middle', marginRight: 8 }} /> Recommended Degree Pathways</h2>
+              <h2 className="career-section-header"><BsMortarboard /> Recommended Degree Pathways</h2>
               {career.degreeMappings && career.degreeMappings.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   {career.degreeMappings.map((mapping, idx) => (
-                    <div key={idx} className="card" style={{ padding: 20, borderLeft: mapping.isPrimary ? '4px solid var(--accent-500)' : '4px solid transparent' }}>
-                      <div className="flex justify-between items-center">
+                    <div key={idx} className="pathway-card" style={{ borderLeft: mapping.isPrimary ? '4px solid var(--accent-500)' : undefined }}>
+                      <div>
                         <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{formatDegree(mapping.degreeType)} in {mapping.field}</h4>
-                        {mapping.isPrimary && <span className="badge badge-accent">Primary Path</span>}
+                        {mapping.specialization && <p className="text-muted mt-2">Recommended specialization: <strong>{mapping.specialization}</strong></p>}
                       </div>
-                      {mapping.specialization && <p className="text-muted mt-2">Recommended specialization: <strong>{mapping.specialization}</strong></p>}
+                      {mapping.isPrimary && (
+                        <div className="pathway-badge-wrapper">
+                          <span className="badge badge-accent">Primary Path</span>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -110,12 +114,12 @@ export default function CareerDetail() {
 
           </div>
 
-          <div>
-            <div className="card" style={{ padding: 24, marginBottom: 24 }}>
-              <h3 style={{ marginBottom: 16, borderBottom: '1px solid var(--border-primary)', paddingBottom: 12 }}>Career Data</h3>
+          <div className="career-sidebar">
+            <div className="career-data-card" style={{ marginBottom: 24 }}>
+              <h3 className="career-section-header" style={{ marginBottom: 16, borderBottom: '1px solid var(--border-primary)', paddingBottom: 12 }}>Career Data</h3>
 
               <div style={{ marginBottom: 16 }}>
-                <span className="text-xs text-muted" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>Typical Industries</span>
+                <div className="career-data-header">Typical Industries</div>
                 <div className="flex gap-2 flex-wrap mt-2">
                   {(career.typicalIndustries || []).map((ind, idx) => (
                     <span key={idx} className="badge bg-secondary">{ind}</span>
@@ -125,14 +129,14 @@ export default function CareerDetail() {
 
               {career.potentialEmployers && career.potentialEmployers.length > 0 && (
                 <div style={{ marginBottom: 16 }}>
-                  <span className="text-xs text-muted" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>Top Employers</span>
+                  <div className="career-data-header">Top Employers</div>
                   <p className="mt-1 font-medium">{career.potentialEmployers.join(', ')}</p>
                 </div>
               )}
 
               {career.recommendedCountries && career.recommendedCountries.length > 0 && (
                 <div style={{ marginBottom: 16 }}>
-                  <span className="text-xs text-muted" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>Best Countries for this Career</span>
+                  <div className="career-data-header">Best Countries for this Career</div>
                   <p className="mt-1 font-medium">{career.recommendedCountries.join(', ')}</p>
                 </div>
               )}
