@@ -50,7 +50,7 @@ export default function CareerDetail() {
 
   return (
     <div className="page">
-      <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)' }}>
+      <div className="detail-hero" style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-primary)', paddingTop: '48px' }}>
         <div className="container">
           <Link to="/careers" className="text-sm text-muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20, textDecoration: 'none' }}>
             <BsArrowLeft /> Back to Careers
