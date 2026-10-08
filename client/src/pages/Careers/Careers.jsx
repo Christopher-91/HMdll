@@ -52,7 +52,7 @@ export default function Careers() {
 
       {loading ? (
         <div className="cards-grid">
-          {[1,2,3,4].map(i => <div key={i} className="skeleton" style={{ height: 160, borderRadius: 16 }} />)}
+          {[1, 2, 3, 4].map(i => <div key={i} className="skeleton" style={{ height: 160, borderRadius: 16 }} />)}
         </div>
       ) : (
         <div className="cards-grid stagger-children" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))' }}>
