@@ -934,13 +934,18 @@ export default function UniversityDetail() {
                             </Link>
                           ))}
                         </div>
-                        {totalCount > 6 && (
-                          <div style={{ marginTop: 16, textAlign: 'center' }}>
+                        <div style={{ marginTop: 16, textAlign: 'center', display: 'flex', gap: 12, justifyContent: 'center' }}>
+                          {totalCount > 6 && (
                             <Link to={`/programs?university=${slug}`} className="btn btn-ghost btn-sm">
                               View All {totalCount} Programs →
                             </Link>
-                          </div>
-                        )}
+                          )}
+                          {uni.website && (
+                            <a href={uni.website} target="_blank" rel="noreferrer" className="btn btn-ghost btn-sm">
+                              Visit website →
+                            </a>
+                          )}
+                        </div>
                       </>
                     ) : (
                       <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem' }}>
