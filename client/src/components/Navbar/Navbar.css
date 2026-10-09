@@ -450,3 +450,28 @@
   border-radius: 9999px;
   pointer-events: none;
 }
+
+/* ─── Currency Selector ─── */
+.currency-select {
+  background: var(--surface-1);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-landing .currency-select {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-landing .currency-select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}

@@ -176,21 +176,11 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="currency-selector" style={{ position: 'relative' }}>
+            <div className="currency-selector">
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                style={{
-                  background: 'var(--surface-1)',
-                  color: 'var(--text-primary)',
-                  border: '1px solid var(--border-primary)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '4px 8px',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  outline: 'none',
-                }}
+                className="currency-select"
               >
                 {Object.keys(exchangeRates).map(cur => (
                   <option key={cur} value={cur}>{cur}</option>
