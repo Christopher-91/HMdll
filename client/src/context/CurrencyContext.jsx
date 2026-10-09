@@ -10,6 +10,9 @@ export const exchangeRates = {
   CAD: { rate: 1.36, symbol: 'CA$', locale: 'en-CA' },
   AUD: { rate: 1.53, symbol: 'A$', locale: 'en-AU' },
   CNY: { rate: 7.24, symbol: '¥', locale: 'zh-CN' },
+  JPY: { rate: 156.4, symbol: '¥', locale: 'ja-JP' },
+  NZD: { rate: 1.67, symbol: 'NZ$', locale: 'en-NZ' },
+  KRW: { rate: 1365.5, symbol: '₩', locale: 'ko-KR' },
 };
 
 export function CurrencyProvider({ children }) {

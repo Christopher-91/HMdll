@@ -471,7 +471,74 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.navbar-landing .currency-select option {
+.currency-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 140px;
+  max-height: 200px;
+  overflow-y: auto;
   background: var(--bg-secondary);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  padding: 4px;
+}
+
+/* Custom Scrollbar for Currency Dropdown */
+.currency-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.currency-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.currency-dropdown::-webkit-scrollbar-thumb {
+  background-color: var(--border-secondary);
+  border-radius: 10px;
+}
+
+.currency-dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.currency-dropdown-item:hover {
+  background: var(--bg-hover);
   color: var(--text-primary);
+}
+
+.currency-dropdown-item.active {
+  background: var(--primary-100);
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .currency-dropdown-item.active {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
+.currency-dropdown-symbol {
+  display: inline-block;
+  width: 28px;
+  color: var(--text-tertiary);
+}
+
+.currency-dropdown-item:hover .currency-dropdown-symbol,
+.currency-dropdown-item.active .currency-dropdown-symbol {
+  color: inherit;
 }

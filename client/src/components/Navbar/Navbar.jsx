@@ -14,6 +14,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [profileOpen, setProfileOpen] = useState(false);
+  const [currencyOpen, setCurrencyOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [hasUnread, setHasUnread] = useState(() => localStorage.getItem('hmdll-notification-read') !== 'true');
@@ -176,16 +177,34 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="currency-selector">
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
+            <div className="currency-selector" style={{ position: 'relative' }}>
+              <button
+                type="button"
                 className="currency-select"
+                onClick={() => setCurrencyOpen(!currencyOpen)}
+                onBlur={() => setTimeout(() => setCurrencyOpen(false), 200)}
+                aria-label="Select currency"
               >
-                {Object.keys(exchangeRates).map(cur => (
-                  <option key={cur} value={cur}>{cur}</option>
-                ))}
-              </select>
+                {currency}
+              </button>
+              
+              {currencyOpen && (
+                <div className="currency-dropdown animate-fadeIn">
+                  {Object.keys(exchangeRates).map(cur => (
+                    <button
+                      key={cur}
+                      className={`currency-dropdown-item ${currency === cur ? 'active' : ''}`}
+                      onClick={() => {
+                        setCurrency(cur);
+                        setCurrencyOpen(false);
+                      }}
+                    >
+                      <span className="currency-dropdown-symbol">{exchangeRates[cur].symbol}</span>
+                      <span className="currency-dropdown-code">{cur}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {isAuthenticated ? (
