@@ -108,7 +108,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '4rem' }}
           >
             <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.025em', textAlign: 'center' }}>
               Your Global Education Starts Here.
