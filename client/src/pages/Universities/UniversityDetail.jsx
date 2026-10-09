@@ -7,6 +7,7 @@ import UserAvatar from '../../components/UserAvatar/UserAvatar';
 import { formatDegree } from '../../lib/formatters';
 import { Bookmark } from 'lucide-react';
 import useShortlist from '../../hooks/useShortlist';
+import { useCurrency } from '../../context/CurrencyContext';
 import {
   BsBullseye, BsCashCoin, BsMortarboard, BsPeopleFill,
   BsChatSquareDots, BsHouseDoor, BsForkKnife, BsBusFront, BsBox,
@@ -310,7 +311,7 @@ function ReviewsSection({ uniSlug, user, isAuthenticated }) {
 
 
 // ── Client-side match calculation ─────────────────────────
-function computeMatch(profile, uni) {
+function computeMatch(profile, uni, formatCurrency) {
   if (!profile || !uni) return null;
 
   // Extract from nested API shape
@@ -389,7 +390,7 @@ function computeMatch(profile, uni) {
       factors.budget = { 
         level: 'difficult', 
         score, 
-        reason: `Your budget is below the estimated total cost ($${totalCost.toLocaleString('en-US')}).` 
+        reason: `Your budget is below the estimated total cost (${formatCurrency ? formatCurrency(totalCost) : '$' + totalCost}).` 
       };
       totalScore += score;
     }
@@ -518,6 +519,7 @@ export default function UniversityDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated } = useAuth();
+  const { formatCurrency } = useCurrency();
   const { toggle, isShortlisted } = useShortlist();
   const [uni, setUni] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -550,7 +552,7 @@ export default function UniversityDetail() {
       .catch(() => { });
   }, []);
 
-  const match = useMemo(() => computeMatch(profile, uni), [profile, uni]);
+  const match = useMemo(() => computeMatch(profile, uni, formatCurrency), [profile, uni, formatCurrency]);
 
   if (loading) {
     return (
@@ -668,7 +670,7 @@ export default function UniversityDetail() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 28, flexWrap: 'wrap', gap: 24 }}>
             <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
             {[
-              { label: 'Avg. Tuition', value: uni.financial?.avgTuitionUsd ? `$${Number(uni.financial.avgTuitionUsd).toLocaleString('en-US')}/yr` : 'N/A' },
+              { label: 'Avg. Tuition', value: uni.financial?.avgTuitionUsd ? `${formatCurrency(uni.financial.avgTuitionUsd)}/yr` : 'N/A' },
               { label: 'Total Students', value: uni.totalStudents ? Number(uni.totalStudents).toLocaleString('en-US') : 'N/A' },
               { label: 'Intl. Students', value: uni.internationalStudentsPct ? `${uni.internationalStudentsPct}%` : 'N/A' },
               { label: 'Verified Programs', value: uni.verifiedProgramCount ?? 0 },
@@ -821,12 +823,12 @@ export default function UniversityDetail() {
                 <div className="afford-comparison">
                   <div className="afford-item" style={{ textAlign: 'left' }}>
                     <div className="afford-item-label">Your Budget</div>
-                    <div className="afford-item-value">{userBudget ? `$${Number(userBudget).toLocaleString('en-US')}` : '—'}</div>
+                    <div className="afford-item-value">{userBudget ? formatCurrency(userBudget) : '—'}</div>
                   </div>
                   <div className="afford-vs">vs</div>
                   <div className="afford-item" style={{ textAlign: 'right' }}>
                     <div className="afford-item-label">Estimated Annual Cost</div>
-                    <div className="afford-item-value">${Number(totalAnnualCost).toLocaleString('en-US')}</div>
+                    <div className="afford-item-value">{formatCurrency(totalAnnualCost)}</div>
                   </div>
                 </div>
                 {budgetDiffPct !== null ? (
@@ -1004,14 +1006,14 @@ export default function UniversityDetail() {
                 {livingCosts.map(c => (
                   <div key={c.label} className="living-cost-item">
                     <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>{c.icon} {c.label}</span>
-                    <span>{c.value ? `$${Number(c.value).toLocaleString('en-US')}/mo` : '—'}</span>
+                    <span>{c.value ? `${formatCurrency(c.value)}/mo` : '—'}</span>
                   </div>
                 ))}
               </div>
               {uni.financial?.avgLivingCostUsd && (
                 <div style={{ marginTop: 16, padding: '14px 16px', borderRadius: 'var(--radius-md)', background: 'var(--bg-secondary)', border: '1px solid var(--border-secondary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Total Annual</span>
-                  <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-300)' }}>${Number(uni.financial.avgLivingCostUsd).toLocaleString('en-US')}/yr</span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-300)' }}>{formatCurrency(uni.financial.avgLivingCostUsd)}/yr</span>
                 </div>
               )}
             </div>
@@ -1027,7 +1029,7 @@ export default function UniversityDetail() {
                       <Link key={c.id} to={`/careers/${c.slug}`} className="career-outcome-card">
                         <div className="career-outcome-icon">{careerIconMap[c.name] || c.icon}</div>
                         <div className="career-outcome-name">{c.name}</div>
-                        <div className="career-outcome-salary">Avg. ${(Number(c.avgSalaryUsd) || 0).toLocaleString('en-US')}/yr</div>
+                        <div className="career-outcome-salary">Avg. {formatCurrency(c.avgSalaryUsd || 0)}/yr</div>
                       </Link>
                     ))}
                   </div>
@@ -1055,7 +1057,7 @@ export default function UniversityDetail() {
                           {s.coverage === 'full' ? <><BsStarFill size={9} /> Full</> : <><BsCash size={9} /> Partial</>}
                         </span>
                         <div className="scholarship-mini-name">{s.name}</div>
-                        {s.amountUsd && <div className="scholarship-mini-amount">Up to ${Number(s.amountUsd).toLocaleString('en-US')}</div>}
+                        {s.amountUsd && <div className="scholarship-mini-amount">Up to {formatCurrency(s.amountUsd)}</div>}
                       </Link>
                     ))}
                   </div>

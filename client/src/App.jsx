@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { CallProvider } from './context/CallContext';
+import { CurrencyProvider } from './context/CurrencyContext';
 import { ProtectedRoute, PublicRoute } from './router/ProtectedRoute';
 import Navbar from './components/Navbar/Navbar';
 import { BsCompass } from 'react-icons/bs';
@@ -48,6 +49,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <AuthProvider>
+        <CurrencyProvider>
         <CallProvider>
         <Navbar />
         <Routes>
@@ -93,6 +95,7 @@ function App() {
           } />
         </Routes>
         </CallProvider>
+        </CurrencyProvider>
 
         <Toaster
           position="bottom-right"

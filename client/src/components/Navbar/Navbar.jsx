@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
+import { useCurrency, exchangeRates } from '../../context/CurrencyContext';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import { Landmark, BookOpen, Globe2, Award, Briefcase, Calculator, Plane, MessageSquare, Bell, Bookmark } from 'lucide-react';
 import useShortlist from '../../hooks/useShortlist';
@@ -9,6 +10,7 @@ import './Navbar.css';
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
+  const { currency, setCurrency } = useCurrency();
   const navigate = useNavigate();
   const location = useLocation();
   const [profileOpen, setProfileOpen] = useState(false);
@@ -172,6 +174,28 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
+            </div>
+
+            <div className="currency-selector" style={{ position: 'relative' }}>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                style={{
+                  background: 'var(--surface-1)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--border-primary)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '4px 8px',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  outline: 'none',
+                }}
+              >
+                {Object.keys(exchangeRates).map(cur => (
+                  <option key={cur} value={cur}>{cur}</option>
+                ))}
+              </select>
             </div>
 
             {isAuthenticated ? (
