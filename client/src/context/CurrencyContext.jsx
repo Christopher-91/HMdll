@@ -5,7 +5,7 @@ const CurrencyContext = createContext();
 export const exchangeRates = {
   USD: { rate: 1, symbol: '$', locale: 'en-US' },
   INR: { rate: 83.5, symbol: '₹', locale: 'en-IN' },
-  EUR: { rate: 0.92, symbol: '€', locale: 'en-IE' },
+  EUR: { rate: 0.92, symbol: '€', locale: 'de-DE' },
   GBP: { rate: 0.79, symbol: '£', locale: 'en-GB' },
   CAD: { rate: 1.36, symbol: 'CA$', locale: 'en-CA' },
   AUD: { rate: 1.53, symbol: 'A$', locale: 'en-AU' },
