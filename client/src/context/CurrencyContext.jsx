@@ -9,6 +9,7 @@ export const exchangeRates = {
   GBP: { rate: 0.79, symbol: '£', locale: 'en-GB' },
   CAD: { rate: 1.36, symbol: 'CA$', locale: 'en-CA' },
   AUD: { rate: 1.53, symbol: 'A$', locale: 'en-AU' },
+  CNY: { rate: 7.24, symbol: '¥', locale: 'zh-CN' },
 };
 
 export function CurrencyProvider({ children }) {
