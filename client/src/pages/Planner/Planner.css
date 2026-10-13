@@ -268,7 +268,7 @@
 }
 
 .planner-modal {
-  background: var(--bg-primary);
+  background: var(--bg-card);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 500px;

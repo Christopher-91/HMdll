@@ -78,6 +78,9 @@
   --bg-section-alt: rgba(24, 24, 27, 0.5);
   --bg-footer: #09090b;
 
+  --surface-1: #18181b;
+  --surface-2: #27272a;
+
   --border-primary: rgba(255, 255, 255, 0.1);
   --border-secondary: rgba(255, 255, 255, 0.06);
   --border-card: rgba(255, 255, 255, 0.1);
@@ -114,21 +117,24 @@
 
 /* ─── Light Theme ────────────────────────────────────────── */
 html[data-theme='light'] {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
-  --bg-card: #ffffff;
-  --bg-glass: #ffffff;
-  --bg-hover: rgba(15, 23, 42, 0.04);
-  --bg-input: #ffffff;
-  --bg-navbar: #ffffff;
-  --bg-section-alt: #f8fafc;
-  --bg-footer: #f1f5f9;
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #FFFEFB;
+  --bg-tertiary: #EFE9DE;
+  --bg-card: #FFFEFB;
+  --bg-glass: #FFFEFB;
+  --bg-hover: #EFE9DE;
+  --bg-input: #FFFEFB;
+  --bg-navbar: #FFFEFB;
+  --bg-section-alt: #F3EEE5;
+  --bg-footer: #F3EEE5;
 
-  --border-primary: #e2e8f0;
-  --border-secondary: #f1f5f9;
-  --border-card: #e5e7eb;
+  --border-primary: #E7E1D6;
+  --border-secondary: #E7E1D6;
+  --border-card: #E7E1D6;
   --border-focus: var(--brand-500);
+
+  --surface-1: #FFFEFB;
+  --surface-2: #EFE9DE;
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
@@ -453,9 +459,9 @@ input, select, textarea {
 }
 
 .badge-primary {
-  background: #f1f5f9;
+  background: var(--bg-tertiary);
   color: #334155;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-primary);
 }
 
 [data-theme='dark'] .badge-primary {

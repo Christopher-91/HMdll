@@ -258,8 +258,12 @@
   left: 0;
   width: 100%;
   z-index: 90;
-  background: var(--bg-secondary);
+  background: var(--bg-section-alt);
   border-bottom: 1px solid var(--border-card);
+}
+
+[data-theme='dark'] .sub-nav-bar {
+  background: var(--bg-secondary);
 }
 
 .sub-nav-inner {

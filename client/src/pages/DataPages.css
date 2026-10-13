@@ -343,9 +343,9 @@
 }
 
 .stat-slate {
-  background-color: #f8fafc;
+  background-color: var(--bg-tertiary);
   color: #334155;
-  border-color: #e2e8f0;
+  border-color: var(--border-primary);
 }
 
 .career-skills-row {
@@ -354,12 +354,12 @@
   gap: 6px;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border-secondary);
 }
 
 .career-skill-tag {
   padding: 4px 8px;
-  background-color: #f8fafc;
+  background-color: var(--bg-tertiary);
   color: #64748b;
   border-radius: 4px;
   font-size: 11px;
@@ -1001,8 +1001,8 @@
 }
 
 .career-data-card {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -1018,8 +1018,8 @@
 }
 
 .pathway-card {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
   border-radius: 0.75rem;
   padding: 1.25rem;
   display: flex;
