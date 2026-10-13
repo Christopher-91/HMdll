@@ -12,7 +12,8 @@
     "scrape": "node src/services/scraper/index.js",
     "db:reset": "node src/config/reset.js",
     "build": "echo 'No build required for backend'",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --passWithNoTests"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
+    "validate:costs": "node src/modules/costs/validate-costs.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

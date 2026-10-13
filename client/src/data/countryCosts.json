@@ -1,0 +1,1864 @@
+{
+  "united-states": {
+    "countryName": "United States",
+    "currency": "USD",
+    "governmentProofOfFunds": {
+      "monthly": 1500,
+      "annual": 18000,
+      "currency": "USD",
+      "description": "US Dept of State / DHS Form I-20 financial verification standard for international student living expenses ($15,000–$20,000/yr).",
+      "source_url": "https://studyinthestates.dhs.gov/students/financial-ability",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 2400,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Mandatory comprehensive university student health insurance plan (SHIP/ACA compliant).",
+      "source_url": "https://trends.collegeboard.org/college-pricing",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 185,
+      "sevisFee": 350,
+      "residencePermit": 0,
+      "healthSurcharge": 0,
+      "deposit": 1200,
+      "booksMaterials": 1000,
+      "source_url": "https://travel.state.gov/content/travel/en/us-visas/study/student-visa.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "New York, San Francisco, Boston, Los Angeles",
+        "rent": {
+          "shared": { "low": 1100, "typical": 1450, "high": 1850 },
+          "studio": { "low": 1900, "typical": 2400, "high": 3200 }
+        },
+        "food": 450,
+        "transport": 132,
+        "utilities": 160,
+        "misc": 250,
+        "source_url": "https://trends.collegeboard.org/college-pricing",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Midwest, South, Regional & College Towns",
+        "rent": {
+          "shared": { "low": 600, "typical": 780, "high": 1000 },
+          "studio": { "low": 1000, "typical": 1250, "high": 1600 }
+        },
+        "food": 360,
+        "transport": 75,
+        "utilities": 120,
+        "misc": 180,
+        "source_url": "https://trends.collegeboard.org/college-pricing",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "US Department of State (DS-160 MRV Fee)", "url": "https://travel.state.gov/content/travel/en/us-visas/study/student-visa.html" },
+      { "name": "US DHS Study in the States (SEVIS I-901)", "url": "https://studyinthestates.dhs.gov/students/financial-ability" },
+      { "name": "College Board Trends in College Pricing & Living Costs", "url": "https://trends.collegeboard.org/college-pricing" }
+    ]
+  },
+  "united-kingdom": {
+    "countryName": "United Kingdom",
+    "currency": "GBP",
+    "governmentProofOfFunds": {
+      "monthly": 1529,
+      "annual": 13761,
+      "currency": "GBP",
+      "description": "UK Home Office / UKVI official maintenance requirement: £1,529/mo (London) or £1,171/mo (outside London) for up to 9 months.",
+      "source_url": "https://www.gov.uk/student-visa/money",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 776,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Immigration Health Surcharge (IHS) giving full access to the National Health Service (NHS).",
+      "source_url": "https://www.gov.uk/healthcare-immigration-application/how-much-pay",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 490,
+      "residencePermit": 0,
+      "healthSurcharge": 776,
+      "deposit": 900,
+      "booksMaterials": 450,
+      "source_url": "https://www.gov.uk/student-visa",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "London (Greater London Area)",
+        "rent": {
+          "shared": { "low": 750, "typical": 950, "high": 1250 },
+          "studio": { "low": 1350, "typical": 1650, "high": 2100 }
+        },
+        "food": 320,
+        "transport": 110,
+        "utilities": 130,
+        "misc": 200,
+        "source_url": "https://www.gov.uk/student-visa/money",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Manchester, Edinburgh, Birmingham, Leeds & Others",
+        "rent": {
+          "shared": { "low": 450, "typical": 580, "high": 750 },
+          "studio": { "low": 750, "typical": 920, "high": 1200 }
+        },
+        "food": 250,
+        "transport": 65,
+        "utilities": 95,
+        "misc": 150,
+        "source_url": "https://www.gov.uk/student-visa/money",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "UK Home Office / UKVI Student Visa Financial Requirement", "url": "https://www.gov.uk/student-visa/money" },
+      { "name": "UK Home Office Immigration Health Surcharge (IHS)", "url": "https://www.gov.uk/healthcare-immigration-application/how-much-pay" },
+      { "name": "Transport for London (18+ Student Oyster photocard)", "url": "https://tfl.gov.uk/fares/free-and-discounted-travel/18-plus-student-oyster-photocard" }
+    ]
+  },
+  "canada": {
+    "countryName": "Canada",
+    "currency": "CAD",
+    "governmentProofOfFunds": {
+      "monthly": 1908,
+      "annual": 22895,
+      "currency": "CAD",
+      "description": "IRCC minimum financial requirement for international students (75% of LICO, single student).",
+      "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 850,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Mandatory university health insurance plan (UHIP or provincial equivalent).",
+      "source_url": "https://uhip.ca",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 150,
+      "biometrics": 85,
+      "residencePermit": 0,
+      "healthSurcharge": 0,
+      "deposit": 1000,
+      "booksMaterials": 600,
+      "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Toronto, Vancouver, Montreal",
+        "rent": {
+          "shared": { "low": 850, "typical": 1150, "high": 1500 },
+          "studio": { "low": 1650, "typical": 2050, "high": 2600 }
+        },
+        "food": 420,
+        "transport": 130,
+        "utilities": 120,
+        "misc": 200,
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents.html",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Calgary, Ottawa, Edmonton, Halifax & Other Cities",
+        "rent": {
+          "shared": { "low": 600, "typical": 780, "high": 980 },
+          "studio": { "low": 1100, "typical": 1350, "high": 1700 }
+        },
+        "food": 360,
+        "transport": 90,
+        "utilities": 100,
+        "misc": 160,
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents.html",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "IRCC Study Permit Financial Requirements", "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents.html" },
+      { "name": "University Health Insurance Plan (UHIP)", "url": "https://uhip.ca" }
+    ]
+  },
+  "germany": {
+    "countryName": "Germany",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 992,
+      "annual": 11904,
+      "currency": "EUR",
+      "description": "German Federal Foreign Office / BAföG statutory blocked account (Sperrkonto) requirement: €992/month (€11,904/year).",
+      "source_url": "https://www.auswaertiges-amt.de/en/visa-service/buergerservice/faq/-/606848",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 130,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "Statutory health and long-term care insurance (Techniker Krankenkasse / AOK student tariff).",
+      "source_url": "https://www.tk.de/en",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 75,
+      "residencePermit": 100,
+      "healthSurcharge": 0,
+      "deposit": 700,
+      "booksMaterials": 300,
+      "source_url": "https://www.auswaertiges-amt.de/en/visa-service/visabestimmungen-node",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Munich, Berlin, Frankfurt, Hamburg",
+        "rent": {
+          "shared": { "low": 500, "typical": 680, "high": 880 },
+          "studio": { "low": 900, "typical": 1150, "high": 1500 }
+        },
+        "food": 280,
+        "transport": 29,
+        "utilities": 110,
+        "misc": 150,
+        "source_url": "https://www.studentenwerke.de/en/content/cost-living",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Leipzig, Aachen, Dresden, Heidelberg & Other Cities",
+        "rent": {
+          "shared": { "low": 350, "typical": 440, "high": 580 },
+          "studio": { "low": 600, "typical": 740, "high": 920 }
+        },
+        "food": 240,
+        "transport": 29,
+        "utilities": 90,
+        "misc": 120,
+        "source_url": "https://www.studentenwerke.de/en/content/cost-living",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "German Federal Foreign Office (Sperrkonto / Blocked Account)", "url": "https://www.auswaertiges-amt.de/en/visa-service/buergerservice/faq/-/606848" },
+      { "name": "Deutsches Studentenwerk Student Social Survey Cost of Living", "url": "https://www.studentenwerke.de/en/content/cost-living" },
+      { "name": "Techniker Krankenkasse (TK) Student Health Insurance", "url": "https://www.tk.de/en" }
+    ]
+  },
+  "australia": {
+    "countryName": "Australia",
+    "currency": "AUD",
+    "governmentProofOfFunds": {
+      "monthly": 2476,
+      "annual": 29710,
+      "currency": "AUD",
+      "description": "Department of Home Affairs Subclass 500 Student Visa financial capacity requirement.",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500#Eligibility",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 700,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Overseas Student Health Cover (OSHC) mandatory policy for visa duration.",
+      "source_url": "https://www.privatehealth.gov.au/health_insurance/overseas/oshealthcover.htm",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 1600,
+      "residencePermit": 0,
+      "healthSurcharge": 0,
+      "deposit": 1200,
+      "booksMaterials": 600,
+      "source_url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Sydney, Melbourne, Brisbane",
+        "rent": {
+          "shared": { "low": 1000, "typical": 1280, "high": 1650 },
+          "studio": { "low": 1850, "typical": 2300, "high": 2900 }
+        },
+        "food": 460,
+        "transport": 160,
+        "utilities": 140,
+        "misc": 250,
+        "source_url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500#Eligibility",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Adelaide, Perth, Hobart, Wollongong & Other Cities",
+        "rent": {
+          "shared": { "low": 720, "typical": 920, "high": 1150 },
+          "studio": { "low": 1350, "typical": 1620, "high": 1950 }
+        },
+        "food": 380,
+        "transport": 110,
+        "utilities": 120,
+        "misc": 180,
+        "source_url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500#Eligibility",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Australian Department of Home Affairs (Subclass 500 Financial Capacity)", "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500#Eligibility" },
+      { "name": "Private Health Insurance Ombudsman (OSHC)", "url": "https://www.privatehealth.gov.au/health_insurance/overseas/oshealthcover.htm" }
+    ]
+  },
+  "netherlands": {
+    "countryName": "Netherlands",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 1131,
+      "annual": 13569,
+      "currency": "EUR",
+      "description": "IND (Immigration and Naturalisation Service) study norm: €1,130.77/month.",
+      "source_url": "https://ind.nl/en/study",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 60,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "Private student health insurance (Aon / OOM / IPS) for international students not employed in NL.",
+      "source_url": "https://www.aonstudentinsurance.com",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 0,
+      "residencePermit": 228,
+      "healthSurcharge": 0,
+      "deposit": 850,
+      "booksMaterials": 400,
+      "source_url": "https://ind.nl/en/fees-costs-of-an-application",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Amsterdam, Utrecht, Rotterdam, The Hague",
+        "rent": {
+          "shared": { "low": 650, "typical": 820, "high": 1050 },
+          "studio": { "low": 1150, "typical": 1400, "high": 1750 }
+        },
+        "food": 320,
+        "transport": 80,
+        "utilities": 120,
+        "misc": 160,
+        "source_url": "https://ind.nl/en/study",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Groningen, Eindhoven, Enschede, Maastricht & Other Cities",
+        "rent": {
+          "shared": { "low": 450, "typical": 560, "high": 720 },
+          "studio": { "low": 800, "typical": 980, "high": 1200 }
+        },
+        "food": 260,
+        "transport": 60,
+        "utilities": 100,
+        "misc": 130,
+        "source_url": "https://ind.nl/en/study",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "IND Netherlands (Study Residence Permit & Income Requirements)", "url": "https://ind.nl/en/study" },
+      { "name": "IND Netherlands Application Fees", "url": "https://ind.nl/en/fees-costs-of-an-application" },
+      { "name": "University of Amsterdam Cost of Living", "url": "https://www.uva.nl/en/education/practical-information/costs-of-living.html" }
+    ]
+  },
+  "switzerland": {
+    "countryName": "Switzerland",
+    "currency": "CHF",
+    "governmentProofOfFunds": {
+      "monthly": 1750,
+      "annual": 21000,
+      "currency": "CHF",
+      "description": "Cantonal Migration Offices / SEM guideline: CHF 1,750–2,000/month (ETH Zurich / UZH standard: CHF 21,000/year).",
+      "source_url": "https://ethz.ch/en/studies/international/financial.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 110,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "Mandatory Swiss student health insurance (Swisscare / ScoreStudies cantonal exemption).",
+      "source_url": "https://swisscare.com",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 88,
+      "residencePermit": 160,
+      "healthSurcharge": 0,
+      "deposit": 1200,
+      "booksMaterials": 500,
+      "source_url": "https://www.sem.admin.ch/sem/en/home/themen/einreise/faq.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Zurich, Geneva, Lausanne",
+        "rent": {
+          "shared": { "low": 750, "typical": 980, "high": 1280 },
+          "studio": { "low": 1450, "typical": 1820, "high": 2300 }
+        },
+        "food": 500,
+        "transport": 85,
+        "utilities": 120,
+        "misc": 220,
+        "source_url": "https://ethz.ch/en/studies/international/financial.html",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Basel, Bern, St. Gallen, Fribourg & Other Cities",
+        "rent": {
+          "shared": { "low": 550, "typical": 740, "high": 920 },
+          "studio": { "low": 1050, "typical": 1300, "high": 1600 }
+        },
+        "food": 420,
+        "transport": 75,
+        "utilities": 100,
+        "misc": 180,
+        "source_url": "https://ethz.ch/en/studies/international/financial.html",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "State Secretariat for Migration (SEM) Switzerland", "url": "https://www.sem.admin.ch" },
+      { "name": "ETH Zurich International Student Financial Guidelines", "url": "https://ethz.ch/en/studies/international/financial.html" }
+    ]
+  },
+  "singapore": {
+    "countryName": "Singapore",
+    "currency": "SGD",
+    "governmentProofOfFunds": {
+      "monthly": 1800,
+      "annual": 21600,
+      "currency": "SGD",
+      "description": "ICA / Singapore University cost of attendance standard: SGD 1,800–2,000/month.",
+      "source_url": "https://www.ica.gov.sg/reside/student-pass",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 200,
+      "period": "annual",
+      "mandatory": true,
+      "description": "University mandatory student group medical insurance.",
+      "source_url": "https://www.nus.edu.sg/uhc/services/billing-insurance/insurance-schemes",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 45,
+      "residencePermit": 60,
+      "healthSurcharge": 0,
+      "deposit": 1000,
+      "booksMaterials": 450,
+      "source_url": "https://www.ica.gov.sg/reside/student-pass",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Singapore Central & Metropolitan Area",
+        "rent": {
+          "shared": { "low": 850, "typical": 1150, "high": 1550 },
+          "studio": { "low": 2100, "typical": 2600, "high": 3300 }
+        },
+        "food": 520,
+        "transport": 110,
+        "utilities": 120,
+        "misc": 200,
+        "source_url": "https://www.nus.edu.sg/admissions/undergraduate-financial-aid/cost-of-attendance",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Suburban / Campus Halls (Jurong, Woodlands, Clementi)",
+        "rent": {
+          "shared": { "low": 580, "typical": 750, "high": 950 },
+          "studio": { "low": 1500, "typical": 1850, "high": 2300 }
+        },
+        "food": 420,
+        "transport": 95,
+        "utilities": 95,
+        "misc": 160,
+        "source_url": "https://www.nus.edu.sg/admissions/undergraduate-financial-aid/cost-of-attendance",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Immigration & Checkpoints Authority (ICA) Student's Pass", "url": "https://www.ica.gov.sg/reside/student-pass" },
+      { "name": "National University of Singapore (NUS) Cost of Attendance", "url": "https://www.nus.edu.sg/admissions/undergraduate-financial-aid/cost-of-attendance" }
+    ]
+  },
+  "japan": {
+    "countryName": "Japan",
+    "currency": "JPY",
+    "governmentProofOfFunds": {
+      "monthly": 110000,
+      "annual": 2000000,
+      "currency": "JPY",
+      "description": "Immigration Services Agency of Japan standard: ¥2,000,000/year (JASSO student baseline: ¥105,000–120,000/mo).",
+      "source_url": "https://www.jasso.go.jp/en/study_j/sgtj.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 2000,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "National Health Insurance (NHI) subsidized student contribution.",
+      "source_url": "https://www.studyinjapan.go.jp/en/life/living/health/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 3000,
+      "residencePermit": 0,
+      "healthSurcharge": 0,
+      "deposit": 65000,
+      "booksMaterials": 30000,
+      "source_url": "https://www.mofa.go.jp/j_info/visit/visa/procedure/fees.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Tokyo, Osaka, Kyoto",
+        "rent": {
+          "shared": { "low": 50000, "typical": 68000, "high": 88000 },
+          "studio": { "low": 80000, "typical": 98000, "high": 130000 }
+        },
+        "food": 36000,
+        "transport": 9000,
+        "utilities": 12000,
+        "misc": 15000,
+        "source_url": "https://www.jasso.go.jp/en/study_j/sgtj.html",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Fukuoka, Sendai, Sapporo, Nagoya & Other Cities",
+        "rent": {
+          "shared": { "low": 30000, "typical": 42000, "high": 56000 },
+          "studio": { "low": 50000, "typical": 63000, "high": 82000 }
+        },
+        "food": 28000,
+        "transport": 7000,
+        "utilities": 10000,
+        "misc": 12000,
+        "source_url": "https://www.jasso.go.jp/en/study_j/sgtj.html",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "JASSO Student Guide to Japan Cost of Living Survey", "url": "https://www.jasso.go.jp/en/study_j/sgtj.html" },
+      { "name": "Ministry of Foreign Affairs (MOFA) Visa Fees", "url": "https://www.mofa.go.jp/j_info/visit/visa/procedure/fees.html" }
+    ]
+  },
+  "south-korea": {
+    "countryName": "South Korea",
+    "currency": "KRW",
+    "governmentProofOfFunds": {
+      "monthly": 1500000,
+      "annual": 20000000,
+      "currency": "KRW",
+      "description": "Ministry of Justice D-2 student visa financial requirement: 20,000,000 KRW/year (Seoul area) or 16,000,000–18,000,000 KRW (regional).",
+      "source_url": "https://www.studyinkorea.go.kr",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 75000,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "National Health Insurance Service (NHIS) mandatory international student tariff.",
+      "source_url": "https://www.nhis.or.kr",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 80000,
+      "residencePermit": 30000,
+      "healthSurcharge": 0,
+      "deposit": 1000000,
+      "booksMaterials": 300000,
+      "source_url": "https://www.hikorea.go.kr",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Seoul Metropolitan Area",
+        "rent": {
+          "shared": { "low": 420000, "typical": 560000, "high": 750000 },
+          "studio": { "low": 750000, "typical": 920000, "high": 1250000 }
+        },
+        "food": 400000,
+        "transport": 75000,
+        "utilities": 90000,
+        "misc": 150000,
+        "source_url": "https://www.studyinkorea.go.kr",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Busan, Daegu, Daejeon, Gwangju & Other Cities",
+        "rent": {
+          "shared": { "low": 300000, "typical": 390000, "high": 520000 },
+          "studio": { "low": 500000, "typical": 640000, "high": 820000 }
+        },
+        "food": 320000,
+        "transport": 60000,
+        "utilities": 75000,
+        "misc": 120000,
+        "source_url": "https://www.studyinkorea.go.kr",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Ministry of Education / Study in Korea Guidelines", "url": "https://www.studyinkorea.go.kr" },
+      { "name": "National Health Insurance Service (NHIS) International Students", "url": "https://www.nhis.or.kr" }
+    ]
+  },
+  "ireland": {
+    "countryName": "Ireland",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 833,
+      "annual": 10000,
+      "currency": "EUR",
+      "description": "Irish Immigration Service Delivery (ISD) standard maintenance requirement: €10,000/year (€833/month).",
+      "source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/frequently-asked-questions-for-students/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 195,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Mandatory private medical insurance for non-EEA students (Study & Protect / Halligan / Swisscare).",
+      "source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/frequently-asked-questions-for-students/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 60,
+      "residencePermit": 300,
+      "healthSurcharge": 0,
+      "deposit": 800,
+      "booksMaterials": 400,
+      "source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Dublin (Capital / Major City)",
+        "rent": {
+          "shared": { "low": 700, "typical": 900, "high": 1200 },
+          "studio": { "low": 1200, "typical": 1500, "high": 1850 }
+        },
+        "food": 350,
+        "transport": 65,
+        "utilities": 110,
+        "misc": 175,
+        "source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/frequently-asked-questions-for-students/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Cork, Galway, Limerick & Other Cities",
+        "rent": {
+          "shared": { "low": 500, "typical": 650, "high": 850 },
+          "studio": { "low": 850, "typical": 1100, "high": 1350 }
+        },
+        "food": 300,
+        "transport": 55,
+        "utilities": 95,
+        "misc": 150,
+        "source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/frequently-asked-questions-for-students/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Irish Immigration Service Delivery (ISD) Financial Requirements", "url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/frequently-asked-questions-for-students/" },
+      { "name": "Irish Immigration Service Delivery (IRP Registration Fee)", "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-register-your-permission-for-the-first-time/" },
+      { "name": "Transport for Ireland (TFI Student Leap Card Fare Cap)", "url": "https://www.transportforireland.ie/fares/leap-card/" }
+    ]
+  },
+  "france": {
+    "countryName": "France",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 615,
+      "annual": 7380,
+      "currency": "EUR",
+      "description": "Campus France / France-Visas statutory minimum proof of resources: €615/month (€7,380/year).",
+      "source_url": "https://www.campusfrance.org/en/student-visa-france",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 0,
+      "period": "annual",
+      "mandatory": false,
+      "description": "French Social Security (Assurance Maladie) is 100% free for all domestic and international students. CVEC contribution is €103/yr.",
+      "source_url": "https://etudiant-etranger.ameli.fr",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 50,
+      "cvecFee": 103,
+      "residencePermit": 200,
+      "healthSurcharge": 0,
+      "deposit": 650,
+      "booksMaterials": 300,
+      "source_url": "https://france-visas.gouv.fr",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Paris (Île-de-France)",
+        "rent": {
+          "shared": { "low": 550, "typical": 720, "high": 950 },
+          "studio": { "low": 900, "typical": 1150, "high": 1500 }
+        },
+        "food": 300,
+        "transport": 42,
+        "utilities": 100,
+        "misc": 160,
+        "source_url": "https://www.campusfrance.org/en/preparing-budget-student-France",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Lyon, Toulouse, Lille, Montpellier & Other Cities",
+        "rent": {
+          "shared": { "low": 380, "typical": 480, "high": 620 },
+          "studio": { "low": 600, "typical": 720, "high": 920 }
+        },
+        "food": 240,
+        "transport": 30,
+        "utilities": 80,
+        "misc": 120,
+        "source_url": "https://www.campusfrance.org/en/preparing-budget-student-France",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Campus France Financial Requirements & Student Visa", "url": "https://www.campusfrance.org/en/student-visa-france" },
+      { "name": "Campus France Cost of Living Guide", "url": "https://www.campusfrance.org/en/preparing-budget-student-France" },
+      { "name": "L'Assurance Maladie pour étudiants étrangers", "url": "https://etudiant-etranger.ameli.fr" }
+    ]
+  },
+  "sweden": {
+    "countryName": "Sweden",
+    "currency": "SEK",
+    "governmentProofOfFunds": {
+      "monthly": 10584,
+      "annual": 105840,
+      "currency": "SEK",
+      "description": "Migrationsverket (Swedish Migration Agency) maintenance requirement: SEK 10,584/month (SEK 10,656 for 2026).",
+      "source_url": "https://www.migrationsverket.se/English/Private-individuals/Studying-and-researching-in-Sweden/Higher-education/Residence-permit-for-higher-education.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 0,
+      "period": "annual",
+      "mandatory": false,
+      "description": "Covered under Swedish public healthcare system via personal identity number (personnummer) for studies >1 year.",
+      "source_url": "https://studyinsweden.se/life-in-sweden/health-insurance/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 0,
+      "residencePermit": 1500,
+      "healthSurcharge": 0,
+      "deposit": 5000,
+      "booksMaterials": 3000,
+      "source_url": "https://www.migrationsverket.se/English/Private-individuals/Studying-and-researching-in-Sweden/Higher-education/Residence-permit-for-higher-education.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Stockholm, Gothenburg",
+        "rent": {
+          "shared": { "low": 4500, "typical": 5800, "high": 7500 },
+          "studio": { "low": 7500, "typical": 9500, "high": 12500 }
+        },
+        "food": 2800,
+        "transport": 650,
+        "utilities": 600,
+        "misc": 1200,
+        "source_url": "https://studyinsweden.se/moving-to-sweden/cost-of-living/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Uppsala, Lund, Umeå, Linköping & Other Cities",
+        "rent": {
+          "shared": { "low": 3500, "typical": 4400, "high": 5500 },
+          "studio": { "low": 5500, "typical": 6800, "high": 8500 }
+        },
+        "food": 2400,
+        "transport": 500,
+        "utilities": 500,
+        "misc": 1000,
+        "source_url": "https://studyinsweden.se/moving-to-sweden/cost-of-living/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Migrationsverket (Swedish Migration Agency Residence Permit)", "url": "https://www.migrationsverket.se/English/Private-individuals/Studying-and-researching-in-Sweden/Higher-education/Residence-permit-for-higher-education.html" },
+      { "name": "Study in Sweden Cost of Living Guide", "url": "https://studyinsweden.se/moving-to-sweden/cost-of-living/" }
+    ]
+  },
+  "italy": {
+    "countryName": "Italy",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 848,
+      "annual": 10180,
+      "currency": "EUR",
+      "description": "MUR / Universitaly proof of financial means: €848.25/month (€10,179.85/year) based on updated social allowance.",
+      "source_url": "https://www.universitaly.it",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 700,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Servizio Sanitario Nazionale (SSN) student voluntary registration.",
+      "source_url": "https://www.salute.gov.it",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 50,
+      "residencePermit": 118,
+      "healthSurcharge": 0,
+      "deposit": 600,
+      "booksMaterials": 350,
+      "source_url": "https://vistoperitalia.esteri.it",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Milan, Rome, Bologna",
+        "rent": {
+          "shared": { "low": 450, "typical": 620, "high": 820 },
+          "studio": { "low": 850, "typical": 1080, "high": 1450 }
+        },
+        "food": 280,
+        "transport": 35,
+        "utilities": 95,
+        "misc": 150,
+        "source_url": "https://www.universitaly.it",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Turin, Florence, Padua, Pisa & Other Cities",
+        "rent": {
+          "shared": { "low": 320, "typical": 420, "high": 560 },
+          "studio": { "low": 550, "typical": 690, "high": 880 }
+        },
+        "food": 230,
+        "transport": 25,
+        "utilities": 75,
+        "misc": 110,
+        "source_url": "https://www.universitaly.it",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Universitaly / Ministry of University and Research", "url": "https://www.universitaly.it" },
+      { "name": "Ministry of Foreign Affairs (Visa for Italy)", "url": "https://vistoperitalia.esteri.it" },
+      { "name": "Ministry of Health (SSN Student Registration)", "url": "https://www.salute.gov.it" }
+    ]
+  },
+  "new-zealand": {
+    "countryName": "New Zealand",
+    "currency": "NZD",
+    "governmentProofOfFunds": {
+      "monthly": 1667,
+      "annual": 20000,
+      "currency": "NZD",
+      "description": "Immigration New Zealand (INZ) Fee-Paying Student Visa maintenance: NZD $20,000/year (NZD $1,667/month).",
+      "source_url": "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/fee-paying-student-visa",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 750,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Mandatory international student travel and medical insurance (Studentsafe / Allianz).",
+      "source_url": "https://www.insurancesafenz.com/studentsafe",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 750,
+      "residencePermit": 0,
+      "healthSurcharge": 0,
+      "deposit": 900,
+      "booksMaterials": 500,
+      "source_url": "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/fee-paying-student-visa",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Auckland, Wellington",
+        "rent": {
+          "shared": { "low": 800, "typical": 1050, "high": 1350 },
+          "studio": { "low": 1500, "typical": 1850, "high": 2300 }
+        },
+        "food": 420,
+        "transport": 140,
+        "utilities": 130,
+        "misc": 200,
+        "source_url": "https://www.studywithnewzealand.govt.nz",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Christchurch, Dunedin, Hamilton & Other Cities",
+        "rent": {
+          "shared": { "low": 600, "typical": 760, "high": 960 },
+          "studio": { "low": 1100, "typical": 1320, "high": 1650 }
+        },
+        "food": 350,
+        "transport": 95,
+        "utilities": 105,
+        "misc": 160,
+        "source_url": "https://www.studywithnewzealand.govt.nz",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Immigration New Zealand Student Visa Requirements", "url": "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/fee-paying-student-visa" },
+      { "name": "Study with New Zealand Cost of Living", "url": "https://www.studywithnewzealand.govt.nz" }
+    ]
+  },
+  "china": {
+    "countryName": "China",
+    "currency": "CNY",
+    "governmentProofOfFunds": {
+      "monthly": 2500,
+      "annual": 30000,
+      "currency": "CNY",
+      "description": "Ministry of Education / Consular financial verification baseline for self-funded students: ~CNY 25,000–30,000/year.",
+      "source_url": "https://www.campuschina.org",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 800,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Comprehensive Medical Insurance Scheme for Foreign Students in China.",
+      "source_url": "https://www.lxbx.net",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 600,
+      "residencePermit": 400,
+      "medicalExam": 500,
+      "deposit": 1500,
+      "booksMaterials": 500,
+      "source_url": "https://www.nia.gov.cn",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Beijing, Shanghai, Guangzhou, Shenzhen (Tier 1)",
+        "rent": {
+          "shared": { "low": 2000, "typical": 2800, "high": 3800 },
+          "studio": { "low": 4000, "typical": 5200, "high": 7200 }
+        },
+        "food": 1800,
+        "transport": 200,
+        "utilities": 250,
+        "misc": 400,
+        "source_url": "https://www.campuschina.org",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Nanjing, Wuhan, Chengdu, Xi'an & Other Cities (Tier 2/3)",
+        "rent": {
+          "shared": { "low": 1000, "typical": 1400, "high": 2000 },
+          "studio": { "low": 2000, "typical": 2600, "high": 3600 }
+        },
+        "food": 1200,
+        "transport": 120,
+        "utilities": 180,
+        "misc": 250,
+        "source_url": "https://www.campuschina.org",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "China Scholarship Council / Campus China", "url": "https://www.campuschina.org" },
+      { "name": "National Immigration Administration of China", "url": "https://www.nia.gov.cn" },
+      { "name": "Ping An Comprehensive Medical Insurance Scheme", "url": "https://www.lxbx.net" }
+    ]
+  },
+  "denmark": {
+    "countryName": "Denmark",
+    "currency": "DKK",
+    "governmentProofOfFunds": {
+      "monthly": 7426,
+      "annual": 89112,
+      "currency": "DKK",
+      "description": "SIRI (Danish Agency for International Recruitment and Integration) maintenance norm: DKK 7,426/month.",
+      "source_url": "https://www.nyidanmark.dk/en-GB/Applying/Study",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 0,
+      "period": "annual",
+      "mandatory": false,
+      "description": "Danish National Health Insurance (Yellow Card / sundhedskort) is free for all residents registered in the CPR registry.",
+      "source_url": "https://www.sundhed.dk",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 0,
+      "residencePermit": 2315,
+      "healthSurcharge": 0,
+      "deposit": 6000,
+      "booksMaterials": 2500,
+      "source_url": "https://www.nyidanmark.dk/en-GB/Applying/Study",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Copenhagen (Hovedstaden)",
+        "rent": {
+          "shared": { "low": 4500, "typical": 5800, "high": 7500 },
+          "studio": { "low": 7500, "typical": 9200, "high": 12000 }
+        },
+        "food": 2400,
+        "transport": 450,
+        "utilities": 600,
+        "misc": 1000,
+        "source_url": "https://www.nyidanmark.dk/en-GB/Applying/Study",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Aarhus, Odense, Aalborg & Other Cities",
+        "rent": {
+          "shared": { "low": 3200, "typical": 4100, "high": 5200 },
+          "studio": { "low": 5000, "typical": 6200, "high": 8000 }
+        },
+        "food": 2000,
+        "transport": 380,
+        "utilities": 500,
+        "misc": 800,
+        "source_url": "https://www.nyidanmark.dk/en-GB/Applying/Study",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "SIRI New to Denmark (Higher Education Residence)", "url": "https://www.nyidanmark.dk/en-GB/Applying/Study" },
+      { "name": "Danish Health Authority (Sundhedskort)", "url": "https://www.sundhed.dk" }
+    ]
+  },
+  "finland": {
+    "countryName": "Finland",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 800,
+      "annual": 9600,
+      "currency": "EUR",
+      "description": "Finnish Immigration Service (Migri) requirement: €800/month (€9,600/year).",
+      "source_url": "https://migri.fi/en/income-requirement-for-students",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 372,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Private health insurance (€300/yr) plus mandatory Finnish Student Health Service (FSHS) fee of €73.60/yr.",
+      "source_url": "https://www.yths.fi/en/fshs/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 0,
+      "residencePermit": 350,
+      "healthSurcharge": 0,
+      "deposit": 550,
+      "booksMaterials": 250,
+      "source_url": "https://migri.fi/en/residence-permit-application-for-studies",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Helsinki Metropolitan Area (Espoo, Vantaa)",
+        "rent": {
+          "shared": { "low": 450, "typical": 580, "high": 760 },
+          "studio": { "low": 750, "typical": 920, "high": 1200 }
+        },
+        "food": 280,
+        "transport": 40,
+        "utilities": 60,
+        "misc": 140,
+        "source_url": "https://migri.fi/en/income-requirement-for-students",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Tampere, Turku, Oulu, Jyväskylä & Other Cities",
+        "rent": {
+          "shared": { "low": 320, "typical": 410, "high": 520 },
+          "studio": { "low": 550, "typical": 670, "high": 820 }
+        },
+        "food": 240,
+        "transport": 35,
+        "utilities": 50,
+        "misc": 110,
+        "source_url": "https://migri.fi/en/income-requirement-for-students",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Finnish Immigration Service (Migri Income Requirement)", "url": "https://migri.fi/en/income-requirement-for-students" },
+      { "name": "Finnish Student Health Service (FSHS/YTHS)", "url": "https://www.yths.fi/en/fshs/" }
+    ]
+  },
+  "norway": {
+    "countryName": "Norway",
+    "currency": "NOK",
+    "governmentProofOfFunds": {
+      "monthly": 15169,
+      "annual": 166859,
+      "currency": "NOK",
+      "description": "UDI (Norwegian Directorate of Immigration) subsistence requirement: NOK 15,169/month (NOK 166,859/year).",
+      "source_url": "https://www.udi.no/en/want-to-apply/studies/studietillatelse/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 1400,
+      "period": "annual",
+      "mandatory": true,
+      "description": "National Insurance Scheme (Folketrygden) is free for >1 yr; semester welfare fee is ~NOK 700/semester.",
+      "source_url": "https://www.udi.no",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 0,
+      "residencePermit": 5900,
+      "healthSurcharge": 0,
+      "deposit": 7000,
+      "booksMaterials": 3500,
+      "source_url": "https://www.udi.no/en/want-to-apply/studies/studietillatelse/",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Oslo, Bergen",
+        "rent": {
+          "shared": { "low": 5500, "typical": 7100, "high": 9200 },
+          "studio": { "low": 9500, "typical": 12200, "high": 15500 }
+        },
+        "food": 3800,
+        "transport": 550,
+        "utilities": 700,
+        "misc": 1500,
+        "source_url": "https://www.udi.no/en/want-to-apply/studies/studietillatelse/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Trondheim, Tromsø, Stavanger & Other Cities",
+        "rent": {
+          "shared": { "low": 4200, "typical": 5400, "high": 6900 },
+          "studio": { "low": 7500, "typical": 9200, "high": 11500 }
+        },
+        "food": 3300,
+        "transport": 460,
+        "utilities": 550,
+        "misc": 1200,
+        "source_url": "https://www.udi.no/en/want-to-apply/studies/studietillatelse/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Norwegian Directorate of Immigration (UDI Study Permit)", "url": "https://www.udi.no/en/want-to-apply/studies/studietillatelse/" },
+      { "name": "University of Oslo Living Costs Guide", "url": "https://www.uio.no/english/studies/student-life/budget/" }
+    ]
+  },
+  "uae": {
+    "countryName": "United Arab Emirates",
+    "currency": "AED",
+    "governmentProofOfFunds": {
+      "monthly": 4000,
+      "annual": 48000,
+      "currency": "AED",
+      "description": "University sponsorship & immigration living cost baseline: AED 4,000–5,000/month.",
+      "source_url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/student-visa",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 1200,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Compulsory DHA/DOH compliant medical insurance policy for residency visa holders.",
+      "source_url": "https://u.ae",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 3000,
+      "residencePermit": 380,
+      "healthSurcharge": 0,
+      "deposit": 2000,
+      "booksMaterials": 1000,
+      "source_url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/student-visa",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Dubai, Abu Dhabi",
+        "rent": {
+          "shared": { "low": 1800, "typical": 2400, "high": 3300 },
+          "studio": { "low": 3500, "typical": 4700, "high": 6200 }
+        },
+        "food": 1200,
+        "transport": 300,
+        "utilities": 250,
+        "misc": 400,
+        "source_url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/student-visa",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Sharjah, Ajman, Ras Al Khaimah & Other Emirates",
+        "rent": {
+          "shared": { "low": 1200, "typical": 1550, "high": 2100 },
+          "studio": { "low": 2200, "typical": 2900, "high": 3800 }
+        },
+        "food": 900,
+        "transport": 200,
+        "utilities": 180,
+        "misc": 300,
+        "source_url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/student-visa",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "UAE Government Portal (Student Visa Regulations)", "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/student-visa" },
+      { "name": "ICP Federal Authority for Identity and Citizenship", "url": "https://icp.gov.ae" }
+    ]
+  },
+  "luxembourg": {
+    "countryName": "Luxembourg",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 1517,
+      "annual": 18211,
+      "currency": "EUR",
+      "description": "Guichet.lu / Directorate of Immigration: at least 80% of REVIS = €1,517/month (€18,211/year).",
+      "source_url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/etudiant.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 40,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "Caisse Nationale de Santé (CNS) statutory student social security contribution.",
+      "source_url": "https://cns.public.lu",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 80,
+      "residencePermit": 50,
+      "healthSurcharge": 0,
+      "deposit": 1000,
+      "booksMaterials": 350,
+      "source_url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/etudiant.html",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Luxembourg City (Capital)",
+        "rent": {
+          "shared": { "low": 750, "typical": 960, "high": 1250 },
+          "studio": { "low": 1300, "typical": 1580, "high": 1950 }
+        },
+        "food": 380,
+        "transport": 0,
+        "utilities": 110,
+        "misc": 180,
+        "source_url": "https://www.uni.lu/en/admissions/cost-of-living/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Esch-sur-Alzette, Differdange (Belval Campus)",
+        "rent": {
+          "shared": { "low": 600, "typical": 740, "high": 920 },
+          "studio": { "low": 1000, "typical": 1220, "high": 1500 }
+        },
+        "food": 320,
+        "transport": 0,
+        "utilities": 95,
+        "misc": 150,
+        "source_url": "https://www.uni.lu/en/admissions/cost-of-living/",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Guichet.lu Directorate of Immigration Third-Country Students", "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/etudiant.html" },
+      { "name": "University of Luxembourg Cost of Living", "url": "https://www.uni.lu/en/admissions/cost-of-living/" },
+      { "name": "Caisse Nationale de Santé (CNS)", "url": "https://cns.public.lu" }
+    ]
+  },
+  "belgium": {
+    "countryName": "Belgium",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 1062,
+      "annual": 12744,
+      "currency": "EUR",
+      "description": "Belgian Immigration Office (IBZ) statutory minimum net means of subsistence: €1,062/month (€12,744/year).",
+      "source_url": "https://dofi.ibz.be/en/themes/third-country-nationals/study",
+      "year": 2026,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 120,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Mandatory statutory health insurance (Mutualité / Ziekenfonds).",
+      "source_url": "https://www.riziv.fgov.be",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 250,
+      "residencePermit": 251,
+      "healthSurcharge": 0,
+      "deposit": 650,
+      "booksMaterials": 350,
+      "source_url": "https://dofi.ibz.be/en/themes/third-country-nationals/study",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Brussels, Leuven, Antwerp",
+        "rent": {
+          "shared": { "low": 450, "typical": 580, "high": 760 },
+          "studio": { "low": 750, "typical": 920, "high": 1150 }
+        },
+        "food": 280,
+        "transport": 35,
+        "utilities": 95,
+        "misc": 140,
+        "source_url": "https://www.kuleuven.be/english/life-at-ku-leuven/money-matters/cost-of-living",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Ghent, Liege, Louvain-la-Neuve & Other Cities",
+        "rent": {
+          "shared": { "low": 380, "typical": 470, "high": 590 },
+          "studio": { "low": 600, "typical": 730, "high": 900 }
+        },
+        "food": 240,
+        "transport": 30,
+        "utilities": 80,
+        "misc": 110,
+        "source_url": "https://www.kuleuven.be/english/life-at-ku-leuven/money-matters/cost-of-living",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Belgian Immigration Office (IBZ Proof of Funds & Fees)", "url": "https://dofi.ibz.be/en/themes/third-country-nationals/study" },
+      { "name": "KU Leuven Money Matters & Cost of Living", "url": "https://www.kuleuven.be/english/life-at-ku-leuven/money-matters/cost-of-living" }
+    ]
+  },
+  "austria": {
+    "countryName": "Austria",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 723,
+      "annual": 8671,
+      "currency": "EUR",
+      "description": "OeAD / Austrian Federal Ministry: €722.58/month (under 24) or €1,308.39/month (24+) statutory minimum.",
+      "source_url": "https://oead.at/en/to-austria/entry-and-residence/residence-permit-student",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 70,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "ÖGK statutory self-insurance for students (Selbstversicherung für Studierende).",
+      "source_url": "https://www.gesundheitskasse.at",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 0,
+      "residencePermit": 160,
+      "healthSurcharge": 0,
+      "deposit": 650,
+      "booksMaterials": 350,
+      "source_url": "https://oead.at/en/to-austria/entry-and-residence/residence-permit-student",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Vienna, Salzburg, Innsbruck",
+        "rent": {
+          "shared": { "low": 420, "typical": 560, "high": 720 },
+          "studio": { "low": 700, "typical": 890, "high": 1150 }
+        },
+        "food": 280,
+        "transport": 30,
+        "utilities": 90,
+        "misc": 140,
+        "source_url": "https://oead.at/en/to-austria/entry-and-residence/residence-permit-student",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Graz, Linz, Klagenfurt & Other Cities",
+        "rent": {
+          "shared": { "low": 320, "typical": 420, "high": 540 },
+          "studio": { "low": 550, "typical": 680, "high": 830 }
+        },
+        "food": 240,
+        "transport": 25,
+        "utilities": 75,
+        "misc": 110,
+        "source_url": "https://oead.at/en/to-austria/entry-and-residence/residence-permit-student",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "OeAD Agency for Education and Internationalisation Austria", "url": "https://oead.at/en/to-austria/entry-and-residence/residence-permit-student" },
+      { "name": "Österreichische Gesundheitskasse (ÖGK)", "url": "https://www.gesundheitskasse.at" }
+    ]
+  },
+  "russia": {
+    "countryName": "Russia",
+    "currency": "RUB",
+    "governmentProofOfFunds": {
+      "monthly": 20000,
+      "annual": 240000,
+      "currency": "RUB",
+      "description": "Migration / Ministry of Education living standard guideline: 20,000–25,000 RUB/month.",
+      "source_url": "https://studyinrussia.ru",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 8000,
+      "period": "annual",
+      "mandatory": true,
+      "description": "Mandatory Voluntary Medical Insurance (DMS / ДМС) policy for international students.",
+      "source_url": "https://www.hse.ru/en/international",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 7300,
+      "residencePermit": 6000,
+      "medicalExam": 6000,
+      "deposit": 15000,
+      "booksMaterials": 10000,
+      "source_url": "https://studyinrussia.ru",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Moscow, St. Petersburg",
+        "rent": {
+          "shared": { "low": 8000, "typical": 15000, "high": 25000 },
+          "studio": { "low": 35000, "typical": 48000, "high": 65000 }
+        },
+        "food": 16000,
+        "transport": 1800,
+        "utilities": 3500,
+        "misc": 5000,
+        "source_url": "https://www.hse.ru/en/international",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Kazan, Novosibirsk, Tomsk, Nizhny Novgorod & Other Cities",
+        "rent": {
+          "shared": { "low": 3000, "typical": 6500, "high": 12000 },
+          "studio": { "low": 18000, "typical": 24000, "high": 32000 }
+        },
+        "food": 12000,
+        "transport": 1200,
+        "utilities": 2500,
+        "misc": 3500,
+        "source_url": "https://studyinrussia.ru",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Ministry of Science and Higher Education Study in Russia", "url": "https://studyinrussia.ru" },
+      { "name": "HSE University International Student Life", "url": "https://www.hse.ru/en/international" }
+    ]
+  },
+  "spain": {
+    "countryName": "Spain",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 600,
+      "annual": 7200,
+      "currency": "EUR",
+      "description": "Ministry of Inclusion, Social Security and Migration IPREM index: 100% IPREM = €600/month (€7,200/year).",
+      "source_url": "https://www.exteriores.gob.es",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 50,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "Private medical insurance without co-payment authorized to operate in Spain (Sanitas / Adeslas / Asisa).",
+      "source_url": "https://www.sepie.es",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 80,
+      "residencePermit": 16,
+      "healthSurcharge": 0,
+      "deposit": 550,
+      "booksMaterials": 300,
+      "source_url": "https://www.exteriores.gob.es",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Madrid, Barcelona",
+        "rent": {
+          "shared": { "low": 400, "typical": 560, "high": 750 },
+          "studio": { "low": 800, "typical": 1020, "high": 1350 }
+        },
+        "food": 260,
+        "transport": 20,
+        "utilities": 90,
+        "misc": 140,
+        "source_url": "https://www.sepie.es",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Valencia, Seville, Granada, Salamanca & Other Cities",
+        "rent": {
+          "shared": { "low": 280, "typical": 360, "high": 460 },
+          "studio": { "low": 500, "typical": 630, "high": 780 }
+        },
+        "food": 210,
+        "transport": 25,
+        "utilities": 70,
+        "misc": 100,
+        "source_url": "https://www.sepie.es",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Ministry of Foreign Affairs, European Union and Cooperation (Spain)", "url": "https://www.exteriores.gob.es" },
+      { "name": "SEPIE Spanish Service for Internationalization of Education", "url": "https://www.sepie.es" }
+    ]
+  },
+  "malaysia": {
+    "countryName": "Malaysia",
+    "currency": "MYR",
+    "governmentProofOfFunds": {
+      "monthly": 1500,
+      "annual": 18000,
+      "currency": "MYR",
+      "description": "Education Malaysia Global Services (EMGS) / Immigration baseline: MYR 1,500–2,000/month.",
+      "source_url": "https://educationmalaysia.gov.my",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 550,
+      "period": "annual",
+      "mandatory": true,
+      "description": "EMGS mandatory international student group medical insurance policy.",
+      "source_url": "https://educationmalaysia.gov.my",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 1997,
+      "residencePermit": 60,
+      "medicalExam": 250,
+      "deposit": 1000,
+      "booksMaterials": 500,
+      "source_url": "https://educationmalaysia.gov.my",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Kuala Lumpur, Klang Valley, Petaling Jaya",
+        "rent": {
+          "shared": { "low": 600, "typical": 850, "high": 1200 },
+          "studio": { "low": 1300, "typical": 1720, "high": 2300 }
+        },
+        "food": 750,
+        "transport": 120,
+        "utilities": 120,
+        "misc": 200,
+        "source_url": "https://educationmalaysia.gov.my",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Penang, Johor Bahru, Perak & Other States",
+        "rent": {
+          "shared": { "low": 400, "typical": 560, "high": 750 },
+          "studio": { "low": 850, "typical": 1120, "high": 1450 }
+        },
+        "food": 550,
+        "transport": 80,
+        "utilities": 90,
+        "misc": 150,
+        "source_url": "https://educationmalaysia.gov.my",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Education Malaysia Global Services (EMGS Visa & Fees)", "url": "https://educationmalaysia.gov.my" },
+      { "name": "Ministry of Higher Education Malaysia", "url": "https://www.mohe.gov.my" }
+    ]
+  },
+  "portugal": {
+    "countryName": "Portugal",
+    "currency": "EUR",
+    "governmentProofOfFunds": {
+      "monthly": 920,
+      "annual": 11040,
+      "currency": "EUR",
+      "description": "AIMA / National Minimum Wage benchmark: €920/month (€11,040/year).",
+      "source_url": "https://vistos.mne.gov.pt",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 40,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "Private travel and health insurance until registration with the National Health Service (SNS).",
+      "source_url": "https://www.sns.gov.pt",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 110,
+      "residencePermit": 170,
+      "healthSurcharge": 0,
+      "deposit": 550,
+      "booksMaterials": 300,
+      "source_url": "https://vistos.mne.gov.pt",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Lisbon, Porto",
+        "rent": {
+          "shared": { "low": 420, "typical": 560, "high": 760 },
+          "studio": { "low": 750, "typical": 960, "high": 1250 }
+        },
+        "food": 240,
+        "transport": 30,
+        "utilities": 85,
+        "misc": 130,
+        "source_url": "https://vistos.mne.gov.pt",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Coimbra, Braga, Aveiro, Évora & Other Cities",
+        "rent": {
+          "shared": { "low": 280, "typical": 360, "high": 460 },
+          "studio": { "low": 500, "typical": 630, "high": 780 }
+        },
+        "food": 200,
+        "transport": 25,
+        "utilities": 70,
+        "misc": 100,
+        "source_url": "https://vistos.mne.gov.pt",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Ministry of Foreign Affairs National Visa Portal (Portugal)", "url": "https://vistos.mne.gov.pt" },
+      { "name": "AIMA Agência para a Integração, Migrações e Asilo", "url": "https://aima.gov.pt" }
+    ]
+  },
+  "poland": {
+    "countryName": "Poland",
+    "currency": "PLN",
+    "governmentProofOfFunds": {
+      "monthly": 701,
+      "annual": 8412,
+      "currency": "PLN",
+      "description": "Border Guard / UDSC statutory living minimum: PLN 701/month (plus rent and PLN 2,500 return travel ticket).",
+      "source_url": "https://www.strazgraniczna.pl",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "healthInsurance": {
+      "amount": 55.8,
+      "period": "monthly",
+      "mandatory": true,
+      "description": "National Health Fund (NFZ) voluntary student health insurance contribution.",
+      "source_url": "https://www.nfz.gov.pl",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "oneTimeCosts": {
+      "visaFee": 340,
+      "residencePermit": 390,
+      "healthSurcharge": 0,
+      "deposit": 1400,
+      "booksMaterials": 600,
+      "returnTicket": 2500,
+      "source_url": "https://udsc.gov.pl/en",
+      "year": 2025,
+      "retrieved_at": "2026-10-13"
+    },
+    "cityTiers": {
+      "major": {
+        "name": "Warsaw, Krakow, Wroclaw",
+        "rent": {
+          "shared": { "low": 1100, "typical": 1420, "high": 1850 },
+          "studio": { "low": 2200, "typical": 2750, "high": 3500 }
+        },
+        "food": 850,
+        "transport": 60,
+        "utilities": 300,
+        "misc": 450,
+        "source_url": "https://udsc.gov.pl/en",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      },
+      "other": {
+        "name": "Poznan, Gdansk, Lodz, Lublin & Other Cities",
+        "rent": {
+          "shared": { "low": 750, "typical": 960, "high": 1280 },
+          "studio": { "low": 1500, "typical": 1880, "high": 2350 }
+        },
+        "food": 700,
+        "transport": 50,
+        "utilities": 230,
+        "misc": 350,
+        "source_url": "https://udsc.gov.pl/en",
+        "year": 2025,
+        "retrieved_at": "2026-10-13"
+      }
+    },
+    "sources": [
+      { "name": "Polish Border Guard Financial Requirements", "url": "https://www.strazgraniczna.pl" },
+      { "name": "Office for Foreigners (UDSC Temporary Residence for Study)", "url": "https://udsc.gov.pl/en" },
+      { "name": "National Health Fund (NFZ Student Insurance)", "url": "https://www.nfz.gov.pl" }
+    ]
+  }
+}

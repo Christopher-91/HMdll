@@ -84,10 +84,12 @@ export default function CostCalculator() {
     tuitionUsd: 30000,
     durationMonths: 24,
     currency: 'USD',
+    cityType: 'major',
     estimationMode: 'average',
   });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showSources, setShowSources] = useState(false);
 
   // Fetch countries on mount
   useEffect(() => {
@@ -143,16 +145,20 @@ export default function CostCalculator() {
     }
   }, [displayCurrencies, form.currency]);
 
-  // Automatically update currency when country changes if the user hasn't explicitly set it to something else
+  // Automatically update currency when country changes if user hasn't explicitly customized
   useEffect(() => {
     setForm(prev => ({ ...prev, currency: displayCurrencies[0] }));
   }, [form.countrySlug]);
 
-
   const calculate = async () => {
     setLoading(true);
     try {
-      const res = await api.post('/costs/calculate', form);
+      const payload = {
+        ...form,
+        annualTuition: form.tuitionUsd,
+        tuitionCurrency: selectedCountryCurrency,
+      };
+      const res = await api.post('/costs/calculate', payload);
       setResult(res.data.data);
     } catch { }
     finally { setLoading(false); }
@@ -169,7 +175,7 @@ export default function CostCalculator() {
     <div className="page container">
       <div className="page-header">
         <h1 className="page-title">Cost Calculator</h1>
-        <p className="page-subtitle">Get a detailed cost breakdown for studying abroad</p>
+        <p className="page-subtitle">Get an accurate, sourced cost breakdown for studying abroad</p>
       </div>
 
       <div className="calculator-layout animate-fadeInUp">
@@ -202,15 +208,23 @@ export default function CostCalculator() {
               </select>
             </div>
 
-            <div className="form-group" style={{ gridColumn: '1 / -1' }}>
-              <label className="form-label">Estimation Mode</label>
-              <select className="form-input" value={form.estimationMode} onChange={update('estimationMode')} style={{ borderColor: form.estimationMode === 'worst-case' ? 'var(--warning-400)' : undefined }}>
-                <option value="average">National Average Costs (Standard)</option>
-                <option value="worst-case">Worst-Case Scenario (High Cost of Living)</option>
+            <div className="form-group">
+              <label className="form-label">City Type</label>
+              <select className="form-input" value={form.cityType} onChange={update('cityType')}>
+                <option value="major">Major City (Capital / Metro)</option>
+                <option value="other">Other Cities (Regional / Towns)</option>
               </select>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full btn-lg" disabled={loading} style={{ gridColumn: '1 / -1' }}>
+            <div className="form-group">
+              <label className="form-label">Estimation Mode</label>
+              <select className="form-input" value={form.estimationMode} onChange={update('estimationMode')} style={{ borderColor: form.estimationMode === 'worst-case' ? 'var(--warning-400)' : undefined }}>
+                <option value="average">National Average Costs (Standard)</option>
+                <option value="worst-case">Worst-Case Scenario (High Rent)</option>
+              </select>
+            </div>
+
+            <button type="submit" className="btn btn-primary w-full btn-lg" disabled={loading} style={{ gridColumn: '1 / -1', marginTop: 8 }}>
               {loading ? 'Calculating...' : 'Calculate Costs'}
             </button>
             {result && result.disclaimer && (
@@ -225,32 +239,87 @@ export default function CostCalculator() {
         <div>
           {result ? (
             <div className="stagger-children" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              {/* Total Program Cost Card */}
               <div className="calc-result-card">
                 <p className="text-sm text-muted font-semibold">Total Program Cost</p>
                 <p className="calc-total">
                   {result.currency} {result.totalProgram.total.toLocaleString('en-US')}
                 </p>
                 <p className="text-xs text-muted mt-1">
-                  Over {result.durationMonths} months ({(result.durationMonths / 12).toFixed(1)} years)
+                  Over {result.durationMonths} months ({(result.durationMonths / 12).toFixed(1)} years) &bull; {result.cityTypeName}
                 </p>
-              </div>
-
-              <div className="card">
-                <h3 className="font-bold mb-2">Monthly Breakdown</h3>
-                <div className="calc-breakdown">
-                  {Object.entries(result.monthly).filter(([k]) => k !== 'total').map(([key, value]) => (
-                    <div key={key} className="calc-row">
-                      <span className="calc-row-label">{key}</span>
-                      <span className="calc-row-value">{result.currency} {value.toLocaleString('en-US')}</span>
-                    </div>
-                  ))}
-                  <div className="calc-row" style={{ borderBottom: 'none', fontWeight: 700 }}>
-                    <span>Monthly Total</span>
-                    <span style={{ color: 'var(--primary-300)' }}>{result.currency} {result.monthly.total.toLocaleString('en-US')}</span>
+                <div style={{ display: 'flex', gap: 16, marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--border-secondary)', fontSize: '0.85rem', flexWrap: 'wrap' }}>
+                  <div>
+                    <span className="text-muted">Tuition: </span>
+                    <span style={{ fontWeight: 600 }}>{result.currency} {result.totalProgram.tuition.toLocaleString('en-US')}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted">Living: </span>
+                    <span style={{ fontWeight: 600 }}>{result.currency} {result.totalProgram.living.toLocaleString('en-US')}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted">One-time: </span>
+                    <span style={{ fontWeight: 600 }}>{result.currency} {result.totalProgram.oneTimeCosts.toLocaleString('en-US')}</span>
                   </div>
                 </div>
               </div>
 
+              {/* Monthly Living Breakdown */}
+              <div className="card">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                  <h3 className="font-bold">Monthly Living Cost</h3>
+                  {result.range?.monthlyLiving && (
+                    <span className="text-xs text-muted">
+                      Range: {result.currency} {result.range.monthlyLiving.low.toLocaleString('en-US')} – {result.currency} {result.range.monthlyLiving.high.toLocaleString('en-US')}
+                    </span>
+                  )}
+                </div>
+                <div className="calc-breakdown">
+                  <div className="calc-row">
+                    <span className="calc-row-label">Rent / Accommodation</span>
+                    <span className="calc-row-value">
+                      {result.currency} {result.monthly.rent.toLocaleString('en-US')}
+                      {result.range?.rent && (
+                        <span className="text-xs text-muted" style={{ fontWeight: 400, marginLeft: 6 }}>
+                          ({result.currency} {result.range.rent.low.toLocaleString('en-US')} – {result.currency} {result.range.rent.high.toLocaleString('en-US')})
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                  <div className="calc-row">
+                    <span className="calc-row-label">Food & Groceries</span>
+                    <span className="calc-row-value">{result.currency} {result.monthly.food.toLocaleString('en-US')}</span>
+                  </div>
+                  <div className="calc-row">
+                    <span className="calc-row-label">Public Transport</span>
+                    <span className="calc-row-value">{result.currency} {result.monthly.transport.toLocaleString('en-US')}</span>
+                  </div>
+                  <div className="calc-row">
+                    <span className="calc-row-label">Utilities & Phone/Internet</span>
+                    <span className="calc-row-value">{result.currency} {result.monthly.utilities.toLocaleString('en-US')}</span>
+                  </div>
+                  <div className="calc-row">
+                    <span className="calc-row-label">Health Insurance</span>
+                    <span className="calc-row-value">{result.currency} {result.monthly.insurance.toLocaleString('en-US')}</span>
+                  </div>
+                  <div className="calc-row">
+                    <span className="calc-row-label">Personal & Miscellaneous</span>
+                    <span className="calc-row-value">{result.currency} {result.monthly.miscellaneous.toLocaleString('en-US')}</span>
+                  </div>
+                  <div className="calc-row" style={{ borderBottom: 'none', fontWeight: 700, paddingTop: 10 }}>
+                    <span>Total Monthly Living Cost</span>
+                    <span style={{ color: 'var(--brand-500, #4f46e5)' }}>{result.currency} {result.monthly.livingTotal.toLocaleString('en-US')}</span>
+                  </div>
+                  {result.monthly.tuition > 0 && (
+                    <div className="calc-row" style={{ borderBottom: 'none', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                      <span>Tuition (Monthly Equivalent)</span>
+                      <span>{result.currency} {result.monthly.tuition.toLocaleString('en-US')}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* First Year Costs */}
               <div className="card">
                 <h3 className="font-bold mb-2">First Year Costs</h3>
                 <div className="calc-breakdown">
@@ -259,19 +328,129 @@ export default function CostCalculator() {
                     <span className="calc-row-value">{result.currency} {result.firstYear.tuition.toLocaleString('en-US')}</span>
                   </div>
                   <div className="calc-row">
-                    <span className="calc-row-label">Living Expenses</span>
+                    <span className="calc-row-label">Living Expenses ({Math.min(12, result.durationMonths)} mos)</span>
                     <span className="calc-row-value">{result.currency} {result.firstYear.living.toLocaleString('en-US')}</span>
                   </div>
                   <div className="calc-row">
-                    <span className="calc-row-label">One-time Costs</span>
+                    <span className="calc-row-label">One-time Setup Costs</span>
                     <span className="calc-row-value">{result.currency} {result.firstYear.oneTimeCosts.toLocaleString('en-US')}</span>
                   </div>
-                  <div className="calc-row" style={{ borderBottom: 'none', fontWeight: 700 }}>
+                  <div className="calc-row" style={{ borderBottom: 'none', fontWeight: 700, paddingTop: 10 }}>
                     <span>First Year Total</span>
-                    <span style={{ color: 'var(--accent-400)' }}>{result.currency} {result.firstYear.total.toLocaleString('en-US')}</span>
+                    <span style={{ color: 'var(--accent-400, #4f46e5)' }}>{result.currency} {result.firstYear.total.toLocaleString('en-US')}</span>
                   </div>
                 </div>
               </div>
+
+              {/* Sourced Data Footnote & Popover */}
+              <div style={{ textAlign: 'center', marginTop: 4 }}>
+                <p className="text-xs text-muted">
+                  Estimates based on {result.metadata?.dataYear || 2025} data. Last updated {result.metadata?.retrievedAt || 'October 2026'}.
+                  {result.metadata?.sources && result.metadata.sources.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setShowSources(true)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--brand-500, #4f46e5)',
+                        cursor: 'pointer',
+                        textDecoration: 'underline',
+                        marginLeft: 6,
+                        fontSize: 'inherit',
+                        padding: 0,
+                      }}
+                    >
+                      Sources ({result.metadata.sources.length})
+                    </button>
+                  )}
+                </p>
+              </div>
+
+              {/* Sources Modal Popover */}
+              {showSources && (
+                <div
+                  style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'rgba(0,0,0,0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1000,
+                    padding: 20,
+                  }}
+                  onClick={() => setShowSources(false)}
+                >
+                  <div
+                    className="card"
+                    style={{
+                      maxWidth: 520,
+                      width: '100%',
+                      background: 'var(--bg-primary, #ffffff)',
+                      boxShadow: 'var(--shadow-xl)',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: 24,
+                    }}
+                    onClick={e => e.stopPropagation()}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                      <h3 className="font-bold text-lg">{result.countryName} Cost Sources</h3>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        onClick={() => setShowSources(false)}
+                        style={{ padding: '4px 8px' }}
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    {result.governmentProofOfFunds && (
+                      <div style={{ marginBottom: 16, padding: 12, background: 'var(--bg-secondary, #f8f9fa)', borderRadius: 'var(--radius-md)', fontSize: '0.85rem' }}>
+                        <p style={{ fontWeight: 600, marginBottom: 4 }}>Official Proof of Funds Minimum:</p>
+                        <p className="text-muted">{result.governmentProofOfFunds.description}</p>
+                        {result.governmentProofOfFunds.source_url && (
+                          <a
+                            href={result.governmentProofOfFunds.source_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: 'var(--brand-500, #4f46e5)', textDecoration: 'underline', display: 'inline-block', marginTop: 4 }}
+                          >
+                            Immigration Guidelines &rarr;
+                          </a>
+                        )}
+                      </div>
+                    )}
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      <p style={{ fontSize: '0.85rem', fontWeight: 600 }}>Verified Data Sources ({result.metadata?.dataYear}):</p>
+                      {result.metadata?.sources?.map((src, idx) => (
+                        <div key={idx} style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                          <span>•</span>
+                          <a
+                            href={src.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: 'var(--brand-500, #4f46e5)', textDecoration: 'underline', wordBreak: 'break-all' }}
+                          >
+                            {src.name}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div style={{ marginTop: 20, textAlign: 'right' }}>
+                      <button type="button" className="btn btn-secondary btn-sm" onClick={() => setShowSources(false)}>
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
 
             </div>
           ) : (
@@ -279,7 +458,7 @@ export default function CostCalculator() {
               <div className="text-center">
                 <p style={{ fontSize: '3rem', marginBottom: 12 }}></p>
                 <p className="font-semibold">Enter your details</p>
-                <p className="text-sm text-muted mt-1">Click "Calculate Costs" to see a detailed breakdown</p>
+                <p className="text-sm text-muted mt-1">Click &quot;Calculate Costs&quot; to see a detailed breakdown</p>
               </div>
             </div>
           )}
