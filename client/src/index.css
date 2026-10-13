@@ -117,24 +117,24 @@
 
 /* ─── Light Theme ────────────────────────────────────────── */
 html[data-theme='light'] {
-  --bg-primary: #FAF7F2;
-  --bg-secondary: #FFFEFB;
-  --bg-tertiary: #EFE9DE;
-  --bg-card: #FFFEFB;
-  --bg-glass: #FFFEFB;
-  --bg-hover: #EFE9DE;
-  --bg-input: #FFFEFB;
-  --bg-navbar: #FFFEFB;
-  --bg-section-alt: #F3EEE5;
-  --bg-footer: #F3EEE5;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F1F1F8;
+  --bg-card: #FFFFFF;
+  --bg-glass: #FFFFFF;
+  --bg-hover: #F1F1F8;
+  --bg-input: #FFFFFF;
+  --bg-navbar: #FFFFFF;
+  --bg-section-alt: #F7F7FC;
+  --bg-footer: #F7F7FC;
 
-  --border-primary: #E7E1D6;
-  --border-secondary: #E7E1D6;
-  --border-card: #E7E1D6;
+  --border-primary: #E8E8EF;
+  --border-secondary: #E8E8EF;
+  --border-card: #E8E8EF;
   --border-focus: var(--brand-500);
 
-  --surface-1: #FFFEFB;
-  --surface-2: #EFE9DE;
+  --surface-1: #FFFFFF;
+  --surface-2: #F1F1F8;
 
   --text-primary: #0f172a;
   --text-secondary: #475569;

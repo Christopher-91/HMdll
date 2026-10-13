@@ -258,7 +258,7 @@
   left: 0;
   width: 100%;
   z-index: 90;
-  background: var(--bg-section-alt);
+  background: var(--bg-navbar);
   border-bottom: 1px solid var(--border-card);
 }
 
